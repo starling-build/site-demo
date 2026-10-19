@@ -1,0 +1,24 @@
+{
+  "title": "Starling Site demo",
+  "base": "/site-demo/",
+  "pages": [
+    {
+      "slug": "index",
+      "title": "Welcome"
+    },
+    {
+      "slug": "getting-started",
+      "title": "Getting started",
+      "children": [
+        {
+          "slug": "publishing",
+          "title": "Publishing"
+        }
+      ]
+    },
+    {
+      "slug": "about",
+      "title": "About"
+    }
+  ]
+}
