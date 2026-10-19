@@ -1,5 +1,6 @@
 [
   {"url": "fonts/Selawik-Regular.ttf", "families": ["Selawik"]},
+  {"url": "fonts/NotoSansSC-VariableFont_wght.ttf", "families": ["Noto Sans SC"], "fallback": true, "lazy": true},
   {"url": "fonts/Selawik-Semibold.ttf", "families": ["Selawik Semibold", "Selawik"]},
   {"url": "fonts/DejaVuSans.ttf", "families": ["DejaVu Sans"], "fallback": true},
   {"url": "fonts/CupertinoIcons.ttf", "families": ["CupertinoIcons"]},

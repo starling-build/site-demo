@@ -1,0 +1,884 @@
+<!doctype html>
+<html lang="en">
+<head>
+<base href="/site-demo/">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Starling Site demo">
+<meta property="og:title" content="BoringCrypto security policy (footnotes)">
+<meta property="og:description" content="Google, LLC. BoringCrypto Android FIPS 140-2 Security Policy Software Version: dcdc7bbc6e59ac0123407a9dc4d1f43dd0d117cd Date: March 19, 2021 Introduction Federal Information Processing Standards Publication 140-2 — Security Requirements for Cryptographic Modules specifies requirements for cryptograp">
+<meta name="description" content="Google, LLC. BoringCrypto Android FIPS 140-2 Security Policy Software Version: dcdc7bbc6e59ac0123407a9dc4d1f43dd0d117cd Date: March 19, 2021 Introduction Federal Information Processing Standards Publication 140-2 — Security Requirements for Cryptographic Modules specifies requirements for cryptograp">
+<meta name="starling-route" content="/site-demo/security-policy/">
+<title>BoringCrypto security policy (footnotes) — Starling Site demo</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #101418; }
+  canvas { display: block; width: 100vw; height: 100vh; touch-action: none; }
+  /* The loading bar: a blank page for the seconds the module takes to
+     arrive reads as broken. Removed once the app has drawn. */
+  #loading {
+    position: fixed; inset: 0; display: grid; place-items: center;
+    background: #101418; color: #b0bec5; font: 14px system-ui, sans-serif;
+    transition: opacity 0.3s; pointer-events: none;
+  }
+  #loading .bar { width: 240px; height: 3px; background: #263238; border-radius: 2px; margin-top: 12px; overflow: hidden; }
+  #loading .bar div { height: 100%; width: 0; background: #4fc3f7; transition: width 0.1s; }
+  #loading .bar div.indeterminate { width: 35%; animation: loading-slide 1.2s ease-in-out infinite alternate; }
+  @keyframes loading-slide { from { transform: translateX(0); } to { transform: translateX(185%); } }
+  @media (prefers-reduced-motion: reduce) { #loading .bar div.indeterminate { animation: none; } }
+  #loading.done { opacity: 0; }
+  #font-status { position: fixed; bottom: 38px; right: 16px; padding: 10px 14px;
+    background: #163b66; color: white; border-radius: 6px; font: 13px system-ui, sans-serif; }
+  #font-status[hidden] { display: none; }
+  #font-status button { margin-left: 10px; cursor: pointer; }
+</style>
+</head>
+<body>
+<noscript><main><h1>BoringCrypto security policy (footnotes)</h1>
+<p>Google, LLC.</p>
+<p>BoringCrypto Android</p>
+<p>FIPS 140-2 Security Policy</p>
+<p>Software Version: </p>
+<p>dcdc7bbc6e59ac0123407a9dc4d1f43dd0d117cd</p>
+<p>Date: March 19, 2021</p>
+<p>Introduction</p>
+<p>Federal Information Processing Standards Publication 140-2 — Security Requirements for Cryptographic Modules specifies requirements for cryptographic modules to be deployed in a Sensitive but Unclassified environment. The National Institute of Standards and Technology (NIST) and Canadian Centre for Cyber Security (CCCS) Cryptographic Module Validation Program (CMVP) run the FIPS 140 program. The NVLAP accredits independent testing labs to perform FIPS 140 testing; the CMVP validates modules meeting FIPS 140 validation. Validated is the term given to a module that is documented and tested against the FIPS 140 criteria.</p>
+<p>More information is available on the CMVP website at: https://csrc.nist.gov/groups/STM/cmvp/index.html.</p>
+<p>About this Document</p>
+<p>This non-proprietary Cryptographic Module Security Policy for BoringCrypto Android from Google, LLC provides an overview of the product and a high-level description of how it meets the overall Level 1 security requirements of FIPS 140-2. </p>
+<p>The BoringCrypto Android module may also be referred to as the “module” in this document.</p>
+<p>Disclaimer</p>
+<p>The contents of this document are subject to revision without notice due to continued progress in methodology, design, and manufacturing. Google, LLC. shall have no liability for any error or damages of any kind resulting from the use of this document.</p>
+<p>The software referenced in this document is licensed to you under the terms and conditions accompanying the software or as otherwise agreed between you or the company that you are representing.</p>
+<p>Notices</p>
+<p>This document may be freely reproduced and distributed in its entirety without modification.</p>
+<p>Table of Contents</p>
+<p>Introduction	2</p>
+<p>About this Document	2</p>
+<p>Disclaimer	2</p>
+<p>Notices	2</p>
+<p>1.	Introduction	6</p>
+<p>2.	FIPS 140-2 Security Levels	7</p>
+<p>3.	Cryptographic Module Specification	8</p>
+<p>3.1	Cryptographic Boundary	8</p>
+<p>4.	Modes of Operation	9</p>
+<p>5.	Cryptographic Module Ports and Interfaces	9</p>
+<p>6.	Roles, Authentication and Services	10</p>
+<p>7.	Physical Security	12</p>
+<p>8.	Operational Environment	12</p>
+<p>9.	Cryptographic Algorithms &amp; Key Management	13</p>
+<p>9.1	Approved Cryptographic Algorithms	13</p>
+<p>9.2	Allowed Cryptographic Algorithms	14</p>
+<p>9.3	Non-Approved Cryptographic Algorithms	14</p>
+<p>9.4	Cryptographic Key Management	15</p>
+<p>9.5	Public Keys	15</p>
+<p>9.6	Key Generation	16</p>
+<p>9.7	Key Storage	16</p>
+<p>9.8	Key Zeroization	16</p>
+<p>10.	Self-tests	17</p>
+<p>10.1	Power-On Self-Tests	17</p>
+<p>10.2	Conditional Self-Tests	17</p>
+<p>11.	Mitigation of other Attacks	18</p>
+<p>12.	Guidance and Secure Operation	19</p>
+<p>12.1	Installation Instructions	19</p>
+<p>12.2	Secure Operation	20</p>
+<p>12.2.1	Initialization	20</p>
+<p>12.2.2	Usage of AES OFB, CFB and CFB8	20</p>
+<p>12.2.3	Usage of AES-GCM	20</p>
+<p>12.2.4	Usage of Triple-DES	20</p>
+<p>12.2.5	RSA and ECDSA Keys	20</p>
+<p>13.	References and Standards	22</p>
+<p>14.	Acronyms and Definitions	22</p>
+<p>List of Tables</p>
+<p>Table 1 – Tested Operational Environments	6</p>
+<p>Table 2 – Validation Level by FIPS 140-2 Section	7</p>
+<p>Table 3 – Ports and Interfaces	9</p>
+<p>Table 4 – Approved Services, Roles and Access Rights	10</p>
+<p>Table 5 – non-Approved or non-security relevant services	10</p>
+<p>Table 6 - Non-Security Relevant Services	11</p>
+<p>Table 7 – Approved Algorithms and CAVP Certificates	14</p>
+<p>Table 8 – Allowed Algorithms	14</p>
+<p>Table 9 – Non-Approved Algorithms	14</p>
+<p>Table 10 – Keys and CSPs supported	15</p>
+<p>Table 11 – Public keys supported	15</p>
+<p>Table 12 – Power-on Self-tests	17</p>
+<p>Table 13 – Conditional Self-tests	17</p>
+<p>Table 14 – References and Standards	22</p>
+<p>Table 15 – Acronyms and Definitions	24</p>
+<p>List of Figures</p>
+<p>Figure 1 – Logical Boundary	8</p>
+<p>Introduction</p>
+<p>Google, LLC BoringCrypto Android module (hereafter referred to as the “module”) is an open-source, general-purpose cryptographic library which provides FIPS 140-2 approved cryptographic algorithms to serve BoringSSL and other user-space applications. The validated version of the library is dcdc7bbc6e59ac0123407a9dc4d1f43dd0d117cd. For the purposes of the FIPS 140-2 validation, its embodiment type is defined as multi-chip standalone.</p>
+<p>The cryptographic module was tested on the following operational environments on the general-purpose computer (GPC) platforms detailed below:</p>
+<p>#</p>
+<p>Operational Environment</p>
+<p>Processor Family</p>
+<p>1</p>
+<p>Android 12 on Google Pixel 3 XL</p>
+<p>Qualcomm Snapdragon 845 (SDM845) 64-bit (with PAA)</p>
+<p>2</p>
+<p>Android 12 on Google Pixel 3 XL</p>
+<p>Qualcomm Snapdragon 845 (SDM845) 64-bit (without PAA)</p>
+<p>4</p>
+<p>Android 12 on Google Pixel 3 XL</p>
+<p>Qualcomm Snapdragon 845 (SDM845) 32-bit (with PAA)</p>
+<p>5</p>
+<p>Android 12 on Google Pixel 3 XL</p>
+<p>Qualcomm Snapdragon 845 (SDM845) 32-bit (without PAA)</p>
+<p>5</p>
+<p>Android 12 on Google Pixel 3a XL</p>
+<p>Qualcomm Snapdragon 670 (SDM670) 64-bit (with PAA) </p>
+<p>6</p>
+<p>Android 12 on Google Pixel 3a XL</p>
+<p>Qualcomm Snapdragon 670 (SDM670) 64-bit (without PAA)</p>
+<p>7</p>
+<p>Android 12 on Google Pixel 3a XL</p>
+<p>Qualcomm Snapdragon 670 (SDM670) 32-bit (with PAA)</p>
+<p>8</p>
+<p>Android 12 on Google Pixel 3a XL</p>
+<p>Qualcomm Snapdragon 670 (SDM670) 32-bit (without PAA)</p>
+<p>9</p>
+<p>Android 12 on Google Pixel 4 XL</p>
+<p>Qualcomm Snapdragon 855 (SDM855) 64-bit (with PAA)</p>
+<p>10</p>
+<p>Android 12 on Google Pixel 4 XL</p>
+<p>Qualcomm Snapdragon 855 (SDM855) 64-bit (without PAA)</p>
+<p>11</p>
+<p>Android 12 on Google Pixel 4 XL</p>
+<p>Qualcomm Snapdragon 855 (SDM855) 32-bit (with PAA)</p>
+<p>12</p>
+<p>Android 12 on Google Pixel 4 XL</p>
+<p>Qualcomm Snapdragon 855 (SDM855) 32-bit (without PAA)</p>
+<p>13</p>
+<p>Android 12 on Google Pixel 4a</p>
+<p>Qualcomm Snapdragon 730G (SDM730) 64-bit (with PAA)</p>
+<p>14</p>
+<p>Android 12 on Google Pixel 4a</p>
+<p>Qualcomm Snapdragon 730G (SDM730) 64-bit (without PAA)</p>
+<p>15</p>
+<p>Android 12 on Google Pixel 4a</p>
+<p>Qualcomm Snapdragon 730G (SDM730) 32-bit (with PAA)</p>
+<p>16</p>
+<p>Android 12 on Google Pixel 4a</p>
+<p>Qualcomm Snapdragon 730G (SDM730) 32-bit (without PAA)</p>
+<p>17</p>
+<p>Android 12 on Google Pixel 4a-5G</p>
+<p>Qualcomm Snapdragon 765G (SDM765) 64-bit (with PAA)</p>
+<p>18</p>
+<p>Android 12 on Google Pixel 4a-5G</p>
+<p>Qualcomm Snapdragon 765G (SDM765) 64-bit (without PAA)</p>
+<p>19</p>
+<p>Android 12 on Google Pixel 4a-5G</p>
+<p>Qualcomm Snapdragon 765G (SDM765) 32-bit (with PAA)</p>
+<p>20</p>
+<p>Android 12 on Google Pixel 4a-5G</p>
+<p>Qualcomm Snapdragon 765G (SDM765) 32-bit (without PAA)</p>
+<p>21</p>
+<p>Android 12 on Google Pixel 5</p>
+<p>Qualcomm Snapdragon 765G (SDM765) 64-bit (with PAA)</p>
+<p>22</p>
+<p>Android 12 on Google Pixel 5</p>
+<p>Qualcomm Snapdragon 765G (SDM765) 64-bit (without PAA)</p>
+<p>23</p>
+<p>Android 12 on Google Pixel 5</p>
+<p>Qualcomm Snapdragon 765G (SDM765) 32-bit (with PAA)</p>
+<p>24</p>
+<p>Android 12 on Google Pixel 5</p>
+<p>Qualcomm Snapdragon 765G (SDM765) 32-bit (without PAA)</p>
+<p>Table 1 – Tested Operational Environments </p>
+<p>The cryptographic module is also supported on the following operating environments for which operational testing and algorithm testing was not performed:</p>
+<p>Android 12 on Google Pixel 3, Snapdragon 845</p>
+<p>Android 12 on Google Pixel 4, Snapdragon 855</p>
+<p>As per FIPS 140-2 Implementation Guidance G.5, compliance is maintained for other versions of the respective operational environments where the module binary is unchanged. No claim can be made as to the correct operation of the module or the security strengths of the generated keys if any source code is changed and the module binary is reconstructed.</p>
+<p>The GPC(s) used during testing met Federal Communications Commission (FCC) Electromagnetic Interference (EMI) and Electromagnetic Compatibility (EMC) requirements for business use as defined by 47 Code of Federal Regulations, Part 15, Subpart B. FIPS 140-2 validation compliance is maintained when the module is operated on other versions of the GPOS running in single user mode, assuming that the requirements outlined in FIPS 140-2 IG G.5 are met.</p>
+<p>The CMVP makes no statement as to the correct operation of the module or the security strengths of the generated keys when so ported if the specific operational environment is not listed on the validation certificate.</p>
+<p>FIPS 140-2 Security Levels</p>
+<p>The following table lists the level of validation for each area in FIPS 140-2:</p>
+<p>FIPS 140-2 Section Title</p>
+<p>Validation Level</p>
+<p>Cryptographic Module Specification</p>
+<p>1</p>
+<p>Cryptographic Module Ports and Interfaces</p>
+<p>1</p>
+<p>Roles, Services, and Authentication</p>
+<p>1</p>
+<p>Finite State Model</p>
+<p>1</p>
+<p>Physical Security</p>
+<p>N/A</p>
+<p>Operational Environment</p>
+<p>1</p>
+<p>Cryptographic Key Management</p>
+<p>1</p>
+<p>Electromagnetic Interference / Electromagnetic Compatibility</p>
+<p>1</p>
+<p>Self-Tests</p>
+<p>1</p>
+<p>Design Assurance</p>
+<p>1</p>
+<p>Mitigation of Other Attacks</p>
+<p>N/A</p>
+<p>Overall Level </p>
+<p>1</p>
+<p>Table 2 – Validation Level by FIPS 140-2 Section</p>
+<p>Cryptographic Module Specification</p>
+<p>Cryptographic Boundary</p>
+<p>The module is a software library providing a C-language Application Program Interface (API) for use by other processes that require cryptographic functionality. All operations of the module occur via calls from host applications and their respective internal daemons/processes. As such, there are no untrusted services calling the services of the module.</p>
+<p>The physical cryptographic boundary is the general-purpose computer on which the module is installed. The logical boundary of the module is a single object file named bcm.o, which is linked into the libcrypto.so shared library. The module performs no communications other than with the calling application (the process that invokes the module services) and the host operating system.</p>
+<p>Figure 1 shows the logical relationship of the cryptographic module to the other software and hardware components of the computer:</p>
+<p>Figure 1 – Logical Boundary</p>
+<p>Modes of Operation</p>
+<p>The module supports two modes of operation: Approved and Non-Approved. The module will be in FIPS-approved mode when all power up Self-Tests have completed successfully, and only Approved or allowed algorithms are invoked.  See Table 7 (below) for a list of the supported Approved algorithms and Table 8 for allowed algorithms.  The non-Approved mode is entered when a non-Approved algorithm is invoked.  See Table 9 for a list of non-Approved algorithms.</p>
+<p>Cryptographic Module Ports and Interfaces</p>
+<p>The Data Input interface consists of the input parameters of the API functions. The Data Output interface consists of the output parameters of the API functions. The Control Input interface consists of the actual API input parameters. The Status Output interface includes the return values of the API functions.</p>
+<p>FIPS Interface</p>
+<p>Physical Ports</p>
+<p>Logical Interfaces</p>
+<p>Data Input</p>
+<p>Physical ports of the tested platforms</p>
+<p>API input parameters</p>
+<p>Data Output</p>
+<p>Physical ports of the tested platforms</p>
+<p>API output parameters and return values</p>
+<p>Control Input</p>
+<p>Physical ports of the tested platforms</p>
+<p>API input parameters</p>
+<p>Status Output</p>
+<p>Physical ports of the tested platforms</p>
+<p>API return values</p>
+<p>Power Input</p>
+<p>Physical ports of the tested platforms</p>
+<p>N/A</p>
+<p>Table 3 – Ports and Interfaces</p>
+<p>As a software module, control of the physical ports is outside the module scope. However, when the module is performing self-tests, or is in an error state, all output on the module’s logical data output interfaces is inhibited. </p>
+<p>Roles, Authentication and Services</p>
+<p>The cryptographic module implements both User and Crypto Officer (CO) roles. The module does not support user authentication. The User and CO roles are implicitly assumed by the entity accessing services implemented by the module. A user is considered the owner of the thread that instantiates the module and, therefore, only one concurrent user is allowed.</p>
+<p>The Approved services supported by the module and access rights within services accessible over the module’s public interface are listed in the table below:</p>
+<p>Service</p>
+<p>Approved security functions</p>
+<p>Keys and/or CSPs</p>
+<p>Roles</p>
+<p>Access rights to keys and/or CSPs</p>
+<p>  Module Initialization</p>
+<p>N/A</p>
+<p>N/A</p>
+<p>CO</p>
+<p>N/A</p>
+<p>Symmetric encryption/decryption</p>
+<p>AES, Triple-DES</p>
+<p>AES, Triple-DES symmetric keys</p>
+<p>User, CO</p>
+<p>Execute</p>
+<p>Keyed hashing </p>
+<p>HMAC-SHA</p>
+<p>HMAC key</p>
+<p>User, CO</p>
+<p>Execute</p>
+<p>Hashing</p>
+<p>SHS</p>
+<p>None</p>
+<p>User, CO</p>
+<p>N/A</p>
+<p>Random Bit Generation</p>
+<p>CTR_DRBG</p>
+<p>DRBG seed, internal state V and Key values</p>
+<p>User, CO</p>
+<p>Write/Execute</p>
+<p>Signature generation/ verification</p>
+<p>CTR_DRBG</p>
+<p>RSA</p>
+<p>ECDSA</p>
+<p>RSA, ECDSA private key</p>
+<p>User, CO</p>
+<p>Write/Execute</p>
+<p>Key Transport</p>
+<p>RSA</p>
+<p>RSA private key</p>
+<p>User, CO</p>
+<p>Write/Execute</p>
+<p>Key Agreement</p>
+<p>KAS ECC</p>
+<p>EC DH private key</p>
+<p>User, CO</p>
+<p>Write/Execute</p>
+<p>Key Generation</p>
+<p>CTR_DRBG</p>
+<p>RSA</p>
+<p>ECDSA</p>
+<p>RSA, ECDSA private key</p>
+<p>User, CO</p>
+<p>Write/Execute</p>
+<p>On-Demand</p>
+<p>Self-test</p>
+<p>N/A</p>
+<p>N/A</p>
+<p>User, CO</p>
+<p>Execute</p>
+<p>Zeroization</p>
+<p>N/A</p>
+<p>All keys</p>
+<p>User, CO</p>
+<p>Write/Execute</p>
+<p>Show status</p>
+<p>N/A</p>
+<p>N/A</p>
+<p>User, CO</p>
+<p>N/A</p>
+<p>Table 4 – Approved Services, Roles and Access Rights</p>
+<p>The module provides the following non-Approved services which utilize algorithms listed in Table 9:</p>
+<p>Service</p>
+<p>Non-Approved Functions</p>
+<p>Roles</p>
+<p>Keys and/or CSPs</p>
+<p>Symmetric encryption/decryption</p>
+<p>AES (non-compliant), DES, Triple-DES (non-compliant)</p>
+<p>User, CO</p>
+<p>N/A</p>
+<p>Hashing</p>
+<p>MD4, MD5, POLYVAL</p>
+<p>User, CO</p>
+<p>N/A</p>
+<p>Signature generation/ verification</p>
+<p>RSA (non-compliant)</p>
+<p>ECDSA (non-compliant)</p>
+<p>User, CO</p>
+<p>N/A</p>
+<p>Key Transport</p>
+<p>RSA (non-compliant)</p>
+<p>User, CO</p>
+<p>N/A</p>
+<p>Key Generation</p>
+<p>RSA (non-compliant)</p>
+<p>ECDSA (non-compliant)</p>
+<p>User, CO</p>
+<p>N/A</p>
+<p>Table 5 – non-Approved or non-security relevant services</p>
+<p>The module also provides the following non-Approved or non-security relevant services over a non-public interface:</p>
+<p>Service</p>
+<p>Approved Security</p>
+<p>Functions</p>
+<p>Roles</p>
+<p>Access rights to keys</p>
+<p> and/or CSPs</p>
+<p>  Large integer operations</p>
+<p>None</p>
+<p>User, CO</p>
+<p>N/A</p>
+<p>Disable automatic generation of CTR_DRBG &quot;additional_input&quot; parameter</p>
+<p>CTR_DRBG</p>
+<p>User, CO</p>
+<p>N/A</p>
+<p>Wegman-Carter hashing with POLYVAL</p>
+<p>None</p>
+<p>User, CO</p>
+<p>N/A</p>
+<p>Table 6 - Non-Security Relevant Services</p>
+<p>Physical Security</p>
+<p>The cryptographic module is comprised of software only and thus does not claim any physical security.</p>
+<p>Operational Environment</p>
+<p>The cryptographic module operates under Android 11. The module runs on a GPC running one of the operating systems specified in Table 1. Each approved operating system manages processes and threads in a logically separated manner. The module’s user is considered the owner of the calling application that instantiates the module.</p>
+<p>Cryptographic Algorithms &amp; Key Management</p>
+<p>Approved Cryptographic Algorithms</p>
+<p>The module implements the following FIPS 140-2 Approved algorithms:</p>
+<p>CAVP Cert #</p>
+<p>Algorithm</p>
+<p>Standard</p>
+<p>Mode/Method/Size</p>
+<p>Use</p>
+<p> A1109</p>
+<p>AES</p>
+<p>FIPS 197</p>
+<p>SP 800-38A</p>
+<p>128, 192, 256 CBC, ECB, CTR</p>
+<p>Encryption, Decryption</p>
+<p>A1109</p>
+<p>AES</p>
+<p>SP 800-38D</p>
+<p>128 and 256 GCM/GMAC</p>
+<p>Authenticated Encryption, Authenticated Decryption</p>
+<p>A1109</p>
+<p>KTS</p>
+<p>SP 800-38F</p>
+<p>128, 192, 256 KW, KWP</p>
+<p>Key Wrapping, Key Unwrapping</p>
+<p>A1109</p>
+<p>CVL</p>
+<p>SP 800-135rev1</p>
+<p>TLS 1.0/1.1 and 1.2 KDF1</p>
+<p>Key Derivation</p>
+<p>A1109</p>
+<p>DRBG</p>
+<p>SP 800-90Arev1</p>
+<p>AES-256 CTR_DRBG</p>
+<p>Random Bit Generation</p>
+<p>A1109</p>
+<p>ECDSA</p>
+<p>FIPS 186-4</p>
+<p>Signature Generation Component, Key Pair Generation, Signature Generation, Signature Verification, Public Key Validation</p>
+<p>P-224, P-256, P-384, P-521</p>
+<p>Digital Signature Services</p>
+<p>A1109</p>
+<p>HMAC</p>
+<p>FIPS 198-1</p>
+<p>HMAC-SHA-1, HMAC-SHA-224, HMAC-SHA-256, HMAC-SHA-384, HMAC-SHA-512</p>
+<p>Generation, Authentication</p>
+<p>A1109</p>
+<p>RSA</p>
+<p>FIPS 186-4</p>
+<p>Key Generation, Signature Generation, Signature Verification</p>
+<p>(1024, 2048, 3072)</p>
+<p>Note: Key size 1024 is only used for Signature Verification</p>
+<p>Digital Signature Services</p>
+<p>A1109</p>
+<p>SHA</p>
+<p>FIPS 180-4</p>
+<p>SHA-1, SHA-224, SHA-256, SHA-384, SHA-512</p>
+<p>Digital Signature Generation, Digital Signature Verification, non-Digital Signature Applications</p>
+<p>A1109</p>
+<p>Triple-DES</p>
+<p>SP 800-67</p>
+<p>SP 800-38A</p>
+<p>TCBC, TECB</p>
+<p>Encryption, Decryption</p>
+<p>A1109</p>
+<p>KAS-SSC</p>
+<p>SP 800-56rev3</p>
+<p>EC Diffie-Hellman P-224, P-256, P-384 and P-521 (SHA2-224, SHA2-256, 2SHA2-384, SHA2-512)</p>
+<p>Diffie-Hellman FB, FC</p>
+<p>Key Agreement Scheme – Key Agreement Scheme Shared Secret</p>
+<p>Computation (KAS-SSC) per SP 800-56Arev3, Key Derivation per SP 800-135 (CVL Cert. #TBD TLS KDF)</p>
+<p>Table 7 – Approved Algorithms and CAVP Certificates</p>
+<p>Allowed Cryptographic Algorithms</p>
+<p>The module supports the following non-FIPS 140-2 Approved but allowed algorithms that may be used in the Approved mode of operation:</p>
+<p>Algorithm</p>
+<p>Use</p>
+<p>RSA Key Transport </p>
+<p>Key establishment methodology using PKCS#1-v1.5 provides between 112 and 256 bits of encryption strength</p>
+<p>MD5</p>
+<p>When used with the TLS protocol version 1.0 and 1.1</p>
+<p>Table 8 – Allowed Algorithms</p>
+<p>Non-Approved Cryptographic Algorithms</p>
+<p>The module employs the methods listed in Table 9, which are not allowed for use in a FIPS-Approved mode. Their use will result in the module operating in a non-Approved mode.</p>
+<p>MD5, MD4</p>
+<p>DES</p>
+<p>AES-GCM (non-compliant)</p>
+<p>AES (non-compliant)</p>
+<p>ECDSA (non-compliant)</p>
+<p>RSA (non-compliant)</p>
+<p>POLYVAL</p>
+<p>Triple-DES (non-compliant)</p>
+<p>Table 9 – Non-Approved Algorithms</p>
+<p>Cryptographic Key Management</p>
+<p>The table below provides a complete list of Private Keys and CSPs used by the module:</p>
+<p>Key/CSP Name</p>
+<p>Key Description </p>
+<p>Generated/ Input</p>
+<p>Output</p>
+<p>AES Key</p>
+<p>AES (128/192/256) encrypt / decrypt key</p>
+<p>Input via API in plaintext</p>
+<p>Output via API in plaintext</p>
+<p>AES-GCM Key</p>
+<p>AES (128/192/256) encrypt / decrypt / generate / verify key</p>
+<p>Input via API in plaintext</p>
+<p>Output via API in plaintext</p>
+<p>AES Wrapping Key</p>
+<p>AES (128/192/256) key wrapping key</p>
+<p>Input via API in plaintext</p>
+<p>Output via API in plaintext</p>
+<p>Triple-DES Key</p>
+<p>Triple-DES (3-Key) encrypt / decrypt key</p>
+<p>Input via API in plaintext</p>
+<p>Output via API in plaintext</p>
+<p>ECDSA Signing Key</p>
+<p>ECDSA (P-224/P-256/P-384/P-521) signature generation key</p>
+<p>Internally Generated or input via API in plaintext</p>
+<p>Output via API in plaintext</p>
+<p>EC DH Private Key</p>
+<p>EC DH (P-224/P-256/P-384/P-521) private key</p>
+<p>Internally Generated or input via API in plaintext</p>
+<p>Output via API in plaintext</p>
+<p>HMAC Key</p>
+<p>Keyed hash key (160/224/256/384/512)</p>
+<p>Input via API in plaintext</p>
+<p>Output via API in plaintext</p>
+<p>RSA Key (Key Transport)</p>
+<p>RSA (2048 to 16384 bits) key decryption (private key transport) key</p>
+<p>Internally Generated or input via API in plaintext</p>
+<p>Output via API in plaintext</p>
+<p>RSA Signature Generation Key</p>
+<p>RSA (2048 to 16384 bits) signature generation key</p>
+<p>Internally Generated or input via API in plaintext</p>
+<p>Output via API in plaintext</p>
+<p>TLS Pre-Master Secret</p>
+<p>Shared Secret; 48 bytes of pseudo-random data</p>
+<p>Internally Generated </p>
+<p>Output via API in plaintext</p>
+<p>TLS Master Secret</p>
+<p>Shared Secret; 48 bytes of pseudo-random data</p>
+<p>Internally Derived via key derivation function defined in SP 800-135 KDF (TLS).</p>
+<p>Output via API in plaintext</p>
+<p>CTR_DRBG V (Seed)</p>
+<p>128 bits</p>
+<p>Internally Generated</p>
+<p>Does not exit the module</p>
+<p>CTR_DRBG Key</p>
+<p>256 bits</p>
+<p>Internally Generated</p>
+<p>Does not exit the module</p>
+<p>CTR_DRBG Entropy Input</p>
+<p>384 bits</p>
+<p>Input via API in plaintext</p>
+<p>Does not exit the module</p>
+<p>Table 10 – Keys and CSPs supported</p>
+<p>Public Keys</p>
+<p>The table below provides a complete list of the Public keys used by the module:</p>
+<p>Public Key Name</p>
+<p>Key Description </p>
+<p>ECDSA Verification Key</p>
+<p>ECDSA (P-224/P-256/P-384/P-521) signature verification key</p>
+<p>EC DH Public Key</p>
+<p>EC DH (P-224/P-256/P-384/P-521) public key</p>
+<p>RSA Key (Key Transport)</p>
+<p>RSA (2048 to 16384 bits) key encryption (public key transport) key</p>
+<p>RSA Signature Verification Key</p>
+<p>RSA (1024 to 16384 bits) signature verification public key</p>
+<p>Table 11 – Public keys supported</p>
+<p>Key Generation</p>
+<p>The module supports generation of ECDSA, EC Diffie-Hellman, and RSA key pairs as specified in Section 5 of NIST SP 800-133. The module employs a NIST SP 800-90A random bit generator for creation of the seed for asymmetric key generation. The module receives entropy passively.</p>
+<p>The output data path is provided by the data interfaces and is logically disconnected from processes performing key generation or zeroization. No key information will be output through the data output interface when the module zeroizes keys. </p>
+<p>Key Storage</p>
+<p>The cryptographic module does not perform persistent storage of keys. Keys and CSPs are passed to the module by the calling application. The keys and CSPs are stored in memory in plaintext. Keys and CSPs residing in internally allocated data structures (during the lifetime of an API call) can only be accessed using the module defined API. The operating system protects memory and process space from unauthorized access.</p>
+<p>Key Zeroization</p>
+<p>The module is passed keys as part of a function call from a calling application and does not store keys persistently. The calling application is responsible for parameters passed in and out of the module. The Operating System and the calling application are responsible to clean up temporary or ephemeral keys. </p>
+<p>All CSPs can be zeroized by power cycling or by rebooting the host test platform.</p>
+<p>Self-tests</p>
+<p>FIPS 140-2 requires the module to perform self-tests to ensure the integrity of the module and the correctness of the cryptographic functionality at start up. Some functions require conditional tests during normal operation of the module. The supported tests are listed and described in this section.  </p>
+<p>Power-On Self-Tests</p>
+<p>Power-on self-tests are run upon the initialization of the module and do not require operator intervention to run. If any of the tests fail, the module will not initialize. The module will enter an error state and no services can be accessed. </p>
+<p>The module implements the following power-on self-tests:</p>
+<p>Type</p>
+<p>Test</p>
+<p>Integrity Test</p>
+<p>HMAC-SHA-256</p>
+<p>Known Answer Test</p>
+<p>AES KAT (encryption and decryption. Key size: 128-bits)</p>
+<p>AES-GCM KAT (encryption and decryption. Key size: 128-bits)</p>
+<p>Triple-DES KAT (encryption and decryption. Key size: 168-bits)</p>
+<p>ECDSA KAT (signature generation/signature verification. Curve: P-256) </p>
+<p>HMAC KAT (HMAC-SHA-1, HMAC-SHA-512)</p>
+<p>SP 800-90A CTR_DRBG KAT (Key size: 256-bits)</p>
+<p>RSA KAT (signature generation/signature verification and encryption/decryption. Key size: 2048-bit)</p>
+<p>TLS v1.2 KDF KAT</p>
+<p>KAS-ECC KAT (Curve P-256)</p>
+<p>KAS-FFC KAT (2048-bit)</p>
+<p>SHA KAT (SHA-1, SHA-256, SHA-512)</p>
+<p>Table 12 – Power-on Self-tests</p>
+<p>By default, all power up self-tests are executed at module initialization. The module can be configured to only run the integrity test on subsequent instantiations by setting the environmental variable BORINGSSL_FIPS_SELF_TEST_FLAG_FILE, as allowed by FIPS 140-2 IG 9.11. If configured, after the self-tests have passed, the module creates a temporary file named after the module’s HMAC-SHA-256 integrity value (this value does not persist across power cycles). This file is checked for existence whenever subsequent instantiations of the module are initialized. If it exists, only the integrity test is run. If the environmental variable is not set, the file does not exist, or the file cannot be accessed for any reason, the entire set of power-on self-tests (KATs and integrity test) are run. The power-on self-tests must be passed before a User/Crypto Officer can perform services. The Power-on self-tests can be run on demand by power-cycling the host platform.</p>
+<p>Conditional Self-Tests</p>
+<p>Conditional self-tests are run during operation of the module.  If any of these tests fail, the module will enter an error state, where no services can be accessed by the operators. The module can be re-initialized to clear the error and resume FIPS mode of operation. Each module performs the following conditional self-tests:</p>
+<p>Type</p>
+<p>Test</p>
+<p>Pair-wise Consistency Test</p>
+<p>ECDSA Key Pair generation</p>
+<p>RSA Key Pair generation</p>
+<p>CRNGT</p>
+<p>Performed on NDRNG per IG 9.8</p>
+<p>DRBG Health Tests</p>
+<p>Performed on DRBG, per SP 800‐90A Section 11.3. Required per IG C.1. </p>
+<p>Table 13 – Conditional Self-tests</p>
+<p>Pairwise consistency tests are performed for both possible modes of use, e.g. Sign/Verify and Encrypt/Decrypt.</p>
+<p>Mitigation of other Attacks</p>
+<p>The module is not designed to mitigate against attacks which are outside of the scope of FIPS 140-2.</p>
+<p>Guidance and Secure Operation</p>
+<p>Installation Instructions</p>
+<p>On a Linux workstation, issue the following commands to download and verify repo:</p>
+<p>curl curl https://storage.googleapis.com/git-repo-downloads/repo &gt; ~/repo</p>
+<p>chmod u+x ~/repo</p>
+<p>gpg --recv-key 8BB9AD793E8E6153AF0F9A4416530D5E920F5C65</p>
+<p>curl https://storage.googleapis.com/git-repo-downloads/repo.asc | gpg --verify - ~/repo</p>
+<p>Download the manifest from: https://ci.android.com/builds/submitted/7110836/aosp_arm64-userdebug/latest/manifest_7110836.xml</p>
+<p>Verify the manifest using the following command:</p>
+<p>sha256sum ~/manifest_7110836.xml</p>
+<p>Manually validate that the output from this command indicates the following expected hash values for each of these files:</p>
+<p>07a6844a64ffd33ae7e187d1d7b1114ef314802e59b665309617fbd11f11df16 manifest_7110836.xml</p>
+<p>The module can be obtained by issuing the following commands:</p>
+<p>mkdir aosp</p>
+<p>cd aosp</p>
+<p>~/repo init -u https://android.googlesource.com/platform/manifest --depth 1</p>
+<p>~/repo init -m ~/manifest_7110836.xml</p>
+<p>~/repo sync -q -c -j 20</p>
+<p>. build/envsetup.sh</p>
+<p>Once downloaded, the module can be built using the following commands:</p>
+<p>For 64 bit</p>
+<p>lunch aosp_arm64-userdebug</p>
+<p>m clean</p>
+<p>m -j 20 adb bssl acvp_modulewrapper</p>
+<p>For 32 bit</p>
+<p>lunch aosp_arm-userdebug</p>
+<p>m clean</p>
+<p>m -j 20 adb bssl acvp_modulewrapper</p>
+<p>Upon completion of the build process, the module can be deployed to the Android device over ADB and have its FIPS status verified by issuing the following commands:</p>
+<p>For 64 bit</p>
+<p>$ANDROID_HOST_OUT/bin/adb devices -l</p>
+<p>$ANDROID_HOST_OUT/bin/adb push $ANDROID_PRODUCT_OUT/system/bin/bssl /data/local/tmp</p>
+<p>$ANDROID_HOST_OUT/bin/adb push $ANDROID_PRODUCT_OUT/system/bin/modulewrapper /data/local/tmp</p>
+<p>$ANDROID_HOST_OUT/bin/adb shell /data/local/tmp/bssl isfips</p>
+<p>For 32 bit</p>
+<p>$ANDROID_HOST_OUT/bin/adb devices -l</p>
+<p>$ANDROID_HOST_OUT/bin/adb push $ANDROID_PRODUCT_OUT/system/bin/bssl32 /data/local/tmp</p>
+<p>$ANDROID_HOST_OUT/bin/adb push $ANDROID_PRODUCT_OUT/system/bin/modulewrapper32 /data/local/tmp</p>
+<p>$ANDROID_HOST_OUT/bin/adb shell /data/local/tmp/bssl32 isfips</p>
+<p>The module will print “1” if it is in a FIPS 140-2 validated mode of operation.</p>
+<p>Secure Operation	</p>
+<p>Initialization</p>
+<p>The cryptographic module is initialized by loading the module before any cryptographic functionality is available. In User Space the operating system is responsible for the initialization process and loading of the library. The module is designed with a default entry point (DEP) which ensures that the power-up tests are initiated automatically when the module is loaded.</p>
+<p>Usage of AES OFB, CFB and CFB8</p>
+<p>In approved mode, users of the module must not utilize AES OFB, CFB and CFB8.</p>
+<p>Usage of AES-GCM </p>
+<p>In the case of AES-GCM, the IV generation method is user selectable and the value can be computed in more than one manner. </p>
+<p>AES GCM encryption and decryption are used in the context of the TLS protocol version 1.2 (compliant to Scenario 1 in FIPS 140-2 A.5). The module is compliant with NIST SP 800-52 and the mechanism for IV generation is compliant with RFC 5288. The module ensures that it is strictly increasing and thus cannot repeat. When the IV exhausts the maximum number of possible values for a given session key, the first party (client or server) to encounter this condition may either trigger a handshake to establish a new encryption key in accordance with RFC 5246, or fail. In either case, the module prevents and IV duplication and thus enforces the security property.</p>
+<p>The module’s IV is generated internally by the module’s Approved DRBG, which is internal to the module’s boundary. The IV is 96-bits in length per NIST SP 800-38D, Section 8.2.2 and FIPS 140-2 IG A.5 scenario 2.</p>
+<p>The selection of the IV construction method is the responsibility of the user of this cryptographic module. In approved mode, users of the module must not utilize GCM with an externally generated IV.  </p>
+<p>Per IG A.5, in the event module power is lost and restored the consuming application must ensure that any of its AES-GCM keys used for encryption or decryption are re-distributed.</p>
+<p>Usage of Triple-DES</p>
+<p>In accordance with CMVP IG A.13, when operating in a FIPS approved mode of operation, the same Triple-DES key shall not be used to encrypt more than 220 or 216 64-bit data blocks.</p>
+<p>The TLS protocol governs the generation of the respective Triple-DES keys. Please refer to IETF RFC 5246 (TLS) for details relevant to the generation of the individual Triple-DES encryption keys. The user is responsible for ensuring that the module limits the number of encrypted blocks with the same key to no more than 220 when utilized as part of a recognized IETF protocol. </p>
+<p>For all other uses of Triple-DES, the user is responsible for ensuring that the module limits the number of encrypted blocks with the same key to no more than 216.</p>
+<p>RSA and ECDSA Keys</p>
+<p>The module allows the use of 1024 bit RSA keys for legacy purposes including signature generation, which is disallowed in FIPS Approved mode as per NIST SP 800-131A. Therefore, the cryptographic operations with the non-approved key sizes will result in the module operating in Non-Approved mode implicitly.</p>
+<p>The elliptic curves utilized shall be the validated NIST-recommended curves and shall provide a minimum of 112 bits of encryption strength.</p>
+<p>Non-approved cryptographic algorithms shall not share the same key or CSP as an approved algorithm. As such approved algorithms shall not use the keys generated by the module’s Non-Approved key generation methods or the converse. </p>
+<p>References and Standards</p>
+<p>The following Standards are referred to in this Security Policy:</p>
+<p>Abbreviation</p>
+<p>Full Specification Name</p>
+<p>FIPS 140-2</p>
+<p>Security Requirements for Cryptographic modules</p>
+<p>FIPS 180-4</p>
+<p>Secure Hash Standard (SHS)</p>
+<p>FIPS 186-4</p>
+<p>Digital Signature Standard (DSS)</p>
+<p>FIPS 197</p>
+<p>Advanced Encryption Standard</p>
+<p>FIPS 198-1</p>
+<p>The Keyed-Hash Message Authentication Code (HMAC)</p>
+<p>IG</p>
+<p>Implementation Guidance for FIPS PUB 140-2 and the Cryptographic Module Validation Program</p>
+<p>SP 800-38A</p>
+<p>Recommendation for Block Cipher Modes of Operation: Three Variants of Ciphertext Stealing for CBC Mode</p>
+<p>SP 800-38D</p>
+<p>Recommendation for Block Cipher Modes of Operation: Galois/Counter Mode (GCM) and GMAC</p>
+<p>SP 800-38F</p>
+<p>Recommendation for Block Cipher Modes of Operation: Methods for Key Wrapping</p>
+<p>SP 800-56A</p>
+<p>Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography</p>
+<p>SP 800-67</p>
+<p>Recommendation for the Triple Data Encryption Algorithm (TDEA)</p>
+<p>Block Cipher</p>
+<p>SP 800-90A</p>
+<p>Recommendation for Random Number Generation Using Deterministic Random Bit Generators</p>
+<p>SP 800-131A</p>
+<p>Transitioning the Use of Cryptographic Algorithms and Key Lengths</p>
+<p>SP 800-133</p>
+<p>Recommendation for Cryptographic Key Generation</p>
+<p>SP 800-135</p>
+<p>Recommendation for Existing Application-Specific Key Derivation Functions</p>
+<p>Table 14 – References and Standards</p>
+<p>Acronyms and Definitions</p>
+<p>Acronym</p>
+<p>Definition</p>
+<p>ADB</p>
+<p>Android Debug Bridge</p>
+<p>AES</p>
+<p>Advanced Encryption Standard</p>
+<p>API</p>
+<p>Application Programming Interface</p>
+<p>CAVP</p>
+<p>Cryptographic Algorithm Validation Program</p>
+<p>CBC</p>
+<p>Cipher-Block Chaining</p>
+<p>CCCS</p>
+<p>Canadian Centre for Cyber Security</p>
+<p>CFB</p>
+<p>Cipher Feedback</p>
+<p>CKG</p>
+<p>Cooperative Key Generation</p>
+<p>CMVP</p>
+<p>Crypto Module Validation Program</p>
+<p>CO</p>
+<p>Cryptographic Officer</p>
+<p>CPU</p>
+<p>Central Processing Unit</p>
+<p>CRNGT</p>
+<p>Continuous Random Number Generator Test</p>
+<p>CSP</p>
+<p>Critical Security Parameter</p>
+<p>CTR</p>
+<p>Counter-mode</p>
+<p>CVL</p>
+<p>Component Validation List</p>
+<p>DEP</p>
+<p>Default Entry Point</p>
+<p>DES</p>
+<p>Data Encryption Standard</p>
+<p>DH</p>
+<p>Diffie-Hellman</p>
+<p>DRBG</p>
+<p>Deterministic Random Bit Generator</p>
+<p>DSS</p>
+<p>Digital Signature Standard</p>
+<p>EC</p>
+<p>Elliptic Curve</p>
+<p>ECB</p>
+<p>Electronic Code Book</p>
+<p>ECC</p>
+<p>Elliptic Curve Cryptography</p>
+<p>EC DH</p>
+<p>Elliptic Curve Diffie-Hellman</p>
+<p>ECDSA</p>
+<p>Elliptic Curve Digital Signature Authority</p>
+<p>EMC</p>
+<p>Electromagnetic Compatibility</p>
+<p>EMI</p>
+<p>Electromagnetic Interference</p>
+<p>FCC</p>
+<p>Federal Communications Commission</p>
+<p>FIPS</p>
+<p>Federal Information Processing Standards</p>
+<p>GCM</p>
+<p>Galois/Counter Mode</p>
+<p>GMAC</p>
+<p>Galois Message Authentication Code</p>
+<p>GPC</p>
+<p>General Purpose Computer</p>
+<p>GPOS</p>
+<p>General Purpose Operating System</p>
+<p>HMAC</p>
+<p>Key-Hashed Message Authentication Code</p>
+<p>IETF</p>
+<p>Internet Engineering Task Force</p>
+<p>IG</p>
+<p>Implementation Guidance</p>
+<p>IV</p>
+<p>Initialization Vector</p>
+<p>KAS</p>
+<p>Key Agreement Scheme</p>
+<p>KAT</p>
+<p>Known Answer Test</p>
+<p>KDF</p>
+<p>Key Derivation Function</p>
+<p>KTS</p>
+<p>Key Transport Scheme</p>
+<p>KW</p>
+<p>Key Wrap</p>
+<p>KWP</p>
+<p>Key Wrap with Padding</p>
+<p>LLC</p>
+<p>Limited Liability Company</p>
+<p>MAC</p>
+<p>Message Authentication Code</p>
+<p>MD4</p>
+<p>Message Digest algorithm MD4</p>
+<p>MD5</p>
+<p>Message Digest algorithm MD5</p>
+<p>N/A</p>
+<p>Not-Applicable</p>
+<p>NIST</p>
+<p>National Institute of Standards and Technology</p>
+<p>NDRNG</p>
+<p>Non-Deterministic Random Number Generator</p>
+<p>NVLAP</p>
+<p>National Voluntary Lab Accreditation Program</p>
+<p>OFB</p>
+<p>Output Feedback</p>
+<p>PAA</p>
+<p>Processor Algorithm Accelerator</p>
+<p>RAM</p>
+<p>Random Access Memory</p>
+<p>RFC</p>
+<p>Request For Comment</p>
+<p>RSA</p>
+<p>Rivest Shamir Adleman</p>
+<p>SHA</p>
+<p>Secure Hash Algorithm</p>
+<p>SHS</p>
+<p>Secure Hash Standard</p>
+<p>SP</p>
+<p>Special Publication</p>
+<p>SSL</p>
+<p>Secure Socket Layer</p>
+<p>TCBC</p>
+<p>Triple-DES Cipher-Block Chaining</p>
+<p>TDEA</p>
+<p>Triple Data Encryption Algorithm</p>
+<p>TECB</p>
+<p>Triple-DES Electronic Code Book</p>
+<p>TLS</p>
+<p>Transport Layer Security</p>
+<p>Triple-DES</p>
+<p>Triple Data Encryption Standard</p>
+<p>Table 15 – Acronyms and Definitions</p>
+</main></noscript>
+<canvas id="starling"></canvas>
+<div id="loading"><div><div id="loading-text">Loading…</div><div class="bar"><div id="loading-fill" class="indeterminate"></div></div></div></div>
+<div id="font-status" role="status" hidden><span></span><button type="button" hidden>Retry</button></div>
+<script type="module">
+  // A trap inside a frame or an event handler surfaces here, not in the
+  // promise below; without the stack it is only 'unreachable'.
+  window.addEventListener('error', (event) => {
+    console.error(String(event.error?.stack || event.message));
+  });
+  import { startStarling } from './starling.js';
+  const fontStatus = document.getElementById('font-status');
+  const retryFonts = fontStatus.querySelector('button');
+  retryFonts.addEventListener('click', () => window.starling?.retryFonts().catch(console.error));
+  startStarling({
+    canvas: document.getElementById('starling'),
+    app: 'app.wasm',
+    // The app's command line (Office: ['--slides'] starts in Slides).
+    args: ['--site', '/site-demo/'],
+    // The tab's URL path is the app's route (the wiki opens the page it names).
+    initialRoute: location.pathname + location.search + location.hash,
+    skwasmBase: 'skwasm/',
+    // Written by build/web-app.sh; the first face is also the fallback
+    // for any family nobody loaded.
+    fonts: 'fonts/manifest.json',
+    onFontStatus({ pending, failed }) {
+      fontStatus.hidden = !pending.length && !failed.length;
+      fontStatus.querySelector('span').textContent = failed.length
+        ? 'Some fonts could not load. Text is using a fallback.' : 'Loading document fonts…';
+      retryFonts.hidden = !failed.length;
+    },
+    onPhase(message) {
+      document.getElementById('loading-text').textContent = message;
+      document.getElementById('loading-fill').classList.add('indeterminate');
+    },
+    onProgress(loaded, total) {
+      const fill = document.getElementById('loading-fill');
+      fill.classList.toggle('indeterminate', !total);
+      if (total) fill.style.width = `${Math.min(100, 100 * loaded / total)}%`;
+    },
+  }).then((starling) => {
+    window.starling = starling;
+    // A shell page made for a route (the wiki's server, a site build)
+    // already carries the page's title; keep it.
+    if (!document.querySelector('meta[name="starling-route"]')) document.title = 'Starling — running';
+    const loading = document.getElementById('loading');
+    // The first frame is on screen a beat after start returns.
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      loading.classList.add('done');
+      setTimeout(() => loading.remove(), 400);
+    }));
+  })
+    .catch((error) => {
+      console.error(String(error.stack || error));
+      document.title = 'Starling — failed';
+      document.body.append(Object.assign(document.createElement('pre'), {
+        textContent: String(error.stack || error),
+        style: 'color:#ef5350;padding:16px;white-space:pre-wrap',
+      }));
+    });
+</script>
+</body>
+</html>
