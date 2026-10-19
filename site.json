@@ -2,6 +2,7 @@
   "title": "Starling Site demo",
   "base": "/site-demo/",
   "url": "https://starling-build.github.io/site-demo",
+  "repository": "https://github.com/starling-build/site-demo",
   "pages": [
     {
       "slug": "index",
