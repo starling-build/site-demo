@@ -34,18 +34,20 @@
 </style>
 </head>
 <body>
-<noscript><main><h1>Welcome</h1>
-<p>Publish documents, not web pages</p>
+<style>.starling-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}</style>
+<noscript><style>.starling-sr{position:static;width:auto;height:auto;overflow:visible;clip:auto;white-space:normal;padding:16px;font:16px system-ui,sans-serif;color:#eee}</style></noscript>
+<main id="starling-text" class="starling-sr" aria-label="Welcome">
+<h1>Publish documents, not web pages</h1>
 <p>Every page on this site is a Word document, stored in a git repository and drawn here by Starling Writer. Nothing is converted to HTML. What you see is what prints.</p>
-<p>What a page can do that a web page cannot</p>
+<h2>What a page can do that a web page cannot</h2>
 <p>Real pages, with headers, footers and page numbers, on a desktop; the same document reflowed on a phone.</p>
 <p>A table of contents whose entries carry page numbers, and a link to any paragraph.</p>
 <p>Tables that run across pages, footnotes at the foot of the page, Word's own typography.</p>
 <p>A PDF that is the same painter: the pages you read are the pages you print.</p>
-<p>How it is made</p>
+<h2>How it is made</h2>
 <p>Authors edit in Starling Writer, with its full ribbon, on a clone of the repository. Publish builds this folder, commits and pushes; GitHub Pages serves it. There is no server, no sign-in and no build toolchain.</p>
 <p>Open &quot;Published documents&quot; for three real documents: a 24-page security policy with footnotes and two NIST documents, one with 81 headings and a table of contents, one with 778 table cells.</p>
-</main></noscript>
+</main>
 <canvas id="starling"></canvas>
 <div id="loading"><div><div id="loading-text">Loading…</div><div class="bar"><div id="loading-fill" class="indeterminate"></div></div></div></div>
 <div id="font-status" role="status" hidden><span></span><button type="button" hidden>Retry</button></div>

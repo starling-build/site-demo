@@ -34,7 +34,9 @@
 </style>
 </head>
 <body>
-<noscript><main><h1>CMVP revalidation change document (NIST, tables)</h1>
+<style>.starling-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}</style>
+<noscript><style>.starling-sr{position:static;width:auto;height:auto;overflow:visible;clip:auto;white-space:normal;padding:16px;font:16px system-ui,sans-serif;color:#eee}</style></noscript>
+<main id="starling-text" class="starling-sr" aria-label="CMVP revalidation change document (NIST, tables)">
 <p>Change Document</p>
 <p>Version 1.6 (associated with MM V2.7 section 7.1)</p>
 <p>April 9, 2026</p>
@@ -69,16 +71,16 @@
 <p>3.	Affected TEs and Security Policy Changes	42</p>
 <p>4.	Predefined Regression Testing	43</p>
 <p>5.	Document History	43</p>
-<p>The CSTL shall fill in all applicable tables under “CSTL Compliance evidence / justification”.  Non-applicable sections/tables can be left blank or removed from this document. </p>
-<p>Submission Scenarios</p>
+<p>The CSTL shall fill in all applicable tables under “CSTL Compliance evidence / justification”.  Non-applicable sections/tables can be left blank or removed from this document.</p>
+<h1>Submission Scenarios</h1>
 <p>Please review the below tables and requirements within the context of the FIPS 140-3 Management Manual Section 7.1 requirements.</p>
-<p>Requirements for all revalidations (MM 7.1.1)</p>
+<h2>Requirements for all revalidations (MM 7.1.1)</h2>
 <p>Requirement</p>
 <p>CSTL Compliance evidence / justification</p>
 <p>The purpose of the revalidation (scenario, objective, etc.) with reference to applicable guidance (e.g., Section(s) within Management Manual Submission Scenarios 7.1).</p>
 <p>The CSTL is responsible for an independent evaluation of the impacts throughout the module requirements for any change and performs any testing needed prior to submission.  The CSTL shall address all affected TEs and the CSTL’s assessment.</p>
 <p>Brief summary of the modifications (e.g., changes made to the module code, documentation, etc.).</p>
-<p>Indicate whether the modified cryptographic module replaces the previously validated module or adds to it. </p>
+<p>Indicate whether the modified cryptographic module replaces the previously validated module or adds to it.</p>
 <p>(7.1.15 Additional Comment #1 &amp; #2) If the individual section(s) is being lowered as part of the revalidation, this is considered security relevant and the module may be submitted as a UPDT with full testing on the individual section(s) that is being lowered.</p>
 <p>If the individual section(s) is being raised or if the physical embodiment changes, e.g., from multi-chip standalone to multi-chip embedded, then the cryptographic module will be considered a new module and shall undergo full validation testing by a CSTL and submitted as an FS.</p>
 <p>(7.1.15 Additional Comment #4) It is not possible to combine any revalidation scenarios outside of what is explicitly permitted by the submission scenario.</p>
@@ -93,30 +95,30 @@
 <p>d. The vendor shall provide the CSTL with the latest base module physical test report (a.k.a. PTR), as applicable, for the following revalidation scenarios: INTU, NSRL, UPDT, CVE, TRNS and PHYS. This is to ensure the new CSTL has the original tests to confirm if physical testing was impacted (e.g., changes to the physical enclosure or changes to firmware that controls the physical response logic).</p>
 <p>e. The CSTL shall determine that the provided base documentation and implementation is identical to the base validated module.</p>
 <p>f. The CSTL shall examine each modification and confirm that the change is appropriate for the submission type (e.g., non-security relevant for NSRL).</p>
-<p>g. The CSTL shall determine that no other modifications, including unintentional, have been made to the base module apart from what is permitted by the revalidation scenario. </p>
+<p>g. The CSTL shall determine that no other modifications, including unintentional, have been made to the base module apart from what is permitted by the revalidation scenario.</p>
 <p>h. The CSTL submissions shall meet all requirements of the revalidation scenario.</p>
 <p>i. The CSTL submission shall indicate which submission scenario is applicable and a summary of associated changes in the Revalidation Change Document.</p>
 <p>j. The CSTL shall use the Revalidation Change Document format for listing the certificate information as required by each revalidation scenario.</p>
 <p>k. The CSTL shall submit, at a minimum, what is listed in the below sections as required by the revalidation scenario.</p>
 <p>l. The CSTL shall be responsible for all content of the module validation, including module claims made, quality of documentation, and FIPS 140-3 conformance testing performed even if originally done by another lab, for the following revalidation scenarios: UPDT, INTU. In these cases, labs may need to re-do parts of the testing or improve areas of the validation outside of the revalidation changes. Labs also have the option to inform the CMVP to place these modules in question on HOLD while improving the submission. For revalidation scenarios other than UPDT and INTU, the new CSTL is responsible only for the module contents and testing that are impacted by the revalidation scenario.</p>
-<p>FS &amp; INTU (MM 7.1.2)</p>
+<h2>FS &amp; INTU (MM 7.1.2)</h2>
 <p>This Change Document is N/A for an FS and INTU (unless a new lab in which case the table above applies).</p>
-<p>VUP (MM 7.1.3)</p>
-<p>No unique table requirements for a VUP. The general table requirements for all revalidation scenarios still apply (e.g., Sections 1.1, 2, and 3). </p>
-<p>VAOE (MM 7.1.4)</p>
+<h2>VUP (MM 7.1.3)</h2>
+<p>No unique table requirements for a VUP. The general table requirements for all revalidation scenarios still apply (e.g., Sections 1.1, 2, and 3).</p>
+<h2>VAOE (MM 7.1.4)</h2>
 <p>Requirement</p>
 <p>CSTL Compliance evidence / justification</p>
 <p>Management Manual 7.9 Vendor or User Affirmation of Modules for the vendor affirmed OEs</p>
-<p>NSRL (MM 7.1.5)</p>
+<h2>NSRL (MM 7.1.5)</h2>
 <p>Modifications are made to hardware, software or firmware components that do not affect any FIPS 140-3 security relevant items. Per IG 2.4.A, “the term security is not defined in the Terms and Definitions, but, within the scope of FIPS 140-3, is determined based on the Section 6 Functional Security Objectives, and the specific Section 7 Security Requirements derived from those objectives.  The CSTL is responsible for identifying the documentation that is needed to determine whether a revalidation is sufficient, and the vendor is responsible for submitting the requested documentation to the CSTL.  Documentation may include a previous validation report, design documentation, source code, source code difference evidence, FSM, security policy differences, etc.</p>
 <p>Requirement</p>
 <p>CSTL Compliance evidence / justification</p>
 <p>a. CSTL shall review and independently verify the accuracy of the vendor-supplied documentation and identify any additional documentation necessary to confirm the applicability of this revalidation scenario.</p>
 <p>b. CSTL shall determine additional testing as necessary to confirm that FIPS 140-3 security relevant items have not been affected by the modification.</p>
-<p>c. CSTL shall identify the assertions affected by the modification and shall perform the tests associated with those assertions.  This will require the CSTL to: </p>
-<p>Review the COMPLETE list of assertions applicable to the module, </p>
-<p>Identify, from the previous validation report, the assertions that have been affected by the modification, </p>
-<p>Identify additional assertions that were NOT previously tested but should now be tested due to the modification, and </p>
+<p>c. CSTL shall identify the assertions affected by the modification and shall perform the tests associated with those assertions.  This will require the CSTL to:</p>
+<p>Review the COMPLETE list of assertions applicable to the module,</p>
+<p>Identify, from the previous validation report, the assertions that have been affected by the modification,</p>
+<p>Identify additional assertions that were NOT previously tested but should now be tested due to the modification, and</p>
 <p>Review assertions where specific Implementation Guidance (IG) was provided at the time of the original validation to confirm that the IG is still applicable.</p>
 <p>d. CSTL shall perform tests identified in b and c above (expected to at least include AS04.13 to reflect the new version(s) as a result of the code changes) on all new version(s) listed on the module’s certificate on at least one configuration of one module as defined per the module count guidance under “MIS Field Descriptions”.  Additionally for software/firmware/hybrid modules, tests must be done on at least one listed OE. This assumes the new versions compile to the same binary across all modules and configurations. If new versions compile to different binaries, then each binary must be tested separately.</p>
 <p>E.g., a hardware validation has two ‘base’ modules (i.e., P/N 10 and P/N 20) that map to the following firmware components: P/N 10 uses firmware components 1.0 and 2.0, and P/N 20 uses firmware components 1.1, 2.0, and 3.0 (note, the same firmware component, 2.0, is shared between both ‘base’ modules).  If NSRL changes were made to firmware component 2.0 (now version 2.1) but no changes were made to firmware components 1.0, 1.1 and 3.0, it is sufficient for the CSTL to test either: 1) P/N 10 using 1.1 and 2.1, or 2) P/N 20 using 1.0, 2.1, and 3.0. This assumes firmware component 2.1 compiles to the same binary for P/N 10 as it does for P/N 20. If not, P/N 10 and P/N 20 would each need to be separately tested.</p>
@@ -125,30 +127,30 @@
 <p>What changes are being proposed?</p>
 <p>What is the justification that each change is considered non-security relevant? E.g., changes are NOT to any items from 7.8 Module definitions for same certificates or other areas that affects how the module meets the security objectives and requirements of FIPS 140-3.</p>
 <p>Note, even though NSRLs are generally code changes, documentation-only modifications would still fall under an NSRL as opposed to a VUP if those modifications affect assertions that must be reassessed/retested by the CSTL. For example, if a module name is changed but the module identifier remains unchanged, the CSTL would have to reassess compliance to AS04.13 (and AS02.13) but this wouldn’t necessarily require code changes to the versioning output service. Thus, the NSRL would capture these limited regression tests even though code changes remain unchanged.</p>
-<p>ALG (MM 7.1.6)</p>
+<h2>ALG (MM 7.1.6)</h2>
 <p>Post validation, approved security relevant functions or services for which CAVP testing was not available (or vendor affirming was still permitted per the CMVP/CAVP transition schedule) at the time of submission to the CMVP for validation are now CAVP-tested and are being submitted for inclusion as an approved function or service. The CSTL is responsible for identifying the documentation that is needed to determine whether a revalidation is sufficient, and the vendor is responsible for submitting the requested documentation to the CSTL. Documentation may include a previous validation report and applicable CMVP rulings, design documentation, source code, security policy differences, etc.  Code or configuration changes are not permitted under this revalidation scenario.  For example, if self-tests are required for approved algorithms, the module must already support these self-tests. In essence, this means that ALG can only be used when a previously vendor affirmed or allowed algorithm that was available in the approved mode now has CAVP testing available and already meets the algorithm requirements (e.g., self-tests) and module requirements (e.g., approved service indicator).</p>
 <p>Requirement</p>
 <p>CSTL Compliance evidence / justification</p>
 <p>a. The CSTL shall review and independently verify the accuracy of the vendor-supplied documentation and identify any additional documentation necessary to confirm the applicability of this revalidation scenario.</p>
-<p>b. The CSTL shall identify the assertions affected by the modification and shall perform the tests associated with those assertions.  This will require the CSTL to: </p>
-<p>Review the COMPLETE list of assertions applicable to the module, </p>
-<p>Identify, from the previous validation report, the assertions that have been affected by the modification, </p>
-<p>Identify additional assertions that were NOT previously tested but should now be tested due to the modification, and </p>
+<p>b. The CSTL shall identify the assertions affected by the modification and shall perform the tests associated with those assertions.  This will require the CSTL to:</p>
+<p>Review the COMPLETE list of assertions applicable to the module,</p>
+<p>Identify, from the previous validation report, the assertions that have been affected by the modification,</p>
+<p>Identify additional assertions that were NOT previously tested but should now be tested due to the modification, and</p>
 <p>Review assertions where specific Implementation Guidance (IG) was provided at the time of the original validation to confirm that the module still meets the IG as it existed at the time of the original validation, except for IGs related to the newly tested algorithm where the latest IGs shall be met.</p>
-<p>OEUP (MM 7.1.7)</p>
-<p>This revalidation scenario allows a vendor to add new or modified tested OEs to the validation. </p>
+<h2>OEUP (MM 7.1.7)</h2>
+<p>This revalidation scenario allows a vendor to add new or modified tested OEs to the validation.</p>
 <p>Requirement</p>
 <p>CSTL Compliance evidence / justification</p>
-<p>No changes to the module with an addition, modification, or deletion of tested operational environments (OEs).  Purely deleting OEs can be done as a NSRL, but deleting can be done within an OEUP if also adding and/or modifying OEs. This shall require CAVP-testing the algorithm validations on the new/modified OEs. </p>
+<p>No changes to the module with an addition, modification, or deletion of tested operational environments (OEs).  Purely deleting OEs can be done as a NSRL, but deleting can be done within an OEUP if also adding and/or modifying OEs. This shall require CAVP-testing the algorithm validations on the new/modified OEs.</p>
 <p>If an entropy source assessment is applicable per IG 9.3.A, ESV(s) to cover all new/modified OEs and/or platforms shall be submitted and validated separately prior to submission.</p>
 <p>The CSTL shall perform the full regression test suite shown on the CMVP website.</p>
 <p>The only time code changes are allowed as part of an OEUP is if they are non-security relevant and necessary to correctly run the module on the new/modified OE (e.g., compilation flags or configuration options that need to be updated). No other changes are permitted (even to incorporate other non-security relevant changes such as bug fixes).  In Web Cryptik, this may be captured as a checkbox under the OEUP submission scenario (e.g., the CSTL selects “Limited NSRL”).</p>
-<p>RBND (MM 7.1.8)</p>
+<h2>RBND (MM 7.1.8)</h2>
 <p>This scenario applies if there are no modifications to a module and the new module is a re-branding of an already validated Original Equipment Manufacturer (OEM) module.</p>
 <p>Requirement</p>
 <p>CSTL Compliance evidence / justification</p>
 <p>1. The CSTL shall determine that the re-branded module is identical to the OEM module (n.b. this requirement applies equally to open source and non-open-source modules).</p>
-<p>How did the CSTL determine that the re-branded module is identical to the OEM module (e.g., source code / manifest / hash comparison)? </p>
+<p>How did the CSTL determine that the re-branded module is identical to the OEM module (e.g., source code / manifest / hash comparison)?</p>
 <p>2. The CSTL shall include the OEM’s written approval for re-branding in the submission package which shall note the terms of permission (e.g., subsequent addition of OEs, possible re-use of CAVP certificates, entropy, non-security relevant changes, remediation of CVE, whether a rebrand of a rebrand is acceptable, etc.) including who owns/controls the codebase and is responsible for updates to it post validation.  E.g., if these terms do not explicitly allow a vendor to further rebrand the OEM module, then a rebrand of that rebranded module is not permitted unless written permission is granted by the OEM.</p>
 <p>3. (for modules containing any open-source licensed code) The CSTL shall ensure the open-source licensing requirements are met (e.g., any required notices are contained in the Security Policy).</p>
 <p>A RBND shall include at least one OE from the original validation and cannot add new OEs. With proper OEM permissions, a RBND followed by a separate OEUP submission can accomplish rebranding a module on different OEs.</p>
@@ -159,52 +161,52 @@
 <p>A RBND is essentially guaranteed to be combined with a VUP to address the vendor changes so this will not be separately selectable in Web Cryptik.</p>
 <p>A vendor is expected to have permission to reuse the OEM’s CAVP certificates.  Therefore, changes to CAVP certificate information are NOT permitted as part of a RBND (but if permission is granted by the OEM, may be part of a post-RBND revalidation such as a UPDT).</p>
 <p>The CSTL shall provide an updated security policy which is technically identical to the originally validated security policy and describes the re-branded module.</p>
-<p>PTSC (MM 7.1.9)</p>
-<p>A sub-chip cryptographic subsystem that was previously validated in a single-chip (see IG 2.3.B) can be ported to other single-chip constructs as a PTSC submission to the CMVP. </p>
+<h2>PTSC (MM 7.1.9)</h2>
+<p>A sub-chip cryptographic subsystem that was previously validated in a single-chip (see IG 2.3.B) can be ported to other single-chip constructs as a PTSC submission to the CMVP.</p>
 <p>Requirement</p>
 <p>CSTL Compliance evidence / justification</p>
 <p>The CSTL shall verify that there are no security relevant changes in the sub-chip cryptographic subsystem;</p>
 <p>If an entropy source is contained within the sub-chip cryptographic subsystem, ESV(s) to cover all new single-chip environments shall be submitted and validated separately prior to submission;</p>
-<p>Note 1: An ESV may not be required, if the entropy is collected outside the sub-chip cryptographic subsystem, depending on changes to the entropy source or the subsystem housing it. Please refer to IG 9.3.A and IG D.J for details on applicable caveats and entropy estimates. </p>
+<p>Note 1: An ESV may not be required, if the entropy is collected outside the sub-chip cryptographic subsystem, depending on changes to the entropy source or the subsystem housing it. Please refer to IG 9.3.A and IG D.J for details on applicable caveats and entropy estimates.</p>
 <p>Note 2: Single chip embodiments may implement an ESV or a DRBG linked to a dedicated entropy source inside the physical boundary. Such cases may be implemented (a) inside the sub-chip cryptographic subsystem or (b) in two or more sub-chip cryptographic subsystems. The case (b) represents multiple disjoint sub-chip cryptographic subsystems (see Resolution 3 of IG 2.3.B).</p>
-<p>Approved security functions shall be retested and validated by the CAVP if implemented in a soft circuitry core recompiled in a different part configuration. </p>
+<p>Approved security functions shall be retested and validated by the CAVP if implemented in a soft circuitry core recompiled in a different part configuration.</p>
 <p>Note 3: If the original algorithm testing was performed as stated in the Management Manual Section 7.3 – Testing using Emulators and Simulators in a module simulator, and there is no change to the soft-core, no additional algorithm testing is required.</p>
 <p>Full regression testing (see FIPS 140-3 Resources page) shall be performed on the new sub-chip cryptographic subsystem after fabrication (transformation of the HDL to a gate or physical circuitry representation);</p>
 <p>ISO/IEC 19790:2012 Section 7.3 shall be addressed for the new single-chip module for all Security Levels within this Section.</p>
-<p>ISO/IEC 19790:2012 Section 7.7 shall be addressed for the new single-chip module at Security Level 1. </p>
+<p>ISO/IEC 19790:2012 Section 7.7 shall be addressed for the new single-chip module at Security Level 1.</p>
 <p>ISO/IEC 19790:2012 Sections 7.11.2 and 7.11.9 shall be addressed for the new single-chip module for all Security Levels within this Section.</p>
-<p>A new Security Policy shall be provided for the new single-chip module. </p>
+<p>A new Security Policy shall be provided for the new single-chip module.</p>
 <p>Versioning information on the new certificate shall be provided for:</p>
 <p>the new physical single-chip,</p>
-<p>non-security relevant single-chip functional subsystem firmware if applicable, </p>
+<p>non-security relevant single-chip functional subsystem firmware if applicable,</p>
 <p>the sub-chip cryptographic subsystem soft and hard circuitry cores (which are unchanged from the original validation), and</p>
 <p>the associated firmware.</p>
-<p>The only time code changes are allowed as part of an PTSC is if they are non-security relevant and necessary to correctly run the module on the new/modified single chip environment (e.g., compilation flags or configuration options that need to be updated). No other changes are permitted (even to incorporate other non-security relevant changes such as bug fixes).  </p>
-<p>UPDT (MM 7.1.10)</p>
-<p>Modifications are made to hardware, software or firmware components that affect some of the FIPS 140-3 security relevant items. Per IG 2.4.A, “the term security is not defined in the Terms and Definitions, but, within the scope of FIPS 140-3, is determined based on the Section 6 Functional Security Objectives, and the specific Section 7 Security Requirements derived from those objectives. An updated cryptographic module can be considered in this scenario if less than a 30% of security changes were made to the module. </p>
+<p>The only time code changes are allowed as part of an PTSC is if they are non-security relevant and necessary to correctly run the module on the new/modified single chip environment (e.g., compilation flags or configuration options that need to be updated). No other changes are permitted (even to incorporate other non-security relevant changes such as bug fixes).</p>
+<h2>UPDT (MM 7.1.10)</h2>
+<p>Modifications are made to hardware, software or firmware components that affect some of the FIPS 140-3 security relevant items. Per IG 2.4.A, “the term security is not defined in the Terms and Definitions, but, within the scope of FIPS 140-3, is determined based on the Section 6 Functional Security Objectives, and the specific Section 7 Security Requirements derived from those objectives. An updated cryptographic module can be considered in this scenario if less than a 30% of security changes were made to the module.</p>
 <p>The CSTL is responsible for identifying the documentation that is needed to determine whether a revalidation is sufficient, and the vendor is responsible for submitting the requested documentation to the CSTL. Documentation may include a previous validation report and applicable CMVP rulings, design documentation, source code, source code difference evidence, FSM etc.</p>
 <p>Requirement</p>
 <p>CSTL Compliance evidence / justification</p>
 <p>The CSTL shall provide a summary of the changes and rationale of why this meets the &lt;30% guideline.  The CMVP upon review, may determine that the changes are &gt;30% and shall be submitted as an FS.</p>
-<p>Security changes include impacts to: approved / allowed security functions/algorithms, SSPs, approved security services, self-tests, and security states within the FSM.  None of these, assessed individually, can exceed 30% of changes.  The individual ratios for each of these shall be provided to the CMVP within the Change Document (e.g., 2 changes to approved security services out of 10 total results in 20% change). </p>
+<p>Security changes include impacts to: approved / allowed security functions/algorithms, SSPs, approved security services, self-tests, and security states within the FSM.  None of these, assessed individually, can exceed 30% of changes.  The individual ratios for each of these shall be provided to the CMVP within the Change Document (e.g., 2 changes to approved security services out of 10 total results in 20% change).</p>
 <p>Review and independently verify the accuracy of the vendor-supplied documentation and identify any additional documentation necessary to confirm the applicability of this revalidation scenario.</p>
-<p>Identify the assertions affected by the modification and shall perform the tests associated with those assertions.  This will require the CSTL to: </p>
-<p>Review the COMPLETE list of assertions applicable to the module, </p>
-<p>Identify, from the previous validation report, the assertions that have been affected by the modification, </p>
-<p>Identify additional assertions that were NOT previously tested but should now be tested due to the modification, and </p>
+<p>Identify the assertions affected by the modification and shall perform the tests associated with those assertions.  This will require the CSTL to:</p>
+<p>Review the COMPLETE list of assertions applicable to the module,</p>
+<p>Identify, from the previous validation report, the assertions that have been affected by the modification,</p>
+<p>Identify additional assertions that were NOT previously tested but should now be tested due to the modification, and</p>
 <p>Review assertions where specific Implementation Guidance (IG) was provided to confirm that the module meets all current applicable IGs.</p>
 <p>In addition to the tests performed against the affected assertions, the CSTL shall perform the regression test suite shown on the CMVP website.</p>
 <p>The UPDT can also be used to for resetting the module’s sunset date when a module has not changed, provided the above requirements are met.</p>
 <p>UPDT can be combined with any submission scenario(s).</p>
 <p>Original submission date of the revalidation certificate: [DATE]</p>
-<p>Date/name of NEW IG </p>
+<p>Date/name of NEW IG</p>
 <p>Applicable to module?</p>
 <p>How the module meets the requirements found to be applicable</p>
 <p>See IG Change Summary &amp; Archived Versions</p>
 <p>…</p>
 <p>…</p>
 <p>Please add any new IGs that were published after this Change Document date)</p>
-<p>09/10/24: C.O Requirements for SP 800-208 HSS Vendor Affirmation </p>
+<p>09/10/24: C.O Requirements for SP 800-208 HSS Vendor Affirmation</p>
 <p>Yes/no</p>
 <p>[CSTL justification]</p>
 <p>07/26/24: 1.A Binding and Embedding Cryptographic Modules</p>
@@ -235,10 +237,10 @@
 <p>05/16/22: D.Q Transition of the TLS 1.2 KDF to Support the Extended Master Secret</p>
 <p>Yes/no</p>
 <p>[CSTL justification]</p>
-<p>05/16/22: D.R Hash Functions Acceptable for Use in the SP 800-90A DRBGs </p>
+<p>05/16/22: D.R Hash Functions Acceptable for Use in the SP 800-90A DRBGs</p>
 <p>Yes/no</p>
 <p>[CSTL justification]</p>
-<p>11/05/21: D.P SP 800-56Crev2 One-Step Key Derivation Function Without a Counter </p>
+<p>11/05/21: D.P SP 800-56Crev2 One-Step Key Derivation Function Without a Counter</p>
 <p>Yes/no</p>
 <p>[CSTL justification]</p>
 <p>08/27/21: 10.3.D Error Logging</p>
@@ -271,7 +273,7 @@
 <p>Date/name of MODIFIED IG and Summary of Changes</p>
 <p>Applicable to module?</p>
 <p>How the module meets the requirements found to be applicable</p>
-<p> See IG Change Summary &amp; Archived Versions </p>
+<p>See IG Change Summary &amp; Archived Versions</p>
 <p>… Please add any relevant modified IGs that were either published after this Change Document date, or not listed below but still relevant to the UPDT</p>
 <p>…</p>
 <p>04/09/26: 2.4.B Tracking the Component Validation List – Added SPDM KDF CVL (Resolution 9).</p>
@@ -288,7 +290,7 @@
 <p>Yes/no</p>
 <p>02/27/26: C.I XTS-AES (SP 800-38E) Requirements on the Key – Admin update to the Resolution to clarify the documentation requirements in the Test Report and Security Policy.</p>
 <p>Yes/no</p>
-<p>09/02/25: 2.3.A Binding of Cryptographic Algorithm Validation Certificates – Admin update to add “or fully included in” into Resolution 2. </p>
+<p>09/02/25: 2.3.A Binding of Cryptographic Algorithm Validation Certificates – Admin update to add “or fully included in” into Resolution 2.</p>
 <p>Yes/no</p>
 <p>09/02/25: 2.3.C Processor Algorithm Accelerators (PAA) and Processor Algorithm Implementation (PAI) – Admin update to add Additional Comment #8 to explicitly require the Security Policy diagram to include PAA/PAI.</p>
 <p>Yes/no</p>
@@ -296,7 +298,7 @@
 <p>Yes/no</p>
 <p>09/02/25: 10.3.A Cryptographic Algorithm Self-Test Requirements – New Resolution 17 to incorporate the Ascon family of algorithms specified in the SP 800-232. Update to ML-KEM, ML-DSA and SLH-DSA key generation sections to permit checking against the private key only, since the private key contains a copy of the public key (or its hashed value). New GeneralNote7 on permitting hashed representations for pre-computed values. Modified Additional Comment 1 to clarify the PCT is not required by AS10.35 for imported keys.</p>
 <p>Yes/no</p>
-<p>09/02/25: 10.3.F Complete Image Replacement Versus Software/Firmware Loading– Admin update to Additional Comment #3a (3) to indicate TE05.13.06 (which requires the assumption of the CO role) is N/A if the loading is done during initialisation. Updated Additional Comment #6 to emphasize the integrity test is only applicable to bitstreams stored persistently within the FPGA; however, the load test is still required each time the bitstream crosses the FPGA module boundary (related to RFG 250117). </p>
+<p>09/02/25: 10.3.F Complete Image Replacement Versus Software/Firmware Loading– Admin update to Additional Comment #3a (3) to indicate TE05.13.06 (which requires the assumption of the CO role) is N/A if the loading is done during initialisation. Updated Additional Comment #6 to emphasize the integrity test is only applicable to bitstreams stored persistently within the FPGA; however, the load test is still required each time the bitstream crosses the FPGA module boundary (related to RFG 250117).</p>
 <p>Yes/no</p>
 <p>09/02/25: C.H Key/IV Pair Uniqueness Requirements from SP 800-38D – Added TLS/DTLS V1.3 into Scenario 1. New Additional Comment 10 requiring the AES GCM IV be classified as an SSP (PSP).</p>
 <p>Yes/no</p>
@@ -324,9 +326,9 @@
 <p>[CSTL justification]</p>
 <p>10/23/24: 2.3.C Processor Algorithm Accelerators (PAA) and Processor Algorithm Implementation (PAI) – Reworked Additional Comment #3, as it was confusing/misleading. Removed “software” from Additional Comment #5 regarding modules that support a PAI since it may apply to other module types. Added a new Additional Comment #7 to clarify that PAA/PAIs operate within a processor.</p>
 <p>Yes/no</p>
-<p>[Example] </p>
+<p>[Example]</p>
 <p>Module uses PAA = AES-NI from the IG list below and all algorithms have been tested with and without PAA:</p>
-<p>Known PAAs: </p>
+<p>Known PAAs:</p>
 <p>● Intel Processors – Xeon, Core i5, Core i7, Core M and Atom with Westmere, Sandy Bridge, Ivy Bridge, Haswell, Broadwell, Skylake, Kaby Lake, Coffee Lake, Goldmont Plus, Whiskey Lake, Amber Lake, Cascade Lake, Comet Lake, Sunny Cove, or Golden Cove micro-architectures: PAA = AES-NI</p>
 <p>10/21/24: 2.3.C Processor Algorithm Accelerators (PAA) and Processor Algorithm Implementation (PAI) – Updated Additional Comment #4 on what is required to request new “known” PAA or PAIs to the list.</p>
 <p>Yes/no</p>
@@ -358,7 +360,7 @@
 <p>03/26/24: 4.1.A Authorised Roles – Updated Additional Comment #8 to address certain module designs that claim Security Level 2 for section 7.4.</p>
 <p>Yes/no</p>
 <p>[CSTL justification]</p>
-<p>03/26/24: 9.5.A SSP Establishment and SSP Entry and Output – Added footnote 6 to clarify sub-chip SSP establishment requirements. </p>
+<p>03/26/24: 9.5.A SSP Establishment and SSP Entry and Output – Added footnote 6 to clarify sub-chip SSP establishment requirements.</p>
 <p>Yes/no</p>
 <p>[CSTL justification]</p>
 <p>03/26/24: C.A Use of non-Approved Elliptic Curves – Removed erroneous reference to EdDSA from Resolution 5.</p>
@@ -382,7 +384,7 @@
 <p>11/22/23: 4.1.A Authorised Roles - Added “[for CSPs only]” in Background. Clarified in a. the exception applies when hashing data, not SSPs. Added a paragraph after the exceptions connecting authorization to authentication.</p>
 <p>Yes/no</p>
 <p>[CSTL justification]</p>
-<p>11/22/23: 9.5.A SSP Establishment and SSP Entry and Output - Slight modification to the SK legend under Table 2. </p>
+<p>11/22/23: 9.5.A SSP Establishment and SSP Entry and Output - Slight modification to the SK legend under Table 2.</p>
 <p>From: Plaintext Split Knowledge using a TC</p>
 <p>To: Split Knowledge using either E or a TC for the key</p>
 <p>Yes/no</p>
@@ -441,7 +443,7 @@
 <p>10/07/22: C.F - Approved Modulus Sizes for RSA Digital Signature for FIPS 186-4 – Clarified algorithm status and requirements for RSA Signature Verification for both FIPS 186-2 and FIPS 186-4.</p>
 <p>Yes/no</p>
 <p>[CSTL justification]</p>
-<p>05/16/22: 9.5.A SSP Establishment and SSP Entry and Output – Added parenthesis to highlight the fact that there are differences in requirements between CSPs that are keys versus non-keys.  </p>
+<p>05/16/22: 9.5.A SSP Establishment and SSP Entry and Output – Added parenthesis to highlight the fact that there are differences in requirements between CSPs that are keys versus non-keys.</p>
 <p>Yes/no</p>
 <p>[CSTL justification]</p>
 <p>03/14/22: 2.4.A Definition and Use of a non-Approved Security Function – Added “with no security claimed” to the examples subtitle for clarity.  Small editorial change in the Resolution to reference the correct algorithm table in SP 800-140B.  Added a footnote to MD5.</p>
@@ -492,20 +494,20 @@
 <p>05/04/21: D.F Key Agreement Methods - Removed Additional Comment 10 since SP 800-56Arev3 testing is available and therefore vendor affirming to this standard is not permitted.</p>
 <p>Yes/no</p>
 <p>[CSTL justification]</p>
-<p>CVE (MM 7.1.11)</p>
-<p>A CSTL has been contracted to perform a revalidation for a module on which the vendor has made FIPS 140 security-relevant changes in response to one or more CVEs (Common Vulnerability and Exposure) or one or more security relevant maintenance/bugs.   For more information about CVEs please see https://cve.mitre.org/. </p>
+<h2>CVE (MM 7.1.11)</h2>
+<p>A CSTL has been contracted to perform a revalidation for a module on which the vendor has made FIPS 140 security-relevant changes in response to one or more CVEs (Common Vulnerability and Exposure) or one or more security relevant maintenance/bugs.   For more information about CVEs please see https://cve.mitre.org/.</p>
 <p>The purpose of this revalidation scenario is to provide the vendor a means to quickly fix, test and revalidate a module that is subject to a security-relevant CVE or maintenance/bug fix1, while at the same time providing assurance that the module still meets the FIPS 140-3 standard.  If a CVE or maintenance/bug fix does not require security relevant changes to address it, then the vendor may instead pursue a NSRL revalidation.</p>
 <p>Requirement</p>
 <p>CSTL Compliance evidence / justification</p>
-<p>The CSTL shall determine that security relevant changes to the module are only to correct the vulnerability disclosed in the CVE or to maintain the module’s compliance/security claims/objectives via code corrections or bug fixes (e.g., self-tests operate incorrectly on certain OEs that were not part of the module validation). Changes shall not introduce new features or cryptography and shall be consistent with Section 7.8 Module definitions for same certificates (i.e., the new version must be identical in the defined areas when compared against the original version, even if the original version ends up being removed from the certificate upon completion of the CVE Submission). Other changes are permitted if only directly impacted by the CVE or maintenance/bug change (e.g., addressing the CVE or maintenance/bug may require changing the version number, and that requires the show version service to be updated).  </p>
-<p>The CSTL shall examine each modification and confirm that the change does not conflict with the requirements of FIPS 140-3. </p>
-<p>The CSTL shall determine that no other modifications have been made. </p>
+<p>The CSTL shall determine that security relevant changes to the module are only to correct the vulnerability disclosed in the CVE or to maintain the module’s compliance/security claims/objectives via code corrections or bug fixes (e.g., self-tests operate incorrectly on certain OEs that were not part of the module validation). Changes shall not introduce new features or cryptography and shall be consistent with Section 7.8 Module definitions for same certificates (i.e., the new version must be identical in the defined areas when compared against the original version, even if the original version ends up being removed from the certificate upon completion of the CVE Submission). Other changes are permitted if only directly impacted by the CVE or maintenance/bug change (e.g., addressing the CVE or maintenance/bug may require changing the version number, and that requires the show version service to be updated).</p>
+<p>The CSTL shall examine each modification and confirm that the change does not conflict with the requirements of FIPS 140-3.</p>
+<p>The CSTL shall determine that no other modifications have been made.</p>
 <p>The CSTL shall identify the assertions affected by the security-relevant modification and shall perform the tests associated with those assertions.</p>
-<p>The vendor is not required to address IGs that have been published since submission of the original module, besides, for CVE changes, following the continual guidance of IG 11.A (CVE Management).  </p>
+<p>The vendor is not required to address IGs that have been published since submission of the original module, besides, for CVE changes, following the continual guidance of IG 11.A (CVE Management).</p>
 <p>If the fix to address the CVE is in the scope of an algorithm implementation, then this algorithm shall be CAVP tested again to obtain a new CAVP certificate with the new module version.</p>
 <p>In addition to the tests performed against the affected assertions, the CSTL shall also perform the predefined regression tests shown on the CMVP website, under CVE.</p>
 <p>Because the change to the module is to address a security-relevant CVE or maintenance/bug, the previous version of the module is no longer considered validated (in essence, Revoked) and shall be removed from the certificate; exceptions may be made if the vendor shows how the CVE or maintenance/bug can be mitigated by policies included in the Security Policy, while still adhering to the FIPS 140-3 standard.</p>
-<p>TRNS (MM 7.1.12)</p>
+<h2>TRNS (MM 7.1.12)</h2>
 <p>A CSTL has been contracted to perform a revalidation for a module on which the vendor has made FIPS 140-3 security relevant changes solely in response to a published CMVP algorithm transition that will cause some previously validated modules to be placed on the Historical list (see Programmatic Transitions webpage for a list of such algorithms).  For example, the 2024 non-SP 800-56Brev2 RSA-based key encapsulation/un-encapsulation transition explained in FIPS 140-3 IG D.G. If the algorithm transition will NOT cause the module to move to the historical list (i.e., considered a “soft” transition), changes cannot be made as part of this submission.</p>
 <p>Note: a single Scenario TRNS submission may combine multiple algorithm transitions.  However, this may increase review time.</p>
 <p>The purpose of the TRNS revalidation is to provide the vendor a means to quickly address algorithm transition requirements, test and revalidate a module in order to meet a CMVP transition, while at the same time providing assurance that the module still meets the FIPS 140-3 standard.</p>
@@ -518,7 +520,7 @@
 <p>The CSTL shall identify the assertions affected by the security-relevant modification and shall perform the tests associated with those assertions.</p>
 <p>If the means to meet the transition are in the scope of an algorithm implementation, and the path chosen to meet the requirements necessitates testing, then this algorithm shall be CAVP tested to obtain a new CAVP certificate with the new module version.</p>
 <p>In addition to the tests performed against the affected assertions, the CSTL shall also perform the predefined regression tests shown on the CMVP website under TRNS on all versions listed on the module’s certificate and on at least one of the listed OEs for hybrid or software/firmware modules (if the module binary image is identical across all OEs; if not, testing on at least every binary image is required).</p>
-<p>The CSTL shall provide justification on why regression testing is not necessary for the untested OEs.  With proper justification, these may remain on the module’s certificate.  </p>
+<p>The CSTL shall provide justification on why regression testing is not necessary for the untested OEs.  With proper justification, these may remain on the module’s certificate.</p>
 <p>If regression testing is not performed on some versions, then those shall be removed from the module’s certificate. OEs without proper justification or regression testing shall be removed from the module’s certificate.</p>
 <p>If the module code is unchanged to address an algorithm transition and the change is purely to documentation, one or more of the following options apply:</p>
 <p>Requirement</p>
@@ -528,18 +530,17 @@
 <p>[Submitted as a Scenario ALG]</p>
 <p>Option 2:</p>
 <p>The vendor moves all non-compliant functionality into the non-approved mode of operation from the approved mode of operation.</p>
-<p>Option 3: </p>
+<p>Option 3:</p>
 <p>The vendor recategorizes the non-compliant functionality as claiming no security per IG 2.4.A, and this functionality remains in the approved mode of operation.</p>
 <p>The CSTL shall state that the change to address the transition is purely documentational and which option applies.</p>
 <p>The CSTL shall determine that security relevant changes to the module are only to address a specific CMVP transition.</p>
 <p>The CSTL shall examine each modification and confirm that the change does not conflict with the requirements of FIPS 140-3.</p>
 <p>The CSTL shall determine that no other modifications have been made.  The vendor is not required to address IGs or guidance that have been published since submission of the original module, unless directly applicable to the transitioning algorithm (e.g., CAVP testing or self-test requirements).</p>
-<p>	</p>
 <p>The CSTL shall identify the assertions affected by the security-relevant documentation modification and shall perform the tests associated with those assertions.</p>
 <p>The CSTL shall demonstrate how the module still meets IG 2.4.C after the reclassification of non-compliant functionality into a non-approved mode of operation. Due to this FIPS 140-3 requirement that all approved security services have an unambiguous indicator (AS02.24), it does not seem likely/possible that a FIPS 140-3 validation fall under this Option 2, where code is unchanged yet a previously approved service is moved to the non-approved mode, as that would surely invalidate the approved indicator for this service.</p>
-<p>In addition to the tests performed against the affected assertions, the CSTL shall also perform the predefined regression tests shown on the CMVP website under TRNS on all versions listed on the module’s certificate and on at least one of the listed OEs for hybrid or software/firmware modules (if the module binary image is identical across all OEs; if not, testing on at least every binary image is required).  </p>
+<p>In addition to the tests performed against the affected assertions, the CSTL shall also perform the predefined regression tests shown on the CMVP website under TRNS on all versions listed on the module’s certificate and on at least one of the listed OEs for hybrid or software/firmware modules (if the module binary image is identical across all OEs; if not, testing on at least every binary image is required).</p>
 <p>The only exception to this requirement is if the algorithm being transitioned is part of a standalone service and is not used by any other module service (e.g., cryptographic library where the module only provides the algorithm as an API service to a calling application as a stand-alone service).  In this case, the CSTL shall provide justification on why regression testing is not necessary at all.</p>
-<p>The CSTL shall provide justification on why regression testing is not necessary for the untested OEs.  With proper justification, these may remain on the module’s certificate.  </p>
+<p>The CSTL shall provide justification on why regression testing is not necessary for the untested OEs.  With proper justification, these may remain on the module’s certificate.</p>
 <p>If regression testing is not performed on some versions, then those shall be removed from the module’s certificate. OEs without proper justification or regression testing shall be removed from the module’s certificate.</p>
 <p>The CSTL shall provide assurance that the non-compliant functionality is not used to meet any FIPS 140-3 requirements (key/CSP establishment, generation, storage, etc.).</p>
 <p>In order to accommodate vendors who are updating their validation to prepare for an algorithm transition, fully compliant TRNS or ALG revalidations that have addressed the transition and are submitted to the CMVP before the date the transition is to take effect, will remain on the active list through the completion of the revalidation, even if it is not completed until after the transition date, unless the algorithm transition is to address a security concern that is deemed unacceptable by the CMVP.  For newly submitted ALG submissions that address the transition, the CSTL shall include in the Special Instructions field the text “algorithm_transition” (with or without the underscore) in order for the CMVP not to move this submission to the historical list come the algorithm transition date.</p>
@@ -547,22 +548,22 @@
 <p>The CSTL shall provide assurance, upon module examination, that no service, algorithm or CSP that relied on or used the non-compliant functionality, parameters, keys, etc. remain in the approved mode.  The approved mode shall only contain approved services.</p>
 <p>Documentation shall be updated to indicate the module does not utilize non-compliant functionality in the approved mode of operation.</p>
 <p>Option 3</p>
-<p>The CSTL shall provide justification on how the requirements of IG 2.4.A are met. This scenario is intended to be rarely used/accepted and depends on the purpose or use of the service that utilizes the non-approved algorithms. For example, a software library implementing three-key Triple-DES Encryption as one of its approved services cannot simply state this algorithm does not claim any security (per IG 2.4.A) and be used in the approved mode, as this does not meet 3) or 4) in IG 2.4.A Additional Comment #2. </p>
-<p>Option 4 </p>
+<p>The CSTL shall provide justification on how the requirements of IG 2.4.A are met. This scenario is intended to be rarely used/accepted and depends on the purpose or use of the service that utilizes the non-approved algorithms. For example, a software library implementing three-key Triple-DES Encryption as one of its approved services cannot simply state this algorithm does not claim any security (per IG 2.4.A) and be used in the approved mode, as this does not meet 3) or 4) in IG 2.4.A Additional Comment #2.</p>
+<p>Option 4</p>
 <p>A combination of any of three options above (ALG, moving non-compliant functionality into the non-approved mode, and/or recategorized per IG 2.4.A), in which case, requirements of each option apply.</p>
 <p>Each option shall be listed/indicated in the Change Document under Option 4 (e.g. under Option 4, the following are claimed: Options 1 and 2) and note how each of the applicable ‘shall’ statements for each option are met).</p>
-<p>PHYS (MM 7.1.13)</p>
+<h2>PHYS (MM 7.1.13)</h2>
 <p>Modifications are made only to the physical enclosure of the cryptographic module that provides its protection and involves no operational changes to the module.</p>
 <p>Requirement</p>
 <p>CSTL Compliance evidence / justification</p>
 <p>The CSTL is responsible for ensuring that the change only affects the physical enclosure (integrity) and has no operational impact on the module.</p>
 <p>The CSTL shall fully test the physical security features of the new enclosure to ensure its compliance to the applicable requirements of the standard.</p>
-<p>Describe the change (pictures may be required) </p>
+<p>Describe the change (pictures may be required)</p>
 <p>State that it is a security relevant change</p>
 <p>Provide sufficient information supporting that the physical only change has no operational impact</p>
 <p>Describe the tests performed by the CSTL that confirm that the modified enclosure still provides the same physical protection attributes as the previously validated module. For physical security levels 2, 3 and 4, the CSTL shall submit an updated Physical Security Test Report.</p>
 <p>The only time code changes are allowed as part of an PHYS is if they are non-security relevant and necessary to correctly run the module on the new/modified physical enclosure (e.g., changes to the enclosure that also requires moving internal components so that they still fit, requiring minor changes to the internal board and firmware). No other changes are permitted (even to incorporate other non-security relevant changes such as bug fixes).</p>
-<p>Certificate Modification Tables</p>
+<h1>Certificate Modification Tables</h1>
 <p>For all revalidation scenarios the CSTL shall use the following format to cover all updated fields (e.g., vendor, CSTL, and module changes). Deletions shall be marked using red strikethrough and additions shall be highlighted in yellow.</p>
 <p>For example:</p>
 <p>Field(s)</p>
@@ -584,7 +585,7 @@
 <p>Caveat</p>
 <p>Tested Configuration(s)</p>
 <p>Etc.</p>
-<p>Non-Br1 algorithm updates</p>
+<h2>Non-Br1 algorithm updates</h2>
 <p>Table 5 Approved Algorithms</p>
 <p>CAVP Cert</p>
 <p>Algorithm and Standard</p>
@@ -597,7 +598,7 @@
 <p>HMAC with SHA2-256</p>
 <p>Key strength of 256 bits</p>
 <p>Random number generation</p>
-<p>OR </p>
+<p>OR</p>
 <p>(which ever method is clearer for the given changes)</p>
 <p>A99</p>
 <p>HMAC DRBG</p>
@@ -624,7 +625,7 @@
 <p>Description</p>
 <p>SF Properties [O]</p>
 <p>Algorithms/CAVP Cert</p>
-<p>Br1 algorithm updates</p>
+<h2>Br1 algorithm updates</h2>
 <p>Approved Algorithms (Security Policy section 2.5)</p>
 <p>Algorithm</p>
 <p>CAVP Cert</p>
@@ -662,7 +663,7 @@
 <p>Description</p>
 <p>Properties</p>
 <p>Algorithms</p>
-<p>Affected TEs and Security Policy Changes</p>
+<h1>Affected TEs and Security Policy Changes</h1>
 <p>The CSTL shall list the affected TEs, and a summary of the changes performed in their associated CSTL assessment.</p>
 <p>For example:</p>
 <p>TR/SP Section</p>
@@ -687,7 +688,7 @@
 <p>…</p>
 <p>Non-invasive security</p>
 <p>…</p>
-<p>Sensitive security parameter management </p>
+<p>Sensitive security parameter management</p>
 <p>…</p>
 <p>Self-tests</p>
 <p>…</p>
@@ -696,9 +697,9 @@
 <p>Mitigation of other attacks</p>
 <p>…</p>
 <p>Appendix B</p>
-<p>Predefined Regression Testing</p>
+<h1>Predefined Regression Testing</h1>
 <p>The minimum predefined regression tests are shown on the CMVP website for the OEUP, PTSC, UPDT, CVE, TRNS (code changes), and TRNS (no code changes).</p>
-<p>Document History</p>
+<h1>Document History</h1>
 <p>Version</p>
 <p>Date</p>
 <p>Changes</p>
@@ -726,7 +727,7 @@
 <p>April 9, 2026</p>
 <p>Updated to be consistent with the MM V2.7</p>
 <p>1.10 UPDT: added rows for NEW and MODIFIED IGs.</p>
-</main></noscript>
+</main>
 <canvas id="starling"></canvas>
 <div id="loading"><div><div id="loading-text">Loading…</div><div class="bar"><div id="loading-fill" class="indeterminate"></div></div></div></div>
 <div id="font-status" role="status" hidden><span></span><button type="button" hidden>Retry</button></div>

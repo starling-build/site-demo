@@ -34,11 +34,13 @@
 </style>
 </head>
 <body>
-<noscript><main><h1>Publishing</h1>
-<p>Publishing</p>
+<style>.starling-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}</style>
+<noscript><style>.starling-sr{position:static;width:auto;height:auto;overflow:visible;clip:auto;white-space:normal;padding:16px;font:16px system-ui,sans-serif;color:#eee}</style></noscript>
+<main id="starling-text" class="starling-sr" aria-label="Publishing">
+<h1>Publishing</h1>
 <p>Publish builds the site into docs/, commits, and pushes. GitHub Pages, set to serve docs/ from the main branch, has the new pages a minute later.</p>
 <p>The build copies the web app in, writes a manifest and a search index, and makes one shell page per route with the page's title and summary in meta tags, so a link to a page unfurls in chat.</p>
-</main></noscript>
+</main>
 <canvas id="starling"></canvas>
 <div id="loading"><div><div id="loading-text">Loading…</div><div class="bar"><div id="loading-fill" class="indeterminate"></div></div></div></div>
 <div id="font-status" role="status" hidden><span></span><button type="button" hidden>Retry</button></div>
