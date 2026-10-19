@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://starling-build.github.io/site-demo/sitemap.xml

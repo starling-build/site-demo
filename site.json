@@ -1,42 +1,43 @@
 {
-  "base" : "\/site-demo\/",
-  "pages" : [
+  "title": "Starling Site demo",
+  "base": "/site-demo/",
+  "url": "https://starling-build.github.io/site-demo",
+  "pages": [
     {
-      "slug" : "index",
-      "title" : "Welcome"
+      "slug": "index",
+      "title": "Welcome"
     },
     {
-      "children" : [
+      "children": [
         {
-          "slug" : "publishing",
-          "title" : "Publishing"
+          "slug": "publishing",
+          "title": "Publishing"
         }
       ],
-      "slug" : "getting-started",
-      "title" : "Getting started"
+      "slug": "getting-started",
+      "title": "Getting started"
     },
     {
-      "slug" : "about",
-      "title" : "About"
+      "slug": "about",
+      "title": "About"
     },
     {
-      "children" : [
+      "children": [
         {
-          "slug" : "security-policy",
-          "title" : "Security policy (24 pages, footnotes)"
+          "slug": "security-policy",
+          "title": "Security policy (24 pages, footnotes)"
         },
         {
-          "slug" : "fips-140-3-security-policy-template-nist-81-headings",
-          "title" : "FIPS 140-3 security policy template (NIST, 81 headings)"
+          "slug": "fips-140-3-security-policy-template-nist-81-headings",
+          "title": "FIPS 140-3 security policy template (NIST, 81 headings)"
         },
         {
-          "slug" : "cmvp-revalidation-change-document-nist-tables",
-          "title" : "CMVP revalidation change document (NIST, tables)"
+          "slug": "cmvp-revalidation-change-document-nist-tables",
+          "title": "CMVP revalidation change document (NIST, tables)"
         }
       ],
-      "slug" : "demos",
-      "title" : "Published documents"
+      "slug": "demos",
+      "title": "Published documents"
     }
-  ],
-  "title" : "Starling Site demo"
+  ]
 }

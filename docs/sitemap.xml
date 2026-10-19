@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://starling-build.github.io/site-demo/</loc></url>
+  <url><loc>https://starling-build.github.io/site-demo/getting-started/</loc></url>
+  <url><loc>https://starling-build.github.io/site-demo/publishing/</loc></url>
+  <url><loc>https://starling-build.github.io/site-demo/about/</loc></url>
+  <url><loc>https://starling-build.github.io/site-demo/demos/</loc></url>
+  <url><loc>https://starling-build.github.io/site-demo/security-policy/</loc></url>
+  <url><loc>https://starling-build.github.io/site-demo/fips-140-3-security-policy-template-nist-81-headings/</loc></url>
+  <url><loc>https://starling-build.github.io/site-demo/cmvp-revalidation-change-document-nist-tables/</loc></url>
+</urlset>
