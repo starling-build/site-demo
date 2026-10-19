@@ -25,16 +25,8 @@
       "title": "Published documents",
       "children": [
         {
-          "slug": "official-notice",
-          "title": "临沧市政府办公室通知（公文格式）"
-        },
-        {
-          "slug": "credit-rules",
-          "title": "浙江省交通建设工程信用评价管理细则（长表格）"
-        },
-        {
           "slug": "security-policy",
-          "title": "BoringCrypto security policy (footnotes)"
+          "title": "Security policy (24 pages, footnotes)"
         }
       ]
     }
