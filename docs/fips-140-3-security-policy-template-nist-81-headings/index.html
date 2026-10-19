@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+<base href="/site-demo/">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Starling Site demo">
+<meta property="og:title" content="FIPS 140-3 security policy template (NIST, 81 headings)">
+<meta property="og:description" content="From Web Cryptik From Web Cryptik FIPS 140-3 Non-Proprietary Security Policy Table of Contents 1 General	7 1.1 Overview	7 1.2 Security Levels	7 1.3 Additional Information [O]	7 2 Cryptographic Module Specification	7 2.1 Description	7 2.2 Tested and Vendor Affirmed Module Version and Identification	7">
+<meta name="description" content="From Web Cryptik From Web Cryptik FIPS 140-3 Non-Proprietary Security Policy Table of Contents 1 General	7 1.1 Overview	7 1.2 Security Levels	7 1.3 Additional Information [O]	7 2 Cryptographic Module Specification	7 2.1 Description	7 2.2 Tested and Vendor Affirmed Module Version and Identification	7">
+<meta name="starling-route" content="/site-demo/fips-140-3-security-policy-template-nist-81-headings/">
+<title>FIPS 140-3 security policy template (NIST, 81 headings) — Starling Site demo</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #101418; }
+  canvas { display: block; width: 100vw; height: 100vh; touch-action: none; }
+  /* The loading bar: a blank page for the seconds the module takes to
+     arrive reads as broken. Removed once the app has drawn. */
+  #loading {
+    position: fixed; inset: 0; display: grid; place-items: center;
+    background: #101418; color: #b0bec5; font: 14px system-ui, sans-serif;
+    transition: opacity 0.3s; pointer-events: none;
+  }
+  #loading .bar { width: 240px; height: 3px; background: #263238; border-radius: 2px; margin-top: 12px; overflow: hidden; }
+  #loading .bar div { height: 100%; width: 0; background: #4fc3f7; transition: width 0.1s; }
+  #loading .bar div.indeterminate { width: 35%; animation: loading-slide 1.2s ease-in-out infinite alternate; }
+  @keyframes loading-slide { from { transform: translateX(0); } to { transform: translateX(185%); } }
+  @media (prefers-reduced-motion: reduce) { #loading .bar div.indeterminate { animation: none; } }
+  #loading.done { opacity: 0; }
+  #font-status { position: fixed; bottom: 38px; right: 16px; padding: 10px 14px;
+    background: #163b66; color: white; border-radius: 6px; font: 13px system-ui, sans-serif; }
+  #font-status[hidden] { display: none; }
+  #font-status button { margin-left: 10px; cursor: pointer; }
+</style>
+</head>
+<body>
+<noscript><main><h1>FIPS 140-3 security policy template (NIST, 81 headings)</h1>
+<p>From Web Cryptik</p>
+<p>From Web Cryptik</p>
+<p>FIPS 140-3 Non-Proprietary Security Policy</p>
+<p>Table of Contents</p>
+<p>1 General	7</p>
+<p>1.1 Overview	7</p>
+<p>1.2 Security Levels	7</p>
+<p>1.3 Additional Information [O]	7</p>
+<p>2 Cryptographic Module Specification	7</p>
+<p>2.1 Description	7</p>
+<p>2.2 Tested and Vendor Affirmed Module Version and Identification	7</p>
+<p>2.3 Excluded Components	8</p>
+<p>2.4 Modes of Operation	8</p>
+<p>2.5 Algorithms	8</p>
+<p>2.6 Security Function Implementations	9</p>
+<p>2.7 Algorithm Specific Information	9</p>
+<p>2.8 RBG and Entropy	9</p>
+<p>2.9 Key Generation	9</p>
+<p>2.10 Key Establishment	10</p>
+<p>2.11 Industry Protocols	10</p>
+<p>2.12 Additional Information [O]	10</p>
+<p>3 Cryptographic Module Interfaces	10</p>
+<p>3.1 Ports and Interfaces	10</p>
+<p>3.2 Trusted Channel Specification [O]	10</p>
+<p>3.3 Control Interface Not Inhibited [O]	10</p>
+<p>3.4 Additional Information [O]	10</p>
+<p>4 Roles, Services, and Authentication	10</p>
+<p>4.1 Authentication Methods	10</p>
+<p>4.2 Roles	10</p>
+<p>4.3 Approved Services	11</p>
+<p>4.4 Non-Approved Services	11</p>
+<p>4.5 External Software/Firmware Loaded	11</p>
+<p>4.6 Bypass Actions and Status [O]	11</p>
+<p>4.7 Cryptographic Output Actions and Status [O]	11</p>
+<p>4.8 Additional Information [O]	11</p>
+<p>5 Software/Firmware Security	11</p>
+<p>5.1 Integrity Techniques	11</p>
+<p>5.2 Initiate on Demand	11</p>
+<p>5.3 Open-Source Parameters [O]	11</p>
+<p>5.4 Additional Information [O]	12</p>
+<p>6 Operational Environment	12</p>
+<p>6.1 Operational Environment Type and Requirements	12</p>
+<p>6.2 Configuration Settings and Restrictions [O]	12</p>
+<p>6.3 Additional Information [O]	12</p>
+<p>7 Physical Security	12</p>
+<p>7.1 Mechanisms and Actions Required [O]	12</p>
+<p>7.2 User Placed Tamper Seals [O]	12</p>
+<p>7.3 Filler Panels [O]	12</p>
+<p>7.4 Fault Induction Mitigation [O]	13</p>
+<p>7.5 EFP/EFT Information [O]	13</p>
+<p>7.6 Hardness Testing Temperature Ranges [O]	13</p>
+<p>7.7 Additional Information [O]	13</p>
+<p>8 Non-Invasive Security	13</p>
+<p>8.1 Mitigation Techniques [O]	13</p>
+<p>8.2 Effectiveness [O]	13</p>
+<p>8.3 Additional Information [O]	13</p>
+<p>9 Sensitive Security Parameters Management	13</p>
+<p>9.1 Storage Areas	13</p>
+<p>9.2 SSP Input-Output Methods	13</p>
+<p>9.3 SSP Zeroization Methods	14</p>
+<p>9.4 SSPs	14</p>
+<p>9.5 Transitions [O]	14</p>
+<p>9.6 Additional Information [O]	14</p>
+<p>10 Self-Tests	14</p>
+<p>10.1 Pre-Operational Self-Tests	14</p>
+<p>10.2 Conditional Self-Tests	14</p>
+<p>10.3 Periodic Self-Test Information	14</p>
+<p>10.4 Error States	15</p>
+<p>10.5 Operator Initiation of Self-Tests [O]	15</p>
+<p>10.6 Additional Information [O]	15</p>
+<p>11 Life-Cycle Assurance	15</p>
+<p>11.1 Installation, Initialization, and Startup Procedures	15</p>
+<p>11.2 Administrator Guidance	15</p>
+<p>11.3 Non-Administrator Guidance	15</p>
+<p>11.4 Design and Rules [O]	15</p>
+<p>11.5 Maintenance Requirements [O]	15</p>
+<p>11.6 End of Life [O]	15</p>
+<p>11.7 Additional Information [O]	15</p>
+<p>12 Mitigation of Other Attacks	16</p>
+<p>12.1 Attack List [O]	16</p>
+<p>12.2 Mitigation Effectiveness [O]	16</p>
+<p>12.3 Guidance and Constraints [O]	16</p>
+<p>12.4 Additional Information [O]	16</p>
+<p>List of Tables</p>
+<p>Table 1: Security Levels	7</p>
+<p>Table 2: Tested Module Identification – Hardware	8</p>
+<p>Table 3: Tested Module Identification – Software/Firmware/Hybrid (Executable Code Sets)	8</p>
+<p>Table 4: Tested Module Identification – Hybrid Disjoint Hardware	8</p>
+<p>Table 5: Tested Operational Environments - Software, Firmware, Hybrid	8</p>
+<p>Table 6: Vendor Affirmed Operational Environments - Software, Firmware, Hybrid	8</p>
+<p>Table 7: Modes List and Description	8</p>
+<p>Table 8: Approved Algorithms	9</p>
+<p>Table 9: Vendor Affirmed Algorithms	9</p>
+<p>Table 10: Non-Approved, Allowed Algorithms	9</p>
+<p>Table 11: Non-Approved, Allowed Algorithms with No Security Claimed	9</p>
+<p>Table 12: Non-Approved, Not Allowed Algorithms	9</p>
+<p>Table 13: Security Function Implementations	10</p>
+<p>Table 14: Entropy Certificates	10</p>
+<p>Table 15: Entropy Sources	10</p>
+<p>Table 16: Key Generation	10</p>
+<p>Table 17: Key Agreement	10</p>
+<p>Table 18: Key Transport	10</p>
+<p>Table 19: Ports and Interfaces	11</p>
+<p>Table 20: Authentication Methods	11</p>
+<p>Table 21: Roles	11</p>
+<p>Table 22: Approved Services	11</p>
+<p>Table 23: Non-Approved Services	12</p>
+<p>Table 24: Mechanisms and Actions Required	13</p>
+<p>Table 25: EFP/EFT Information	13</p>
+<p>Table 26: Hardness Testing Temperatures	14</p>
+<p>Table 27: Storage Areas	14</p>
+<p>Table 28: SSP Input-Output	14</p>
+<p>Table 29: SSP Zeroization Methods	14</p>
+<p>Table 30: SSP Information First	15</p>
+<p>Table 31: SSP Information Second	15</p>
+<p>Table 32: Pre-Operational Self-Tests	15</p>
+<p>Table 33: Conditional Self-Tests	15</p>
+<p>Table 34: Pre-Operational Periodic Information	15</p>
+<p>Table 35: Conditional Periodic Information	15</p>
+<p>Table 36: Error States	15</p>
+<p>List of Figures</p>
+<p>Figure 1: Block Diagram	6</p>
+<p>1 General</p>
+<p>1.1 Overview</p>
+<p>&lt;Text&gt;</p>
+<p>1.2 Security Levels</p>
+<p>From Web Cryptik</p>
+<p>1.3 Additional Information [O]</p>
+<p>&lt;Text&gt;</p>
+<p>2 Cryptographic Module Specification</p>
+<p>2.1 Description</p>
+<p>Purpose and Use:</p>
+<p>&lt;Text&gt;</p>
+<p>Module Type: From Web Cryptik</p>
+<p>Module Embodiment: From Web Cryptik</p>
+<p>Module Characteristics [O]: From Web Cryptik</p>
+<p>Cryptographic Boundary:</p>
+<p>&lt;Text&gt;</p>
+<p>Tested Operational Environment’s Physical Perimeter (TOEPP) [O]:</p>
+<p>&lt;Text&gt;</p>
+<p>&lt;Other Diagrams, Photographs and Descriptive Text&gt;</p>
+<p>&lt;Picture or Block Diagram&gt;</p>
+<p>Figure 1: Block Diagram</p>
+<p>2.2 Tested and Vendor Affirmed Module Version and Identification</p>
+<p>Tested Module Identification – Hardware:</p>
+<p>From Web Cryptik [O]</p>
+<p>Tested Module Identification – Software, Firmware, Hybrid (Executable Code Sets):</p>
+<p>From Web Cryptik [O]</p>
+<p>Tested Module Identification – Hybrid Disjoint Hardware:</p>
+<p>From Web Cryptik [O]</p>
+<p>Tested Operational Environments - Software, Firmware, Hybrid:</p>
+<p>From Web Cryptik [O]</p>
+<p>Vendor-Affirmed Operational Environments - Software, Firmware, Hybrid:</p>
+<p>From Web Cryptik [O]</p>
+<p>CMVP makes no statement as to the correct operation of the module or the security strengths of the generated keys when so ported if the specific operational environment is not listed on the validation certificate. [Delete this paragraph if not applicable]</p>
+<p>2.3 Excluded Components</p>
+<p>&lt;Excluded components statements or table&gt;</p>
+<p>2.4 Modes of Operation</p>
+<p>Modes List and Description:</p>
+<p>From Web Cryptik</p>
+<p>&lt;Text&gt;</p>
+<p>Mode Change Instructions and Status [O]:</p>
+<p>&lt;Text&gt;</p>
+<p>Degraded Mode Description [O]:</p>
+<p>&lt;Text&gt;</p>
+<p>2.5 Algorithms</p>
+<p>Approved Algorithms:</p>
+<p>From Web Cryptik</p>
+<p>&lt;Text&gt;</p>
+<p>Vendor-Affirmed Algorithms:</p>
+<p>From Web Cryptik</p>
+<p>&lt;Text&gt;</p>
+<p>Non-Approved, Allowed Algorithms:</p>
+<p>From Web Cryptik</p>
+<p>&lt;Text&gt;</p>
+<p>Non-Approved, Allowed Algorithms with No Security Claimed:</p>
+<p>From Web Cryptik</p>
+<p>&lt;Text&gt;</p>
+<p>Non-Approved, Not Allowed Algorithms:</p>
+<p>From Web Cryptik</p>
+<p>&lt;Text&gt;</p>
+<p>2.6 Security Function Implementations</p>
+<p>From Web Cryptik</p>
+<p>&lt;Text&gt;</p>
+<p>2.7 Algorithm Specific Information</p>
+<p>&lt;Text&gt;</p>
+<p>2.8 RBG and Entropy</p>
+<p>From Web Cryptik [O]</p>
+<p>From Web Cryptik [O]</p>
+<p>&lt;Text&gt;</p>
+<p>2.9 Key Generation</p>
+<p>&lt;Text&gt;</p>
+<p>2.10 Key Establishment</p>
+<p>&lt;Text&gt;</p>
+<p>2.11 Industry Protocols</p>
+<p>&lt;Text&gt;</p>
+<p>2.12 Additional Information [O]</p>
+<p>&lt;Text&gt;</p>
+<p>3 Cryptographic Module Interfaces</p>
+<p>3.1 Ports and Interfaces</p>
+<p>From Web Cryptik</p>
+<p>&lt;Text&gt;</p>
+<p>3.2 Trusted Channel Specification [O]</p>
+<p>&lt;Text&gt;</p>
+<p>3.3 Control Interface Not Inhibited [O]</p>
+<p>&lt;Text&gt;</p>
+<p>3.4 Additional Information [O]</p>
+<p>&lt;Text&gt;</p>
+<p>4 Roles, Services, and Authentication</p>
+<p>4.1 Authentication Methods</p>
+<p>From Web Cryptik [O]</p>
+<p>&lt;Text&gt;</p>
+<p>4.2 Roles</p>
+<p>From Web Cryptik</p>
+<p>&lt;Text&gt;</p>
+<p>4.3 Approved Services</p>
+<p>From Web Cryptik</p>
+<p>&lt;Text&gt;</p>
+<p>4.4 Non-Approved Services</p>
+<p>From Web Cryptik [O]</p>
+<p>&lt;Text&gt;</p>
+<p>4.5 External Software/Firmware Loaded</p>
+<p>&lt;Text&gt;</p>
+<p>4.6 Bypass Actions and Status [O]</p>
+<p>&lt;Text&gt;</p>
+<p>4.7 Cryptographic Output Actions and Status [O]</p>
+<p>&lt;Text&gt;</p>
+<p>4.8 Additional Information [O]</p>
+<p>&lt;Text&gt;</p>
+<p>5 Software/Firmware Security</p>
+<p>5.1 Integrity Techniques</p>
+<p>&lt;Text&gt;</p>
+<p>5.2 Initiate on Demand</p>
+<p>&lt;Text&gt;</p>
+<p>5.3 Open-Source Parameters [O]</p>
+<p>&lt;Text&gt;</p>
+<p>5.4 Additional Information [O]</p>
+<p>&lt;Text&gt;</p>
+<p>6 Operational Environment</p>
+<p>6.1 Operational Environment Type and Requirements</p>
+<p>Type of Operational Environment: From Web Cryptik</p>
+<p>How Requirements are Satisfied [O]:</p>
+<p>&lt;Text&gt;</p>
+<p>6.2 Configuration Settings and Restrictions [O]</p>
+<p>&lt;Text&gt;</p>
+<p>6.3 Additional Information [O]</p>
+<p>&lt;Text&gt;</p>
+<p>7 Physical Security</p>
+<p>7.1 Mechanisms and Actions Required [O]</p>
+<p>From Web Cryptik [O]</p>
+<p>&lt;Text and Photos&gt;</p>
+<p>7.2 User Placed Tamper Seals [O]</p>
+<p>Number:</p>
+<p>Placement:</p>
+<p>Surface Preparation:</p>
+<p>Operator Responsible for Securing Unused Seals:</p>
+<p>Part Numbers:</p>
+<p>&lt;Text and Pictures&gt;</p>
+<p>7.3 Filler Panels [O]</p>
+<p>&lt;Text and Pictures&gt;</p>
+<p>7.4 Fault Induction Mitigation [O]</p>
+<p>&lt;Text&gt;</p>
+<p>7.5 EFP/EFT Information [O]</p>
+<p>From Web Cryptik [O]</p>
+<p>&lt;Text&gt;</p>
+<p>7.6 Hardness Testing Temperature Ranges [O]</p>
+<p>From Web Cryptik [O]</p>
+<p>&lt;Text&gt;</p>
+<p>7.7 Additional Information [O]</p>
+<p>&lt;Text&gt;</p>
+<p>8 Non-Invasive Security</p>
+<p>8.1 Mitigation Techniques [O]</p>
+<p>&lt;Text&gt;</p>
+<p>8.2 Effectiveness [O]</p>
+<p>&lt;Text&gt;</p>
+<p>8.3 Additional Information [O]</p>
+<p>&lt;Text&gt;</p>
+<p>9 Sensitive Security Parameters Management</p>
+<p>9.1 Storage Areas</p>
+<p>From Web Cryptik</p>
+<p>&lt;Text&gt;</p>
+<p>9.2 SSP Input-Output Methods</p>
+<p>From Web Cryptik</p>
+<p>&lt;Text&gt;</p>
+<p>9.3 SSP Zeroization Methods</p>
+<p>From Web Cryptik</p>
+<p>&lt;Text&gt;</p>
+<p>9.4 SSPs</p>
+<p>From Web Cryptik</p>
+<p>From Web Cryptik</p>
+<p>&lt;Text&gt;</p>
+<p>9.5 Transitions [O]</p>
+<p>&lt;Text&gt;</p>
+<p>9.6 Additional Information [O]</p>
+<p>&lt;Text&gt;</p>
+<p>10 Self-Tests</p>
+<p>10.1 Pre-Operational Self-Tests</p>
+<p>From Web Cryptik</p>
+<p>&lt;Text&gt;</p>
+<p>10.2 Conditional Self-Tests</p>
+<p>From Web Cryptik</p>
+<p>&lt;Text&gt;</p>
+<p>10.3 Periodic Self-Test Information</p>
+<p>From Web Cryptik</p>
+<p>From Web Cryptik</p>
+<p>&lt;Text&gt;</p>
+<p>10.4 Error States</p>
+<p>From Web Cryptik</p>
+<p>&lt;Text&gt;</p>
+<p>10.5 Operator Initiation of Self-Tests [O]</p>
+<p>&lt;Text&gt;</p>
+<p>10.6 Additional Information [O]</p>
+<p>&lt;Text&gt;</p>
+<p>11 Life-Cycle Assurance</p>
+<p>11.1 Installation, Initialization, and Startup Procedures</p>
+<p>&lt;Text&gt;</p>
+<p>11.2 Administrator Guidance</p>
+<p>&lt;Text&gt;</p>
+<p>11.3 Non-Administrator Guidance</p>
+<p>&lt;Text&gt;</p>
+<p>11.4 Design and Rules [O]</p>
+<p>&lt;Text&gt;</p>
+<p>11.5 Maintenance Requirements [O]</p>
+<p>&lt;Text&gt;</p>
+<p>11.6 End of Life [O]</p>
+<p>&lt;Text&gt;</p>
+<p>11.7 Additional Information [O]</p>
+<p>&lt;Text&gt;</p>
+<p>12 Mitigation of Other Attacks</p>
+<p>12.1 Attack List [O]</p>
+<p>&lt;Text&gt;</p>
+<p>12.2 Mitigation Effectiveness [O]</p>
+<p>&lt;Text&gt;</p>
+<p>12.3 Guidance and Constraints [O]</p>
+<p>&lt;Text&gt;</p>
+<p>12.4 Additional Information [O]</p>
+<p>&lt;Text&gt;</p>
+</main></noscript>
+<canvas id="starling"></canvas>
+<div id="loading"><div><div id="loading-text">Loading…</div><div class="bar"><div id="loading-fill" class="indeterminate"></div></div></div></div>
+<div id="font-status" role="status" hidden><span></span><button type="button" hidden>Retry</button></div>
+<script type="module">
+  // A trap inside a frame or an event handler surfaces here, not in the
+  // promise below; without the stack it is only 'unreachable'.
+  window.addEventListener('error', (event) => {
+    console.error(String(event.error?.stack || event.message));
+  });
+  import { startStarling } from './starling.js';
+  const fontStatus = document.getElementById('font-status');
+  const retryFonts = fontStatus.querySelector('button');
+  retryFonts.addEventListener('click', () => window.starling?.retryFonts().catch(console.error));
+  startStarling({
+    canvas: document.getElementById('starling'),
+    app: 'app.wasm',
+    // The app's command line (Office: ['--slides'] starts in Slides).
+    args: ['--site', '/site-demo/'],
+    // The tab's URL path is the app's route (the wiki opens the page it names).
+    initialRoute: location.pathname + location.search + location.hash,
+    skwasmBase: 'skwasm/',
+    // Written by build/web-app.sh; the first face is also the fallback
+    // for any family nobody loaded.
+    fonts: 'fonts/manifest.json',
+    onFontStatus({ pending, failed }) {
+      fontStatus.hidden = !pending.length && !failed.length;
+      fontStatus.querySelector('span').textContent = failed.length
+        ? 'Some fonts could not load. Text is using a fallback.' : 'Loading document fonts…';
+      retryFonts.hidden = !failed.length;
+    },
+    onPhase(message) {
+      document.getElementById('loading-text').textContent = message;
+      document.getElementById('loading-fill').classList.add('indeterminate');
+    },
+    onProgress(loaded, total) {
+      const fill = document.getElementById('loading-fill');
+      fill.classList.toggle('indeterminate', !total);
+      if (total) fill.style.width = `${Math.min(100, 100 * loaded / total)}%`;
+    },
+  }).then((starling) => {
+    window.starling = starling;
+    // A shell page made for a route (the wiki's server, a site build)
+    // already carries the page's title; keep it.
+    if (!document.querySelector('meta[name="starling-route"]')) document.title = 'Starling — running';
+    const loading = document.getElementById('loading');
+    // The first frame is on screen a beat after start returns.
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      loading.classList.add('done');
+      setTimeout(() => loading.remove(), 400);
+    }));
+  })
+    .catch((error) => {
+      console.error(String(error.stack || error));
+      document.title = 'Starling — failed';
+      document.body.append(Object.assign(document.createElement('pre'), {
+        textContent: String(error.stack || error),
+        style: 'color:#ef5350;padding:16px;white-space:pre-wrap',
+      }));
+    });
+</script>
+</body>
+</html>

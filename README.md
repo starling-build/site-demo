@@ -13,3 +13,13 @@ Edit it by cloning and opening the folder in Starling Office
 (`OfficeApp --site <clone>`): Edit is the whole Writer, Publish builds,
 commits and pushes. Or `OfficeApp --site-publish <clone> -m "…"`.
 See docs/plans/site.md in starling-build/starling.
+
+## The published documents
+
+- *Security policy (24 pages, footnotes)*: Google's BoringCrypto Android
+  FIPS 140-2 security policy, "Public Material – May be reproduced only in
+  its original entirety (without revision)".
+- *FIPS 140-3 security policy template* and *CMVP revalidation change
+  document*: NIST, Cryptographic Module Validation Program, Module
+  Processes (csrc.nist.gov). Works of the United States Government, not
+  subject to copyright.
