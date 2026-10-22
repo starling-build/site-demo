@@ -10,6 +10,8 @@
 <meta property="og:description" content="From Web Cryptik From Web Cryptik FIPS 140-3 Non-Proprietary Security Policy Table of Contents 1 General	7 1.1 Overview	7 1.2 Security Levels	7 1.3 Additional Information [O]	7 2 Cryptographic Module Specification	7 2.1 Description	7 2.2 Tested and Vendor Affirmed Module Version and Identification	7">
 <meta name="description" content="From Web Cryptik From Web Cryptik FIPS 140-3 Non-Proprietary Security Policy Table of Contents 1 General	7 1.1 Overview	7 1.2 Security Levels	7 1.3 Additional Information [O]	7 2 Cryptographic Module Specification	7 2.1 Description	7 2.2 Tested and Vendor Affirmed Module Version and Identification	7">
 <meta name="starling-route" content="/site-demo/fips-140-3-security-policy-template-nist-81-headings/">
+<link rel="canonical" href="https://starling-build.github.io/site-demo/fips-140-3-security-policy-template-nist-81-headings/">
+<meta property="og:url" content="https://starling-build.github.io/site-demo/fips-140-3-security-policy-template-nist-81-headings/">
 <title>FIPS 140-3 security policy template (NIST, 81 headings) — Starling Site demo</title>
 <style>
   html, body { margin: 0; height: 100%; background: #101418; }
@@ -33,10 +35,126 @@
   #font-status button { margin-left: 10px; cursor: pointer; }
 </style>
 </head>
-<body>
-<style>.starling-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}</style>
-<noscript><style>.starling-sr{position:static;width:auto;height:auto;overflow:visible;clip:auto;white-space:normal;padding:16px;font:16px system-ui,sans-serif;color:#eee}</style></noscript>
-<main id="starling-text" class="starling-sr" aria-label="Starling Site demo">
+<body class="starling-publication">
+<style>
+  body.starling-publication { background:#f8f9fc; color:#192235; height:auto; min-height:100vh; }
+  .starling-publication #starling-text { max-width:76ch; margin:auto; padding:28px 24px 64px;
+    font:18px/1.65 system-ui,sans-serif; overflow-wrap:anywhere; }
+  .starling-publication a { color:#2449ce; }
+  .starling-publication a:focus-visible,.starling-publication button:focus-visible {
+    outline:3px solid #2449ce; outline-offset:4px; }
+  .starling-publication #starling-text nav { border-bottom:1px solid #dbe0eb; padding-bottom:12px; }
+  .starling-publication #starling-text aside { color:#4e5c73; border-bottom:1px solid #dbe0eb; }
+  .starling-publication #starling-text h1,.starling-publication #starling-text h2,
+  .starling-publication #starling-text h3 { line-height:1.25; }
+  .starling-publication #starling-article > p,.starling-publication #starling-article > h1,
+  .starling-publication #starling-article > h2,.starling-publication #starling-article > h3 { white-space:pre-wrap; }
+  .starling-publication #starling-text li { margin:8px 0; }
+  .starling-publication #starling-text .starling-downloads { font-size:16px; }
+  .starling-publication:not(.starling-interactive) #starling { position:fixed; inset:0; visibility:hidden; }
+  .starling-publication #loading { display:none; }
+  .starling-publication:not(.starling-interactive) #font-status { display:none; }
+  #starling-reader-controls { max-width:76ch; margin:auto; padding:16px 24px 0;
+    font:18px/1.5 system-ui,sans-serif; }
+  #starling-reader-controls button { font:15px/1.5 system-ui,sans-serif; background:#fff; color:#192235;
+    border:1px solid #bdc7dc; border-radius:6px; padding:8px 12px; cursor:pointer; }
+  #starling-reader-controls p { margin:8px 0; font-size:15px; }
+  .starling-interactive #starling-text { position:absolute; width:1px; height:1px;
+    overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; padding:0; }
+  .starling-interactive #starling-reader-controls { position:fixed; bottom:12px; left:12px;
+    z-index:10; padding:0; }
+  .starling-interactive #starling-reader-status { display:none; }
+  @media print {
+    .starling-publication #starling,.starling-publication #starling-reader-controls,
+    .starling-publication #font-status { display:none; }
+    .starling-publication #starling-text { position:static; width:auto; height:auto;
+      clip:auto; overflow:visible; white-space:normal; padding:0; }
+  }
+</style>
+<div id="starling-reader-controls">
+  <p id="starling-reader-status" role="status">Text view. Use the document downloads for the original page layout.</p>
+  <button id="starling-reader-toggle" type="button" hidden>Keep reading text</button>
+</div>
+<script>
+(() => {
+  const body = document.body;
+  const button = document.getElementById('starling-reader-toggle');
+  const status = document.getElementById('starling-reader-status');
+  let ready = false, failed = false;
+  let keepText = new URLSearchParams(location.search).get('reader') === 'text';
+  // Only the reader's own scrolling pins the text view: the browser's
+  // jump to a #p= anchor is not a choice, and the interactive reader
+  // reveals that paragraph itself.
+  let userInput = false;
+  for (const kind of ['pointerdown', 'wheel', 'keydown', 'touchstart']) {
+    window.addEventListener(kind, () => { userInput = true; }, { capture:true, passive:true });
+  }
+  button.hidden = false;
+  status.textContent = 'Opening the interactive reader. You can read the text now or use the downloads for the original page layout.';
+  const preserveTextNavigation = () => {
+    for (const link of document.querySelectorAll('#starling-text nav a, #starling-article a')) {
+      const url = new URL(link.href);
+      if (!link.closest('nav') && !(url.origin === location.origin && /^#p=[0-9]+$/.test(url.hash))) continue;
+      url.searchParams.set('reader', 'text');
+      link.href = url.href;
+    }
+  };
+  const pinText = () => {
+    if (!body.classList.contains('starling-interactive')) {
+      keepText = true;
+      preserveTextNavigation();
+    }
+  };
+  document.addEventListener('pointerdown', event => {
+    if (event.target.closest('#starling-text')) pinText();
+  });
+  document.addEventListener('focusin', event => {
+    if (event.target.closest('#starling-text')) pinText();
+  });
+  window.addEventListener('scroll', () => { if (userInput && window.scrollY > 0) pinText(); }, { passive:true });
+  button.addEventListener('click', () => {
+    if (body.classList.contains('starling-interactive') || !ready) {
+      pinText();
+      keepText = true;
+      body.classList.remove('starling-interactive');
+      preserveTextNavigation();
+      status.textContent = 'Text view. Use the document downloads for the original page layout.';
+      button.textContent = ready ? 'Open interactive reader' : 'Waiting for interactive reader…';
+      button.disabled = !ready;
+    } else {
+      body.classList.add('starling-interactive');
+      button.textContent = 'Read text';
+      window.scrollTo(0, 0);
+    }
+  });
+  window.addEventListener('starling-reader-ready', () => {
+    if (failed) return;
+    ready = true;
+    button.disabled = false;
+    if (!keepText) { body.classList.add('starling-interactive'); window.scrollTo(0, 0); }
+    else preserveTextNavigation();
+    button.textContent = body.classList.contains('starling-interactive') ? 'Read text' : 'Open interactive reader';
+    status.textContent = 'Text view. Use the document downloads for the original page layout.';
+  });
+  window.addEventListener('starling-reader-failed', () => {
+    failed = true;
+    ready = false;
+    body.classList.remove('starling-interactive');
+    button.hidden = true;
+    preserveTextNavigation();
+    status.textContent = 'The interactive reader could not open. You can keep reading the text and use the document downloads.';
+  });
+  // A failed module import prevents the host module itself from running.
+  window.addEventListener('error', event => {
+    if (event.target instanceof HTMLScriptElement) {
+      window.dispatchEvent(new Event('starling-reader-failed'));
+    }
+  }, true);
+  if (keepText) {
+    document.addEventListener('DOMContentLoaded', preserveTextNavigation, { once:true });
+  }
+})();
+</script><main id="starling-text" class="starling-sr" aria-label="Starling Site demo">
 <nav aria-label="Pages"><ul>
 <li><a href="/site-demo/">Welcome</a></li>
 <li><a href="/site-demo/getting-started/">Getting started</a></li>
@@ -48,344 +166,572 @@
 <li>&nbsp;&nbsp;<a href="/site-demo/cmvp-revalidation-change-document-nist-tables/">CMVP revalidation change document (NIST, tables)</a></li>
 </ul></nav>
 <article id="starling-article" aria-label="FIPS 140-3 security policy template (NIST, 81 headings)">
-<p class="starling-downloads"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/fips-140-3-security-policy-template-nist-81-headings.pdf">Download as PDF</a> · <a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/fips-140-3-security-policy-template-nist-81-headings.docx">Download as Word</a></p>
-<p>From Web Cryptik</p>
-<p>From Web Cryptik</p>
-<p>FIPS 140-3 Non-Proprietary Security Policy</p>
-<p>Table of Contents</p>
-<p>1 General	7</p>
-<p>1.1 Overview	7</p>
-<p>1.2 Security Levels	7</p>
-<p>1.3 Additional Information [O]	7</p>
-<p>2 Cryptographic Module Specification	7</p>
-<p>2.1 Description	7</p>
-<p>2.2 Tested and Vendor Affirmed Module Version and Identification	7</p>
-<p>2.3 Excluded Components	8</p>
-<p>2.4 Modes of Operation	8</p>
-<p>2.5 Algorithms	8</p>
-<p>2.6 Security Function Implementations	9</p>
-<p>2.7 Algorithm Specific Information	9</p>
-<p>2.8 RBG and Entropy	9</p>
-<p>2.9 Key Generation	9</p>
-<p>2.10 Key Establishment	10</p>
-<p>2.11 Industry Protocols	10</p>
-<p>2.12 Additional Information [O]	10</p>
-<p>3 Cryptographic Module Interfaces	10</p>
-<p>3.1 Ports and Interfaces	10</p>
-<p>3.2 Trusted Channel Specification [O]	10</p>
-<p>3.3 Control Interface Not Inhibited [O]	10</p>
-<p>3.4 Additional Information [O]	10</p>
-<p>4 Roles, Services, and Authentication	10</p>
-<p>4.1 Authentication Methods	10</p>
-<p>4.2 Roles	10</p>
-<p>4.3 Approved Services	11</p>
-<p>4.4 Non-Approved Services	11</p>
-<p>4.5 External Software/Firmware Loaded	11</p>
-<p>4.6 Bypass Actions and Status [O]	11</p>
-<p>4.7 Cryptographic Output Actions and Status [O]	11</p>
-<p>4.8 Additional Information [O]	11</p>
-<p>5 Software/Firmware Security	11</p>
-<p>5.1 Integrity Techniques	11</p>
-<p>5.2 Initiate on Demand	11</p>
-<p>5.3 Open-Source Parameters [O]	11</p>
-<p>5.4 Additional Information [O]	12</p>
-<p>6 Operational Environment	12</p>
-<p>6.1 Operational Environment Type and Requirements	12</p>
-<p>6.2 Configuration Settings and Restrictions [O]	12</p>
-<p>6.3 Additional Information [O]	12</p>
-<p>7 Physical Security	12</p>
-<p>7.1 Mechanisms and Actions Required [O]	12</p>
-<p>7.2 User Placed Tamper Seals [O]	12</p>
-<p>7.3 Filler Panels [O]	12</p>
-<p>7.4 Fault Induction Mitigation [O]	13</p>
-<p>7.5 EFP/EFT Information [O]	13</p>
-<p>7.6 Hardness Testing Temperature Ranges [O]	13</p>
-<p>7.7 Additional Information [O]	13</p>
-<p>8 Non-Invasive Security	13</p>
-<p>8.1 Mitigation Techniques [O]	13</p>
-<p>8.2 Effectiveness [O]	13</p>
-<p>8.3 Additional Information [O]	13</p>
-<p>9 Sensitive Security Parameters Management	13</p>
-<p>9.1 Storage Areas	13</p>
-<p>9.2 SSP Input-Output Methods	13</p>
-<p>9.3 SSP Zeroization Methods	14</p>
-<p>9.4 SSPs	14</p>
-<p>9.5 Transitions [O]	14</p>
-<p>9.6 Additional Information [O]	14</p>
-<p>10 Self-Tests	14</p>
-<p>10.1 Pre-Operational Self-Tests	14</p>
-<p>10.2 Conditional Self-Tests	14</p>
-<p>10.3 Periodic Self-Test Information	14</p>
-<p>10.4 Error States	15</p>
-<p>10.5 Operator Initiation of Self-Tests [O]	15</p>
-<p>10.6 Additional Information [O]	15</p>
-<p>11 Life-Cycle Assurance	15</p>
-<p>11.1 Installation, Initialization, and Startup Procedures	15</p>
-<p>11.2 Administrator Guidance	15</p>
-<p>11.3 Non-Administrator Guidance	15</p>
-<p>11.4 Design and Rules [O]	15</p>
-<p>11.5 Maintenance Requirements [O]	15</p>
-<p>11.6 End of Life [O]	15</p>
-<p>11.7 Additional Information [O]	15</p>
-<p>12 Mitigation of Other Attacks	16</p>
-<p>12.1 Attack List [O]	16</p>
-<p>12.2 Mitigation Effectiveness [O]	16</p>
-<p>12.3 Guidance and Constraints [O]	16</p>
-<p>12.4 Additional Information [O]	16</p>
-<p>List of Tables</p>
-<p>Table 1: Security Levels	7</p>
-<p>Table 2: Tested Module Identification – Hardware	8</p>
-<p>Table 3: Tested Module Identification – Software/Firmware/Hybrid (Executable Code Sets)	8</p>
-<p>Table 4: Tested Module Identification – Hybrid Disjoint Hardware	8</p>
-<p>Table 5: Tested Operational Environments - Software, Firmware, Hybrid	8</p>
-<p>Table 6: Vendor Affirmed Operational Environments - Software, Firmware, Hybrid	8</p>
-<p>Table 7: Modes List and Description	8</p>
-<p>Table 8: Approved Algorithms	9</p>
-<p>Table 9: Vendor Affirmed Algorithms	9</p>
-<p>Table 10: Non-Approved, Allowed Algorithms	9</p>
-<p>Table 11: Non-Approved, Allowed Algorithms with No Security Claimed	9</p>
-<p>Table 12: Non-Approved, Not Allowed Algorithms	9</p>
-<p>Table 13: Security Function Implementations	10</p>
-<p>Table 14: Entropy Certificates	10</p>
-<p>Table 15: Entropy Sources	10</p>
-<p>Table 16: Key Generation	10</p>
-<p>Table 17: Key Agreement	10</p>
-<p>Table 18: Key Transport	10</p>
-<p>Table 19: Ports and Interfaces	11</p>
-<p>Table 20: Authentication Methods	11</p>
-<p>Table 21: Roles	11</p>
-<p>Table 22: Approved Services	11</p>
-<p>Table 23: Non-Approved Services	12</p>
-<p>Table 24: Mechanisms and Actions Required	13</p>
-<p>Table 25: EFP/EFT Information	13</p>
-<p>Table 26: Hardness Testing Temperatures	14</p>
-<p>Table 27: Storage Areas	14</p>
-<p>Table 28: SSP Input-Output	14</p>
-<p>Table 29: SSP Zeroization Methods	14</p>
-<p>Table 30: SSP Information First	15</p>
-<p>Table 31: SSP Information Second	15</p>
-<p>Table 32: Pre-Operational Self-Tests	15</p>
-<p>Table 33: Conditional Self-Tests	15</p>
-<p>Table 34: Pre-Operational Periodic Information	15</p>
-<p>Table 35: Conditional Periodic Information	15</p>
-<p>Table 36: Error States	15</p>
-<p>List of Figures</p>
-<p>Figure 1: Block Diagram	6</p>
-<h1>1 General</h1>
-<h2>1.1 Overview</h2>
-<p>&lt;Text&gt;</p>
-<h2>1.2 Security Levels</h2>
-<p>From Web Cryptik</p>
-<h2>1.3 Additional Information [O]</h2>
-<p>&lt;Text&gt;</p>
-<h1>2 Cryptographic Module Specification</h1>
-<h2>2.1 Description</h2>
-<p>Purpose and Use:</p>
-<p>&lt;Text&gt;</p>
-<p>Module Type: From Web Cryptik</p>
-<p>Module Embodiment: From Web Cryptik</p>
-<p>Module Characteristics [O]: From Web Cryptik</p>
-<p>Cryptographic Boundary:</p>
-<p>&lt;Text&gt;</p>
-<p>Tested Operational Environment’s Physical Perimeter (TOEPP) [O]:</p>
-<p>&lt;Text&gt;</p>
-<p>&lt;Other Diagrams, Photographs and Descriptive Text&gt;</p>
-<p>&lt;Picture or Block Diagram&gt;</p>
-<p>Figure 1: Block Diagram</p>
-<h2>2.2 Tested and Vendor Affirmed Module Version and Identification</h2>
-<p>Tested Module Identification – Hardware:</p>
-<p>From Web Cryptik [O]</p>
-<p>Tested Module Identification – Software, Firmware, Hybrid (Executable Code Sets):</p>
-<p>From Web Cryptik [O]</p>
-<p>Tested Module Identification – Hybrid Disjoint Hardware:</p>
-<p>From Web Cryptik [O]</p>
-<p>Tested Operational Environments - Software, Firmware, Hybrid:</p>
-<p>From Web Cryptik [O]</p>
-<p>Vendor-Affirmed Operational Environments - Software, Firmware, Hybrid:</p>
-<p>From Web Cryptik [O]</p>
-<p>CMVP makes no statement as to the correct operation of the module or the security strengths of the generated keys when so ported if the specific operational environment is not listed on the validation certificate. [Delete this paragraph if not applicable]</p>
-<h2>2.3 Excluded Components</h2>
-<p>&lt;Excluded components statements or table&gt;</p>
-<h2>2.4 Modes of Operation</h2>
-<p>Modes List and Description:</p>
-<p>From Web Cryptik</p>
-<p>&lt;Text&gt;</p>
-<p>Mode Change Instructions and Status [O]:</p>
-<p>&lt;Text&gt;</p>
-<p>Degraded Mode Description [O]:</p>
-<p>&lt;Text&gt;</p>
-<h2>2.5 Algorithms</h2>
-<p>Approved Algorithms:</p>
-<p>From Web Cryptik</p>
-<p>&lt;Text&gt;</p>
-<p>Vendor-Affirmed Algorithms:</p>
-<p>From Web Cryptik</p>
-<p>&lt;Text&gt;</p>
-<p>Non-Approved, Allowed Algorithms:</p>
-<p>From Web Cryptik</p>
-<p>&lt;Text&gt;</p>
-<p>Non-Approved, Allowed Algorithms with No Security Claimed:</p>
-<p>From Web Cryptik</p>
-<p>&lt;Text&gt;</p>
-<p>Non-Approved, Not Allowed Algorithms:</p>
-<p>From Web Cryptik</p>
-<p>&lt;Text&gt;</p>
-<h2>2.6 Security Function Implementations</h2>
-<p>From Web Cryptik</p>
-<p>&lt;Text&gt;</p>
-<h2>2.7 Algorithm Specific Information</h2>
-<p>&lt;Text&gt;</p>
-<h2>2.8 RBG and Entropy</h2>
-<p>From Web Cryptik [O]</p>
-<p>From Web Cryptik [O]</p>
-<p>&lt;Text&gt;</p>
-<h2>2.9 Key Generation</h2>
-<p>&lt;Text&gt;</p>
-<h2>2.10 Key Establishment</h2>
-<p>&lt;Text&gt;</p>
-<h2>2.11 Industry Protocols</h2>
-<p>&lt;Text&gt;</p>
-<h2>2.12 Additional Information [O]</h2>
-<p>&lt;Text&gt;</p>
-<h1>3 Cryptographic Module Interfaces</h1>
-<h2>3.1 Ports and Interfaces</h2>
-<p>From Web Cryptik</p>
-<p>&lt;Text&gt;</p>
-<h2>3.2 Trusted Channel Specification [O]</h2>
-<p>&lt;Text&gt;</p>
-<h2>3.3 Control Interface Not Inhibited [O]</h2>
-<p>&lt;Text&gt;</p>
-<h2>3.4 Additional Information [O]</h2>
-<p>&lt;Text&gt;</p>
-<h1>4 Roles, Services, and Authentication</h1>
-<h2>4.1 Authentication Methods</h2>
-<p>From Web Cryptik [O]</p>
-<p>&lt;Text&gt;</p>
-<h2>4.2 Roles</h2>
-<p>From Web Cryptik</p>
-<p>&lt;Text&gt;</p>
-<h2>4.3 Approved Services</h2>
-<p>From Web Cryptik</p>
-<p>&lt;Text&gt;</p>
-<h2>4.4 Non-Approved Services</h2>
-<p>From Web Cryptik [O]</p>
-<p>&lt;Text&gt;</p>
-<h2>4.5 External Software/Firmware Loaded</h2>
-<p>&lt;Text&gt;</p>
-<h2>4.6 Bypass Actions and Status [O]</h2>
-<p>&lt;Text&gt;</p>
-<h2>4.7 Cryptographic Output Actions and Status [O]</h2>
-<p>&lt;Text&gt;</p>
-<h2>4.8 Additional Information [O]</h2>
-<p>&lt;Text&gt;</p>
-<h1>5 Software/Firmware Security</h1>
-<h2>5.1 Integrity Techniques</h2>
-<p>&lt;Text&gt;</p>
-<h2>5.2 Initiate on Demand</h2>
-<p>&lt;Text&gt;</p>
-<h2>5.3 Open-Source Parameters [O]</h2>
-<p>&lt;Text&gt;</p>
-<h2>5.4 Additional Information [O]</h2>
-<p>&lt;Text&gt;</p>
-<h1>6 Operational Environment</h1>
-<h2>6.1 Operational Environment Type and Requirements</h2>
-<p>Type of Operational Environment: From Web Cryptik</p>
-<p>How Requirements are Satisfied [O]:</p>
-<p>&lt;Text&gt;</p>
-<h2>6.2 Configuration Settings and Restrictions [O]</h2>
-<p>&lt;Text&gt;</p>
-<h2>6.3 Additional Information [O]</h2>
-<p>&lt;Text&gt;</p>
-<h1>7 Physical Security</h1>
-<h2>7.1 Mechanisms and Actions Required [O]</h2>
-<p>From Web Cryptik [O]</p>
-<p>&lt;Text and Photos&gt;</p>
-<h2>7.2 User Placed Tamper Seals [O]</h2>
-<p>Number:</p>
-<p>Placement:</p>
-<p>Surface Preparation:</p>
-<p>Operator Responsible for Securing Unused Seals:</p>
-<p>Part Numbers:</p>
-<p>&lt;Text and Pictures&gt;</p>
-<h2>7.3 Filler Panels [O]</h2>
-<p>&lt;Text and Pictures&gt;</p>
-<h2>7.4 Fault Induction Mitigation [O]</h2>
-<p>&lt;Text&gt;</p>
-<h2>7.5 EFP/EFT Information [O]</h2>
-<p>From Web Cryptik [O]</p>
-<p>&lt;Text&gt;</p>
-<h2>7.6 Hardness Testing Temperature Ranges [O]</h2>
-<p>From Web Cryptik [O]</p>
-<p>&lt;Text&gt;</p>
-<h2>7.7 Additional Information [O]</h2>
-<p>&lt;Text&gt;</p>
-<h1>8 Non-Invasive Security</h1>
-<h2>8.1 Mitigation Techniques [O]</h2>
-<p>&lt;Text&gt;</p>
-<h2>8.2 Effectiveness [O]</h2>
-<p>&lt;Text&gt;</p>
-<h2>8.3 Additional Information [O]</h2>
-<p>&lt;Text&gt;</p>
-<h1>9 Sensitive Security Parameters Management</h1>
-<h2>9.1 Storage Areas</h2>
-<p>From Web Cryptik</p>
-<p>&lt;Text&gt;</p>
-<h2>9.2 SSP Input-Output Methods</h2>
-<p>From Web Cryptik</p>
-<p>&lt;Text&gt;</p>
-<h2>9.3 SSP Zeroization Methods</h2>
-<p>From Web Cryptik</p>
-<p>&lt;Text&gt;</p>
-<h2>9.4 SSPs</h2>
-<p>From Web Cryptik</p>
-<p>From Web Cryptik</p>
-<p>&lt;Text&gt;</p>
-<h2>9.5 Transitions [O]</h2>
-<p>&lt;Text&gt;</p>
-<h2>9.6 Additional Information [O]</h2>
-<p>&lt;Text&gt;</p>
-<h1>10 Self-Tests</h1>
-<h2>10.1 Pre-Operational Self-Tests</h2>
-<p>From Web Cryptik</p>
-<p>&lt;Text&gt;</p>
-<h2>10.2 Conditional Self-Tests</h2>
-<p>From Web Cryptik</p>
-<p>&lt;Text&gt;</p>
-<h2>10.3 Periodic Self-Test Information</h2>
-<p>From Web Cryptik</p>
-<p>From Web Cryptik</p>
-<p>&lt;Text&gt;</p>
-<h2>10.4 Error States</h2>
-<p>From Web Cryptik</p>
-<p>&lt;Text&gt;</p>
-<h2>10.5 Operator Initiation of Self-Tests [O]</h2>
-<p>&lt;Text&gt;</p>
-<h2>10.6 Additional Information [O]</h2>
-<p>&lt;Text&gt;</p>
-<h1>11 Life-Cycle Assurance</h1>
-<h2>11.1 Installation, Initialization, and Startup Procedures</h2>
-<p>&lt;Text&gt;</p>
-<h2>11.2 Administrator Guidance</h2>
-<p>&lt;Text&gt;</p>
-<h2>11.3 Non-Administrator Guidance</h2>
-<p>&lt;Text&gt;</p>
-<h2>11.4 Design and Rules [O]</h2>
-<p>&lt;Text&gt;</p>
-<h2>11.5 Maintenance Requirements [O]</h2>
-<p>&lt;Text&gt;</p>
-<h2>11.6 End of Life [O]</h2>
-<p>&lt;Text&gt;</p>
-<h2>11.7 Additional Information [O]</h2>
-<p>&lt;Text&gt;</p>
-<h1>12 Mitigation of Other Attacks</h1>
-<h2>12.1 Attack List [O]</h2>
-<p>&lt;Text&gt;</p>
-<h2>12.2 Mitigation Effectiveness [O]</h2>
-<p>&lt;Text&gt;</p>
-<h2>12.3 Guidance and Constraints [O]</h2>
-<p>&lt;Text&gt;</p>
-<h2>12.4 Additional Information [O]</h2>
-<p>&lt;Text&gt;</p>
+<p class="starling-downloads"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/fips-140-3-security-policy-template-nist-81-headings.pdf">Download as PDF</a> · <a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/fips-140-3-security-policy-template-nist-81-headings.docx">Download as Word</a> · <a href="https://github.com/starling-build/site-demo/commits/main/pages/fips-140-3-security-policy-template-nist-81-headings.json">History</a></p>
+<p id="p=1207287135"></p>
+<p id="p=830640944"></p>
+<p id="p=1244122930"></p>
+<p id="p=1519568782">From Web Cryptik</p>
+<p id="p=1726203407"></p>
+<p id="p=545085307"></p>
+<p id="p=111895116">From Web Cryptik</p>
+<p id="p=914096074"></p>
+<p id="p=431680653">FIPS 140-3 Non-Proprietary Security Policy</p>
+<p id="p=576766233"></p>
+<p id="p=48113838"></p>
+<p id="p=604660158"></p>
+<p id="p=1219686638"></p>
+<p id="p=2130814650">Table of Contents</p>
+<p id="p=61274207"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1408405118">1 General</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1408405118">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1408405118">7</a></p>
+<p id="p=932377768"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1007147563">1.1 Overview</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1007147563">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1007147563">7</a></p>
+<p id="p=465610739"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=2017737537">1.2 Security Levels</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=2017737537">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=2017737537">7</a></p>
+<p id="p=1224205242"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=56473874">1.3 Additional Information [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=56473874">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=56473874">7</a></p>
+<p id="p=1760048954"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=509869448">2 Cryptographic Module Specification</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=509869448">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=509869448">7</a></p>
+<p id="p=798724621"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=346899611">2.1 Description</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=346899611">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=346899611">7</a></p>
+<p id="p=2118039645"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=768191985">2.2 Tested and Vendor Affirmed Module Version and Identification</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=768191985">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=768191985">7</a></p>
+<p id="p=1194571802"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=534837192">2.3 Excluded Components</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=534837192">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=534837192">8</a></p>
+<p id="p=640328211"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1746613159">2.4 Modes of Operation</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1746613159">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1746613159">8</a></p>
+<p id="p=1285065361"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1995605842">2.5 Algorithms</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1995605842">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1995605842">8</a></p>
+<p id="p=319343219"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=2013301976">2.6 Security Function Implementations</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=2013301976">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=2013301976">9</a></p>
+<p id="p=1397445945"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1699917366">2.7 Algorithm Specific Information</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1699917366">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1699917366">9</a></p>
+<p id="p=202462575"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=2007011042">2.8 RBG and Entropy</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=2007011042">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=2007011042">9</a></p>
+<p id="p=268911134"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=2070379322">2.9 Key Generation</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=2070379322">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=2070379322">9</a></p>
+<p id="p=25179295"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1165053725">2.10 Key Establishment</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1165053725">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1165053725">10</a></p>
+<p id="p=779051603"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1544459542">2.11 Industry Protocols</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1544459542">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1544459542">10</a></p>
+<p id="p=35374138"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1412700742">2.12 Additional Information [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1412700742">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1412700742">10</a></p>
+<p id="p=2118359879"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=18866484">3 Cryptographic Module Interfaces</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=18866484">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=18866484">10</a></p>
+<p id="p=44625873"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1931407486">3.1 Ports and Interfaces</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1931407486">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1931407486">10</a></p>
+<p id="p=637853401"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=83694842">3.2 Trusted Channel Specification [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=83694842">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=83694842">10</a></p>
+<p id="p=602271225"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=2082107492">3.3 Control Interface Not Inhibited [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=2082107492">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=2082107492">10</a></p>
+<p id="p=1189554776"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=447853086">3.4 Additional Information [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=447853086">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=447853086">10</a></p>
+<p id="p=760239961"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=908362442">4 Roles, Services, and Authentication</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=908362442">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=908362442">10</a></p>
+<p id="p=2117321204"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=849185051">4.1 Authentication Methods</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=849185051">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=849185051">10</a></p>
+<p id="p=581212305"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1621206854">4.2 Roles</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1621206854">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1621206854">10</a></p>
+<p id="p=528330226"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=390759787">4.3 Approved Services</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=390759787">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=390759787">11</a></p>
+<p id="p=864479844"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1099406491">4.4 Non-Approved Services</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1099406491">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1099406491">11</a></p>
+<p id="p=1507512607"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=93574335">4.5 External Software/Firmware Loaded</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=93574335">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=93574335">11</a></p>
+<p id="p=982878067"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=882579916">4.6 Bypass Actions and Status [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=882579916">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=882579916">11</a></p>
+<p id="p=360326123"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1027176993">4.7 Cryptographic Output Actions and Status [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1027176993">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1027176993">11</a></p>
+<p id="p=163617122"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1418794331">4.8 Additional Information [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1418794331">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1418794331">11</a></p>
+<p id="p=1019806238"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1975664181">5 Software/Firmware Security</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1975664181">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1975664181">11</a></p>
+<p id="p=107157405"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1185575549">5.1 Integrity Techniques</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1185575549">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1185575549">11</a></p>
+<p id="p=579700206"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=334953230">5.2 Initiate on Demand</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=334953230">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=334953230">11</a></p>
+<p id="p=710389546"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1854803007">5.3 Open-Source Parameters [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1854803007">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1854803007">11</a></p>
+<p id="p=15179386"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=367547833">5.4 Additional Information [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=367547833">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=367547833">12</a></p>
+<p id="p=1354192124"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1378726911">6 Operational Environment</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1378726911">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1378726911">12</a></p>
+<p id="p=608442086"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=960459707">6.1 Operational Environment Type and Requirements</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=960459707">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=960459707">12</a></p>
+<p id="p=1664041524"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=45931227">6.2 Configuration Settings and Restrictions [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=45931227">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=45931227">12</a></p>
+<p id="p=655080992"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1653941786">6.3 Additional Information [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1653941786">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1653941786">12</a></p>
+<p id="p=143239020"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=330980458">7 Physical Security</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=330980458">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=330980458">12</a></p>
+<p id="p=602442979"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=921156040">7.1 Mechanisms and Actions Required [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=921156040">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=921156040">12</a></p>
+<p id="p=728871479"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1926170782">7.2 User Placed Tamper Seals [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1926170782">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1926170782">12</a></p>
+<p id="p=1137615354"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=193626847">7.3 Filler Panels [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=193626847">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=193626847">12</a></p>
+<p id="p=1764277740"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1829593235">7.4 Fault Induction Mitigation [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1829593235">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1829593235">13</a></p>
+<p id="p=1527445817"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=893311595">7.5 EFP/EFT Information [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=893311595">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=893311595">13</a></p>
+<p id="p=1325919878"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1196297681">7.6 Hardness Testing Temperature Ranges [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1196297681">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1196297681">13</a></p>
+<p id="p=2119597393"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1287688133">7.7 Additional Information [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1287688133">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1287688133">13</a></p>
+<p id="p=1460832558"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1850133868">8 Non-Invasive Security</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1850133868">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1850133868">13</a></p>
+<p id="p=2099614766"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=763613429">8.1 Mitigation Techniques [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=763613429">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=763613429">13</a></p>
+<p id="p=632466736"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=888407806">8.2 Effectiveness [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=888407806">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=888407806">13</a></p>
+<p id="p=1386922831"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1826794558">8.3 Additional Information [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1826794558">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1826794558">13</a></p>
+<p id="p=2081653341"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=976783433">9 Sensitive Security Parameters Management</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=976783433">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=976783433">13</a></p>
+<p id="p=326972347"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1298350777">9.1 Storage Areas</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1298350777">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1298350777">13</a></p>
+<p id="p=1161187288"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1946390212">9.2 SSP Input-Output Methods</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1946390212">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1946390212">13</a></p>
+<p id="p=1336013613"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1200157710">9.3 SSP Zeroization Methods</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1200157710">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1200157710">14</a></p>
+<p id="p=318429643"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1812441819">9.4 SSPs</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1812441819">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1812441819">14</a></p>
+<p id="p=1015156588"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1323215933">9.5 Transitions [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1323215933">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1323215933">14</a></p>
+<p id="p=1687581039"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1484553620">9.6 Additional Information [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1484553620">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1484553620">14</a></p>
+<p id="p=2055899375"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=812748132">10 Self-Tests</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=812748132">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=812748132">14</a></p>
+<p id="p=800342610"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1225174438">10.1 Pre-Operational Self-Tests</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1225174438">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1225174438">14</a></p>
+<p id="p=828441409"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=541107969">10.2 Conditional Self-Tests</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=541107969">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=541107969">14</a></p>
+<p id="p=1908844718"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=952939935">10.3 Periodic Self-Test Information</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=952939935">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=952939935">14</a></p>
+<p id="p=1833046981"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=2108228338">10.4 Error States</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=2108228338">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=2108228338">15</a></p>
+<p id="p=452808819"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1474496820">10.5 Operator Initiation of Self-Tests [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1474496820">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1474496820">15</a></p>
+<p id="p=50594868"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=663387157">10.6 Additional Information [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=663387157">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=663387157">15</a></p>
+<p id="p=1277290944"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=838369873">11 Life-Cycle Assurance</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=838369873">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=838369873">15</a></p>
+<p id="p=1276199090"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=725269789">11.1 Installation, Initialization, and Startup Procedures</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=725269789">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=725269789">15</a></p>
+<p id="p=1290519617"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=454518843">11.2 Administrator Guidance</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=454518843">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=454518843">15</a></p>
+<p id="p=198498411"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1315566468">11.3 Non-Administrator Guidance</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1315566468">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1315566468">15</a></p>
+<p id="p=2139044975"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=899685183">11.4 Design and Rules [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=899685183">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=899685183">15</a></p>
+<p id="p=1329495561"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=665637518">11.5 Maintenance Requirements [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=665637518">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=665637518">15</a></p>
+<p id="p=729155609"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=219206357">11.6 End of Life [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=219206357">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=219206357">15</a></p>
+<p id="p=1780571898"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1701205653">11.7 Additional Information [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1701205653">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1701205653">15</a></p>
+<p id="p=491096574"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=349870657">12 Mitigation of Other Attacks</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=349870657">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=349870657">16</a></p>
+<p id="p=265003444"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=134029745">12.1 Attack List [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=134029745">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=134029745">16</a></p>
+<p id="p=302462044"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=352467840">12.2 Mitigation Effectiveness [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=352467840">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=352467840">16</a></p>
+<p id="p=963668279"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=296835538">12.3 Guidance and Constraints [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=296835538">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=296835538">16</a></p>
+<p id="p=679557856"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=270796309">12.4 Additional Information [O]</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=270796309">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=270796309">16</a></p>
+<p id="p=2103846068"></p>
+<p id="p=122300898"></p>
+<p id="p=1924798583"></p>
+<p id="p=1921723284"></p>
+<p id="p=1539177921">List of Tables</p>
+<p id="p=1925595008"></p>
+<p id="p=1821714043">Table 1: Security Levels	7</p>
+<p id="p=821175414">Table 2: Tested Module Identification – Hardware	8</p>
+<p id="p=1416465503">Table 3: Tested Module Identification – Software/Firmware/Hybrid (Executable Code Sets)	8</p>
+<p id="p=162462111">Table 4: Tested Module Identification – Hybrid Disjoint Hardware	8</p>
+<p id="p=413862867">Table 5: Tested Operational Environments - Software, Firmware, Hybrid	8</p>
+<p id="p=1961977582">Table 6: Vendor Affirmed Operational Environments - Software, Firmware, Hybrid	8</p>
+<p id="p=1812376326">Table 7: Modes List and Description	8</p>
+<p id="p=1457257226">Table 8: Approved Algorithms	9</p>
+<p id="p=1346020402">Table 9: Vendor Affirmed Algorithms	9</p>
+<p id="p=1958341575">Table 10: Non-Approved, Allowed Algorithms	9</p>
+<p id="p=462885997">Table 11: Non-Approved, Allowed Algorithms with No Security Claimed	9</p>
+<p id="p=234314001">Table 12: Non-Approved, Not Allowed Algorithms	9</p>
+<p id="p=1696632545">Table 13: Security Function Implementations	10</p>
+<p id="p=756434509">Table 14: Entropy Certificates	10</p>
+<p id="p=1251194218">Table 15: Entropy Sources	10</p>
+<p id="p=530807616">Table 16: Key Generation	10</p>
+<p id="p=1572607136">Table 17: Key Agreement	10</p>
+<p id="p=326113233">Table 18: Key Transport	10</p>
+<p id="p=1313763497">Table 19: Ports and Interfaces	11</p>
+<p id="p=843375879">Table 20: Authentication Methods	11</p>
+<p id="p=403901190">Table 21: Roles	11</p>
+<p id="p=765104541">Table 22: Approved Services	11</p>
+<p id="p=500237021">Table 23: Non-Approved Services	12</p>
+<p id="p=1986498318">Table 24: Mechanisms and Actions Required	13</p>
+<p id="p=2112357329">Table 25: EFP/EFT Information	13</p>
+<p id="p=1223127889">Table 26: Hardness Testing Temperatures	14</p>
+<p id="p=1916786469">Table 27: Storage Areas	14</p>
+<p id="p=372086218">Table 28: SSP Input-Output	14</p>
+<p id="p=1842878172">Table 29: SSP Zeroization Methods	14</p>
+<p id="p=368174021">Table 30: SSP Information First	15</p>
+<p id="p=2075900705">Table 31: SSP Information Second	15</p>
+<p id="p=1812386950">Table 32: Pre-Operational Self-Tests	15</p>
+<p id="p=1561599098">Table 33: Conditional Self-Tests	15</p>
+<p id="p=1737843107">Table 34: Pre-Operational Periodic Information	15</p>
+<p id="p=1758440177">Table 35: Conditional Periodic Information	15</p>
+<p id="p=31308708">Table 36: Error States	15</p>
+<p id="p=325042139"></p>
+<p id="p=599339166"></p>
+<p id="p=722146747">List of Figures</p>
+<p id="p=1424581836"></p>
+<p id="p=907878390"><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1517374216">Figure 1: Block Diagram</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1517374216">	</a><a href="/site-demo/fips-140-3-security-policy-template-nist-81-headings/#p=1517374216">6</a></p>
+<p id="p=1889341294"></p>
+<p id="p=1670162300"></p>
+<p id="p=1043977856"></p>
+<p id="p=437315163"></p>
+<p id="p=358741963"></p>
+<p id="p=1785457716"></p>
+<p id="p=676273239"></p>
+<p id="p=895891945"></p>
+<p id="p=1411989091"></p>
+<p id="p=1296775008"></p>
+<p id="p=1503153866"></p>
+<p id="p=793037462"></p>
+<p id="p=1261730585"></p>
+<p id="p=1697174671"></p>
+<p id="p=1273759833"></p>
+<p id="p=715570186"></p>
+<p id="p=1893570447"></p>
+<h1 id="p=1408405118">1 General</h1>
+<h2 id="p=1007147563">1.1 Overview</h2>
+<p id="p=1335068332"></p>
+<p id="p=1306875598">&lt;Text&gt;</p>
+<p id="p=1484182807"></p>
+<h2 id="p=2017737537">1.2 Security Levels</h2>
+<p id="p=993523218"></p>
+<p id="p=1591006930">From Web Cryptik</p>
+<h2 id="p=1240075666"></h2>
+<h2 id="p=56473874">1.3 Additional Information [O]</h2>
+<p id="p=807765815"></p>
+<p id="p=1051325554">&lt;Text&gt;</p>
+<h1 id="p=509869448">2 Cryptographic Module Specification</h1>
+<h2 id="p=346899611">2.1 Description</h2>
+<p id="p=1253608991"></p>
+<p id="p=605578321">Purpose and Use:</p>
+<p id="p=1304905394"></p>
+<p id="p=1866047902">&lt;Text&gt;</p>
+<p id="p=338318207"></p>
+<p id="p=1442624078">Module Type: From Web Cryptik</p>
+<p id="p=1103980717"></p>
+<p id="p=518637454">Module Embodiment: From Web Cryptik</p>
+<p id="p=1868646824"></p>
+<p id="p=1964498938">Module Characteristics [O]: From Web Cryptik</p>
+<p id="p=1692392246"></p>
+<p id="p=481825851">Cryptographic Boundary:</p>
+<p id="p=2057354853"></p>
+<p id="p=1335392639">&lt;Text&gt;</p>
+<p id="p=315548003"></p>
+<p id="p=1442668899">Tested Operational Environment’s Physical Perimeter (TOEPP) [O]:</p>
+<p id="p=1708531391"></p>
+<p id="p=1031295145">&lt;Text&gt;</p>
+<p id="p=1734029833"></p>
+<p id="p=1398213393">&lt;Other Diagrams, Photographs and Descriptive Text&gt;</p>
+<p id="p=633699677"></p>
+<p id="p=1978089597">&lt;Picture or Block Diagram&gt;</p>
+<p id="p=1517374216">Figure 1: Block Diagram</p>
+<p id="p=589222938"></p>
+<h2 id="p=768191985">2.2 Tested and Vendor Affirmed Module Version and Identification</h2>
+<p id="p=1062332607"></p>
+<p id="p=1784671352">Tested Module Identification – Hardware:</p>
+<p id="p=938038522"></p>
+<p id="p=1766958693">From Web Cryptik [O]</p>
+<p id="p=38672460"></p>
+<p id="p=645056107">Tested Module Identification – Software, Firmware, Hybrid (Executable Code Sets):</p>
+<p id="p=473087809"></p>
+<p id="p=1642063340">From Web Cryptik [O]</p>
+<p id="p=600211434"></p>
+<p id="p=866953828">Tested Module Identification – Hybrid Disjoint Hardware:</p>
+<p id="p=34707020"></p>
+<p id="p=2009046662">From Web Cryptik [O]</p>
+<p id="p=1013190259"></p>
+<p id="p=484652195">Tested Operational Environments - Software, Firmware, Hybrid:</p>
+<p id="p=1101718236"></p>
+<p id="p=52835159">From Web Cryptik [O]</p>
+<p id="p=404527349"></p>
+<p id="p=1491386598">Vendor-Affirmed Operational Environments - Software, Firmware, Hybrid:</p>
+<p id="p=1306781266"></p>
+<p id="p=1523129199">From Web Cryptik [O]</p>
+<p id="p=1091316940"></p>
+<p id="p=680562744">CMVP makes no statement as to the correct operation of the module or the security strengths of the generated keys when so ported if the specific operational environment is not listed on the validation certificate. [Delete this paragraph if not applicable]</p>
+<p id="p=62353800"></p>
+<h2 id="p=534837192">2.3 Excluded Components</h2>
+<p id="p=1894936356"></p>
+<p id="p=1218531271">&lt;Excluded components statements or table&gt;</p>
+<p id="p=1614039653"></p>
+<h2 id="p=1746613159">2.4 Modes of Operation</h2>
+<p id="p=315836162"></p>
+<p id="p=2092943705">Modes List and Description:</p>
+<p id="p=806312642"></p>
+<p id="p=1521192719">From Web Cryptik</p>
+<p id="p=1250209072"></p>
+<p id="p=1580292510">&lt;Text&gt;</p>
+<p id="p=829659218"></p>
+<p id="p=761895751">Mode Change Instructions and Status [O]:</p>
+<p id="p=951083426"></p>
+<p id="p=1549677142">&lt;Text&gt;</p>
+<p id="p=598182449"></p>
+<p id="p=398444823">Degraded Mode Description [O]:</p>
+<p id="p=193328599"></p>
+<p id="p=1979938219">&lt;Text&gt;</p>
+<p id="p=535196613"></p>
+<h2 id="p=1995605842">2.5 Algorithms</h2>
+<p id="p=1930423977"></p>
+<p id="p=1396757465">Approved Algorithms:</p>
+<p id="p=1003821511"></p>
+<p id="p=1921425835">From Web Cryptik</p>
+<p id="p=645604006"></p>
+<p id="p=2130177850">&lt;Text&gt;</p>
+<p id="p=2115737236"></p>
+<p id="p=257668144">Vendor-Affirmed Algorithms:</p>
+<p id="p=1014828360"></p>
+<p id="p=2098225049">From Web Cryptik</p>
+<p id="p=83721668"></p>
+<p id="p=1583161192">&lt;Text&gt;</p>
+<p id="p=1478956775"></p>
+<p id="p=2014681759">Non-Approved, Allowed Algorithms:</p>
+<p id="p=519798656"></p>
+<p id="p=1580314298">From Web Cryptik</p>
+<p id="p=957661828"></p>
+<p id="p=1191034288">&lt;Text&gt;</p>
+<p id="p=2096716829"></p>
+<p id="p=673275146">Non-Approved, Allowed Algorithms with No Security Claimed:</p>
+<p id="p=1908835618"></p>
+<p id="p=1378326591">From Web Cryptik</p>
+<p id="p=1867951873"></p>
+<p id="p=777112119">&lt;Text&gt;</p>
+<p id="p=1763655844"></p>
+<p id="p=1686534797">Non-Approved, Not Allowed Algorithms:</p>
+<p id="p=870334422"></p>
+<p id="p=1709540074">From Web Cryptik</p>
+<p id="p=771421093"></p>
+<p id="p=710975831">&lt;Text&gt;</p>
+<p id="p=330503999"></p>
+<h2 id="p=2013301976">2.6 Security Function Implementations</h2>
+<p id="p=663028267"></p>
+<p id="p=758102843">From Web Cryptik</p>
+<p id="p=1952123916"></p>
+<p id="p=1739903387">&lt;Text&gt;</p>
+<p id="p=784561275"></p>
+<h2 id="p=1699917366">2.7 Algorithm Specific Information</h2>
+<p id="p=499716924"></p>
+<p id="p=937386960">&lt;Text&gt;</p>
+<p id="p=719365825"></p>
+<h2 id="p=2007011042">2.8 RBG and Entropy</h2>
+<p id="p=1704358241"></p>
+<p id="p=645250028">From Web Cryptik [O]</p>
+<p id="p=1760584116"></p>
+<p id="p=1468566285">From Web Cryptik [O]</p>
+<p id="p=89525994"></p>
+<p id="p=1621375287">&lt;Text&gt;</p>
+<p id="p=710966743"></p>
+<h2 id="p=2070379322">2.9 Key Generation</h2>
+<p id="p=1273975996"></p>
+<p id="p=702294981">&lt;Text&gt;</p>
+<p id="p=635278847"></p>
+<h2 id="p=1165053725">2.10 Key Establishment</h2>
+<p id="p=472679216"></p>
+<p id="p=1270715245">&lt;Text&gt;</p>
+<p id="p=955772743"></p>
+<h2 id="p=1544459542">2.11 Industry Protocols</h2>
+<p id="p=1886675809"></p>
+<p id="p=803354353">&lt;Text&gt;</p>
+<p id="p=1730451439"></p>
+<h2 id="p=1412700742">2.12 Additional Information [O]</h2>
+<p id="p=1858725976"></p>
+<p id="p=639875238">&lt;Text&gt;</p>
+<h1 id="p=18866484">3 Cryptographic Module Interfaces</h1>
+<h2 id="p=851379295"></h2>
+<h2 id="p=1931407486">3.1 Ports and Interfaces</h2>
+<p id="p=1253035120"></p>
+<p id="p=147433217">From Web Cryptik</p>
+<p id="p=67958841"></p>
+<p id="p=927856265">&lt;Text&gt;</p>
+<p id="p=677195951"></p>
+<h2 id="p=83694842">3.2 Trusted Channel Specification [O]</h2>
+<p id="p=2086688010"></p>
+<p id="p=29825030">&lt;Text&gt;</p>
+<p id="p=44740411"></p>
+<h2 id="p=2082107492">3.3 Control Interface Not Inhibited [O]</h2>
+<p id="p=1195100329"></p>
+<p id="p=2008349029">&lt;Text&gt;</p>
+<p id="p=40399371"></p>
+<h2 id="p=447853086">3.4 Additional Information [O]</h2>
+<p id="p=197281926"></p>
+<p id="p=1022801194">&lt;Text&gt;</p>
+<h1 id="p=908362442">4 Roles, Services, and Authentication</h1>
+<p id="p=301783516"></p>
+<h2 id="p=849185051">4.1 Authentication Methods</h2>
+<p id="p=1843999119"></p>
+<p id="p=1285300474">From Web Cryptik [O]</p>
+<p id="p=725199144"></p>
+<p id="p=1044073939">&lt;Text&gt;</p>
+<p id="p=291590436"></p>
+<h2 id="p=1621206854">4.2 Roles</h2>
+<p id="p=322709052"></p>
+<p id="p=1119600083">From Web Cryptik</p>
+<p id="p=946359198"></p>
+<p id="p=203051011">&lt;Text&gt;</p>
+<p id="p=400885373"></p>
+<h2 id="p=390759787">4.3 Approved Services</h2>
+<p id="p=1112123698"></p>
+<p id="p=2094795995">From Web Cryptik</p>
+<p id="p=86895015"></p>
+<p id="p=21135336">&lt;Text&gt;</p>
+<p id="p=552407014"></p>
+<h2 id="p=1099406491">4.4 Non-Approved Services</h2>
+<p id="p=177196298"></p>
+<p id="p=82075051">From Web Cryptik [O]</p>
+<p id="p=1836220657"></p>
+<p id="p=1925526494">&lt;Text&gt;</p>
+<p id="p=2066910447"></p>
+<h2 id="p=93574335">4.5 External Software/Firmware Loaded</h2>
+<p id="p=324362395"></p>
+<p id="p=387605868">&lt;Text&gt;</p>
+<p id="p=2096365062"></p>
+<h2 id="p=882579916">4.6 Bypass Actions and Status [O]</h2>
+<p id="p=176350258"></p>
+<p id="p=443876485">&lt;Text&gt;</p>
+<p id="p=1947794024"></p>
+<h2 id="p=1027176993">4.7 Cryptographic Output Actions and Status [O]</h2>
+<p id="p=832437223"></p>
+<p id="p=1547658685">&lt;Text&gt;</p>
+<p id="p=1093540111"></p>
+<h2 id="p=1418794331">4.8 Additional Information [O]</h2>
+<p id="p=868020704"></p>
+<p id="p=1447915840">&lt;Text&gt;</p>
+<h1 id="p=1975664181">5 Software/Firmware Security</h1>
+<h2 id="p=1185575549">5.1 Integrity Techniques</h2>
+<p id="p=908851379"></p>
+<p id="p=1496444994">&lt;Text&gt;</p>
+<p id="p=1466876431"></p>
+<h2 id="p=334953230">5.2 Initiate on Demand</h2>
+<p id="p=1645457907"></p>
+<p id="p=758575083">&lt;Text&gt;</p>
+<p id="p=1746012153"></p>
+<h2 id="p=1854803007">5.3 Open-Source Parameters [O]</h2>
+<p id="p=757584653"></p>
+<p id="p=1378219019">&lt;Text&gt;</p>
+<p id="p=50467203"></p>
+<h2 id="p=367547833">5.4 Additional Information [O]</h2>
+<p id="p=1912014053"></p>
+<p id="p=912927438">&lt;Text&gt;</p>
+<h1 id="p=1378726911">6 Operational Environment</h1>
+<h2 id="p=960459707">6.1 Operational Environment Type and Requirements</h2>
+<p id="p=1374269947"></p>
+<p id="p=1178429400">Type of Operational Environment: From Web Cryptik</p>
+<p id="p=1657862491"></p>
+<p id="p=344787274">How Requirements are Satisfied [O]:</p>
+<p id="p=1106256118"></p>
+<p id="p=1266102890">&lt;Text&gt;</p>
+<p id="p=1280456238"></p>
+<h2 id="p=45931227">6.2 Configuration Settings and Restrictions [O]</h2>
+<p id="p=1222685671"></p>
+<p id="p=1800877286">&lt;Text&gt;</p>
+<p id="p=802411415"></p>
+<h2 id="p=1653941786">6.3 Additional Information [O]</h2>
+<p id="p=501667685"></p>
+<p id="p=1707183281">&lt;Text&gt;</p>
+<h1 id="p=330980458">7 Physical Security</h1>
+<p id="p=390547062"></p>
+<h2 id="p=921156040">7.1 Mechanisms and Actions Required [O]</h2>
+<p id="p=413205156"></p>
+<p id="p=1744053107">From Web Cryptik [O]</p>
+<p id="p=2117416887"></p>
+<p id="p=613394033">&lt;Text and Photos&gt;</p>
+<p id="p=1793687345"></p>
+<h2 id="p=1926170782">7.2 User Placed Tamper Seals [O]</h2>
+<p id="p=907044055"></p>
+<p id="p=1657431285">Number:</p>
+<p id="p=1989265025"></p>
+<p id="p=826660095">Placement:</p>
+<p id="p=1961766950"></p>
+<p id="p=241626000">Surface Preparation:</p>
+<p id="p=768939335"></p>
+<p id="p=57950649">Operator Responsible for Securing Unused Seals:</p>
+<p id="p=2062313562"></p>
+<p id="p=798104123">Part Numbers:</p>
+<p id="p=1439862972"></p>
+<p id="p=530369763">&lt;Text and Pictures&gt;</p>
+<p id="p=1905816867"></p>
+<h2 id="p=193626847">7.3 Filler Panels [O]</h2>
+<p id="p=1404159903"></p>
+<p id="p=1716929710">&lt;Text and Pictures&gt;</p>
+<p id="p=1004827512"></p>
+<h2 id="p=1829593235">7.4 Fault Induction Mitigation [O]</h2>
+<p id="p=910626227"></p>
+<p id="p=537475140">&lt;Text&gt;</p>
+<p id="p=90841148"></p>
+<h2 id="p=893311595">7.5 EFP/EFT Information [O]</h2>
+<p id="p=609311406"></p>
+<p id="p=1033878353">From Web Cryptik [O]</p>
+<p id="p=864963940"></p>
+<p id="p=1060144819">&lt;Text&gt;</p>
+<p id="p=2064242484"></p>
+<h2 id="p=1196297681">7.6 Hardness Testing Temperature Ranges [O]</h2>
+<p id="p=374469340"></p>
+<p id="p=1444862806">From Web Cryptik [O]</p>
+<p id="p=635344800"></p>
+<p id="p=1269617926">&lt;Text&gt;</p>
+<p id="p=2006316082"></p>
+<h2 id="p=1287688133">7.7 Additional Information [O]</h2>
+<p id="p=876119881"></p>
+<p id="p=694550946">&lt;Text&gt;</p>
+<h1 id="p=1850133868">8 Non-Invasive Security</h1>
+<h2 id="p=763613429">8.1 Mitigation Techniques [O]</h2>
+<p id="p=536247023"></p>
+<p id="p=261224851">&lt;Text&gt;</p>
+<p id="p=896661517"></p>
+<h2 id="p=888407806">8.2 Effectiveness [O]</h2>
+<p id="p=1180939285"></p>
+<p id="p=1396081546">&lt;Text&gt;</p>
+<p id="p=1145679096"></p>
+<h2 id="p=1826794558">8.3 Additional Information [O]</h2>
+<p id="p=2115242962"></p>
+<p id="p=694751583">&lt;Text&gt;</p>
+<h1 id="p=976783433">9 Sensitive Security Parameters Management</h1>
+<h2 id="p=1298350777">9.1 Storage Areas</h2>
+<p id="p=1866616703"></p>
+<p id="p=1971199821">From Web Cryptik</p>
+<p id="p=858744240"></p>
+<p id="p=1088020500">&lt;Text&gt;</p>
+<p id="p=287769399"></p>
+<h2 id="p=1946390212">9.2 SSP Input-Output Methods</h2>
+<p id="p=1482477850"></p>
+<p id="p=1120238954">From Web Cryptik</p>
+<p id="p=1439389708"></p>
+<p id="p=389718535">&lt;Text&gt;</p>
+<p id="p=291916419"></p>
+<h2 id="p=1200157710">9.3 SSP Zeroization Methods</h2>
+<p id="p=675554046"></p>
+<p id="p=982758588">From Web Cryptik</p>
+<p id="p=87998809"></p>
+<p id="p=176152449">&lt;Text&gt;</p>
+<p id="p=1687822161"></p>
+<h2 id="p=1812441819">9.4 SSPs</h2>
+<p id="p=524893470"></p>
+<p id="p=619966635">From Web Cryptik</p>
+<p id="p=630736340"></p>
+<p id="p=165638769">From Web Cryptik</p>
+<p id="p=606244195"></p>
+<p id="p=1124035679">&lt;Text&gt;</p>
+<p id="p=1391495475"></p>
+<h2 id="p=1323215933">9.5 Transitions [O]</h2>
+<p id="p=930978950"></p>
+<p id="p=28871784">&lt;Text&gt;</p>
+<p id="p=917581034"></p>
+<h2 id="p=1484553620">9.6 Additional Information [O]</h2>
+<p id="p=60214317"></p>
+<p id="p=1326189421">&lt;Text&gt;</p>
+<h1 id="p=812748132">10 Self-Tests</h1>
+<h2 id="p=1225174438">10.1 Pre-Operational Self-Tests</h2>
+<p id="p=194915670"></p>
+<p id="p=1143561891">From Web Cryptik</p>
+<p id="p=1444987845"></p>
+<p id="p=1519277284">&lt;Text&gt;</p>
+<p id="p=1699451495"></p>
+<h2 id="p=541107969">10.2 Conditional Self-Tests</h2>
+<p id="p=970223488"></p>
+<p id="p=849700419">From Web Cryptik</p>
+<p id="p=1514885879"></p>
+<p id="p=348132652">&lt;Text&gt;</p>
+<p id="p=1104025284"></p>
+<h2 id="p=952939935">10.3 Periodic Self-Test Information</h2>
+<p id="p=727572403"></p>
+<p id="p=954570901">From Web Cryptik</p>
+<p id="p=2145306372"></p>
+<p id="p=2030596304">From Web Cryptik</p>
+<p id="p=638808531"></p>
+<p id="p=389696522">&lt;Text&gt;</p>
+<p id="p=118785711"></p>
+<h2 id="p=2108228338">10.4 Error States</h2>
+<p id="p=41213481"></p>
+<p id="p=300651488">From Web Cryptik</p>
+<p id="p=943852927"></p>
+<p id="p=649452833">&lt;Text&gt;</p>
+<p id="p=2022848139"></p>
+<h2 id="p=1474496820">10.5 Operator Initiation of Self-Tests [O]</h2>
+<p id="p=1674215630"></p>
+<p id="p=1769209300">&lt;Text&gt;</p>
+<p id="p=1427869922"></p>
+<h2 id="p=663387157">10.6 Additional Information [O]</h2>
+<p id="p=191321287"></p>
+<p id="p=1142634516">&lt;Text&gt;</p>
+<h1 id="p=838369873">11 Life-Cycle Assurance</h1>
+<h2 id="p=725269789">11.1 Installation, Initialization, and Startup Procedures</h2>
+<p id="p=175614461"></p>
+<p id="p=1176768961">&lt;Text&gt;</p>
+<p id="p=258154967"></p>
+<h2 id="p=454518843">11.2 Administrator Guidance</h2>
+<p id="p=1812359964"></p>
+<p id="p=1296563339">&lt;Text&gt;</p>
+<p id="p=1571833235"></p>
+<h2 id="p=1315566468">11.3 Non-Administrator Guidance</h2>
+<p id="p=1370481663"></p>
+<p id="p=1674218929">&lt;Text&gt;</p>
+<p id="p=905333514"></p>
+<h2 id="p=899685183">11.4 Design and Rules [O]</h2>
+<p id="p=1514281958"></p>
+<p id="p=929579355">&lt;Text&gt;</p>
+<p id="p=1823128129"></p>
+<h2 id="p=665637518">11.5 Maintenance Requirements [O]</h2>
+<p id="p=739666030"></p>
+<p id="p=1924205425">&lt;Text&gt;</p>
+<p id="p=620453886"></p>
+<h2 id="p=219206357">11.6 End of Life [O]</h2>
+<p id="p=1500837041"></p>
+<p id="p=1994135243">&lt;Text&gt;</p>
+<p id="p=786919689"></p>
+<h2 id="p=1701205653">11.7 Additional Information [O]</h2>
+<p id="p=1429695302"></p>
+<p id="p=1857506077">&lt;Text&gt;</p>
+<h1 id="p=349870657">12 Mitigation of Other Attacks</h1>
+<h2 id="p=134029745">12.1 Attack List [O]</h2>
+<p id="p=525135692"></p>
+<p id="p=982529939">&lt;Text&gt;</p>
+<p id="p=125778607"></p>
+<h2 id="p=352467840">12.2 Mitigation Effectiveness [O]</h2>
+<p id="p=1444185990"></p>
+<p id="p=480070860">&lt;Text&gt;</p>
+<p id="p=906552034"></p>
+<h2 id="p=296835538">12.3 Guidance and Constraints [O]</h2>
+<p id="p=1354829479"></p>
+<p id="p=1060113744">&lt;Text&gt;</p>
+<p id="p=1774935917"></p>
+<h2 id="p=270796309">12.4 Additional Information [O]</h2>
+<p id="p=1987722496"></p>
+<p id="p=1812974694">&lt;Text&gt;</p>
 </article>
 </main>
 <canvas id="starling"></canvas>
@@ -396,6 +742,7 @@
   // promise below; without the stack it is only 'unreachable'.
   window.addEventListener('error', (event) => {
     console.error(String(event.error?.stack || event.message));
+    window.dispatchEvent(new Event('starling-reader-failed'));
   });
   import { startStarling } from './starling.js';
   const fontStatus = document.getElementById('font-status');
@@ -435,12 +782,15 @@
     const loading = document.getElementById('loading');
     // The first frame is on screen a beat after start returns.
     requestAnimationFrame(() => requestAnimationFrame(() => {
+      window.dispatchEvent(new Event('starling-reader-ready'));
       loading.classList.add('done');
       setTimeout(() => loading.remove(), 400);
     }));
   })
     .catch((error) => {
       console.error(String(error.stack || error));
+      window.dispatchEvent(new Event('starling-reader-failed'));
+      if (document.body.classList.contains('starling-publication')) return;
       document.title = 'Starling — failed';
       document.body.append(Object.assign(document.createElement('pre'), {
         textContent: String(error.stack || error),
