@@ -6,24 +6,24 @@
     "url" : "fonts\/Selawik-Regular.ttf"
   },
   {
-    "url" : "fonts\/Selawik-Semibold.ttf",
     "families" : [
       "Selawik Semibold",
       "Selawik"
-    ]
+    ],
+    "url" : "fonts\/Selawik-Semibold.ttf"
   },
   {
+    "fallback" : true,
     "families" : [
       "DejaVu Sans"
     ],
-    "url" : "fonts\/DejaVuSans.ttf",
-    "fallback" : true
+    "url" : "fonts\/DejaVuSans.ttf"
   },
   {
-    "url" : "fonts\/CupertinoIcons.ttf",
     "families" : [
       "CupertinoIcons"
-    ]
+    ],
+    "url" : "fonts\/CupertinoIcons.ttf"
   },
   {
     "url" : "fonts\/FluentSystemIcons-Regular.ttf",
@@ -46,18 +46,18 @@
     ]
   },
   {
+    "lazy" : true,
     "families" : [
       "Caladea"
     ],
-    "lazy" : true,
     "url" : "fonts\/Caladea-Italic.ttf"
   },
   {
-    "lazy" : true,
     "url" : "fonts\/Caladea-Regular.ttf",
     "families" : [
       "Caladea"
-    ]
+    ],
+    "lazy" : true
   },
   {
     "families" : [
@@ -66,16 +66,16 @@
     "url" : "fonts\/Carlito-Bold.ttf"
   },
   {
-    "families" : [
-      "Carlito"
-    ],
-    "url" : "fonts\/Carlito-BoldItalic.ttf"
-  },
-  {
-    "url" : "fonts\/Carlito-Italic.ttf",
+    "url" : "fonts\/Carlito-BoldItalic.ttf",
     "families" : [
       "Carlito"
     ]
+  },
+  {
+    "families" : [
+      "Carlito"
+    ],
+    "url" : "fonts\/Carlito-Italic.ttf"
   },
   {
     "url" : "fonts\/Carlito-Regular.ttf",
@@ -84,78 +84,78 @@
     ]
   },
   {
-    "lazy" : true,
-    "url" : "fonts\/DejaVuSans-Bold.ttf",
     "families" : [
       "DejaVu Sans"
-    ]
+    ],
+    "lazy" : true,
+    "url" : "fonts\/DejaVuSans-Bold.ttf"
   },
   {
-    "lazy" : true,
     "url" : "fonts\/DejaVuSans-BoldItalic.ttf",
     "families" : [
       "DejaVu Sans"
-    ]
+    ],
+    "lazy" : true
   },
   {
     "families" : [
       "DejaVu Sans"
     ],
-    "lazy" : true,
-    "url" : "fonts\/DejaVuSans-Italic.ttf"
+    "url" : "fonts\/DejaVuSans-Italic.ttf",
+    "lazy" : true
   },
   {
     "url" : "fonts\/DejaVuSans-Regular.ttf",
+    "lazy" : true,
     "families" : [
       "DejaVu Sans"
-    ],
-    "lazy" : true
-  },
-  {
-    "families" : [
-      "Liberation Mono"
-    ],
-    "lazy" : true,
-    "url" : "fonts\/LiberationMono-Bold.ttf"
-  },
-  {
-    "lazy" : true,
-    "url" : "fonts\/LiberationMono-BoldItalic.ttf",
-    "families" : [
-      "Liberation Mono"
     ]
   },
   {
+    "families" : [
+      "Liberation Mono"
+    ],
+    "url" : "fonts\/LiberationMono-Bold.ttf",
+    "lazy" : true
+  },
+  {
+    "lazy" : true,
+    "families" : [
+      "Liberation Mono"
+    ],
+    "url" : "fonts\/LiberationMono-BoldItalic.ttf"
+  },
+  {
+    "families" : [
+      "Liberation Mono"
+    ],
     "url" : "fonts\/LiberationMono-Italic.ttf",
-    "families" : [
-      "Liberation Mono"
-    ],
     "lazy" : true
   },
   {
-    "url" : "fonts\/LiberationMono-Regular.ttf",
     "families" : [
       "Liberation Mono"
     ],
-    "lazy" : true
+    "lazy" : true,
+    "url" : "fonts\/LiberationMono-Regular.ttf"
   },
   {
     "families" : [
       "Liberation Sans"
     ],
-    "lazy" : true,
-    "url" : "fonts\/LiberationSans-Bold.ttf"
+    "url" : "fonts\/LiberationSans-Bold.ttf",
+    "lazy" : true
   },
   {
-    "lazy" : true,
+    "url" : "fonts\/LiberationSans-Bold.ttf",
     "families" : [
       "Liberation Sans Word"
     ],
-    "url" : "fonts\/LiberationSans-Bold.ttf"
+    "lazy" : true
   },
   {
-    "url" : "fonts\/LiberationSans-BoldItalic.ttf",
     "lazy" : true,
+    "url" : "fonts\/LiberationSans-BoldItalic.ttf",
     "families" : [
       "Liberation Sans"
     ]
@@ -168,11 +168,11 @@
     ]
   },
   {
+    "url" : "fonts\/LiberationSans-Italic.ttf",
     "lazy" : true,
     "families" : [
       "Liberation Sans"
-    ],
-    "url" : "fonts\/LiberationSans-Italic.ttf"
+    ]
   },
   {
     "lazy" : true,
@@ -182,53 +182,53 @@
     ]
   },
   {
+    "lazy" : true,
     "families" : [
       "Liberation Sans"
     ],
-    "url" : "fonts\/LiberationSans-Regular.ttf",
-    "lazy" : true
+    "url" : "fonts\/LiberationSans-Regular.ttf"
   },
   {
     "families" : [
       "Liberation Sans Word"
     ],
-    "url" : "fonts\/LiberationSans-Regular.ttf",
-    "lazy" : true
-  },
-  {
-    "url" : "fonts\/LiberationSerif-Bold.ttf",
-    "families" : [
-      "Liberation Serif"
-    ],
-    "lazy" : true
-  },
-  {
-    "families" : [
-      "Liberation Serif Word"
-    ],
-    "url" : "fonts\/LiberationSerif-Bold.ttf",
-    "lazy" : true
+    "lazy" : true,
+    "url" : "fonts\/LiberationSans-Regular.ttf"
   },
   {
     "lazy" : true,
+    "url" : "fonts\/LiberationSerif-Bold.ttf",
+    "families" : [
+      "Liberation Serif"
+    ]
+  },
+  {
+    "url" : "fonts\/LiberationSerif-Bold.ttf",
+    "families" : [
+      "Liberation Serif Word"
+    ],
+    "lazy" : true
+  },
+  {
     "url" : "fonts\/LiberationSerif-BoldItalic.ttf",
     "families" : [
       "Liberation Serif"
-    ]
+    ],
+    "lazy" : true
   },
   {
-    "lazy" : true,
     "families" : [
       "Liberation Serif Word"
     ],
+    "lazy" : true,
     "url" : "fonts\/LiberationSerif-BoldItalic.ttf"
   },
   {
-    "lazy" : true,
-    "url" : "fonts\/LiberationSerif-Italic.ttf",
     "families" : [
       "Liberation Serif"
-    ]
+    ],
+    "lazy" : true,
+    "url" : "fonts\/LiberationSerif-Italic.ttf"
   },
   {
     "url" : "fonts\/LiberationSerif-Italic.ttf",
@@ -239,52 +239,52 @@
   },
   {
     "lazy" : true,
-    "url" : "fonts\/LiberationSerif-Regular.ttf",
     "families" : [
       "Liberation Serif"
-    ]
-  },
-  {
-    "families" : [
-      "Liberation Serif Word"
     ],
-    "url" : "fonts\/LiberationSerif-Regular.ttf",
-    "lazy" : true
+    "url" : "fonts\/LiberationSerif-Regular.ttf"
   },
   {
     "lazy" : true,
+    "families" : [
+      "Liberation Serif Word"
+    ],
+    "url" : "fonts\/LiberationSerif-Regular.ttf"
+  },
+  {
     "families" : [
       "Libre Franklin"
     ],
+    "lazy" : true,
     "url" : "fonts\/LibreFranklin-Bold.ttf"
   },
   {
-    "url" : "fonts\/LibreFranklin-BoldItalic.ttf",
+    "lazy" : true,
     "families" : [
       "Libre Franklin"
     ],
-    "lazy" : true
+    "url" : "fonts\/LibreFranklin-BoldItalic.ttf"
   },
   {
-    "lazy" : true,
     "url" : "fonts\/LibreFranklin-Italic.ttf",
     "families" : [
       "Libre Franklin"
-    ]
-  },
-  {
-    "url" : "fonts\/LibreFranklin-Medium.ttf",
-    "families" : [
-      "Libre Franklin Medium"
     ],
     "lazy" : true
   },
   {
+    "lazy" : true,
+    "url" : "fonts\/LibreFranklin-Medium.ttf",
     "families" : [
       "Libre Franklin Medium"
-    ],
+    ]
+  },
+  {
     "lazy" : true,
-    "url" : "fonts\/LibreFranklin-MediumItalic.ttf"
+    "url" : "fonts\/LibreFranklin-MediumItalic.ttf",
+    "families" : [
+      "Libre Franklin Medium"
+    ]
   },
   {
     "families" : [
@@ -301,18 +301,18 @@
     ]
   },
   {
-    "lazy" : true,
     "families" : [
       "Poppins Black"
     ],
+    "lazy" : true,
     "url" : "fonts\/Poppins-BlackItalic.ttf"
   },
   {
-    "lazy" : true,
-    "url" : "fonts\/Poppins-Bold.ttf",
     "families" : [
       "Poppins"
-    ]
+    ],
+    "lazy" : true,
+    "url" : "fonts\/Poppins-Bold.ttf"
   },
   {
     "lazy" : true,
@@ -323,59 +323,59 @@
   },
   {
     "lazy" : true,
+    "url" : "fonts\/Poppins-Italic.ttf",
     "families" : [
       "Poppins"
-    ],
-    "url" : "fonts\/Poppins-Italic.ttf"
-  },
-  {
-    "url" : "fonts\/Poppins-Light.ttf",
-    "lazy" : true,
-    "families" : [
-      "Poppins Light"
-    ]
-  },
-  {
-    "url" : "fonts\/Poppins-LightItalic.ttf",
-    "families" : [
-      "Poppins Light"
-    ],
-    "lazy" : true
-  },
-  {
-    "url" : "fonts\/Poppins-Medium.ttf",
-    "lazy" : true,
-    "families" : [
-      "Poppins Medium"
     ]
   },
   {
     "lazy" : true,
     "families" : [
+      "Poppins Light"
+    ],
+    "url" : "fonts\/Poppins-Light.ttf"
+  },
+  {
+    "families" : [
+      "Poppins Light"
+    ],
+    "lazy" : true,
+    "url" : "fonts\/Poppins-LightItalic.ttf"
+  },
+  {
+    "families" : [
       "Poppins Medium"
     ],
+    "lazy" : true,
+    "url" : "fonts\/Poppins-Medium.ttf"
+  },
+  {
+    "families" : [
+      "Poppins Medium"
+    ],
+    "lazy" : true,
     "url" : "fonts\/Poppins-MediumItalic.ttf"
   },
   {
     "lazy" : true,
-    "url" : "fonts\/Poppins-Regular.ttf",
     "families" : [
       "Poppins"
-    ]
+    ],
+    "url" : "fonts\/Poppins-Regular.ttf"
   },
   {
-    "url" : "fonts\/Poppins-SemiBold.ttf",
     "families" : [
       "Poppins SemiBold"
     ],
+    "url" : "fonts\/Poppins-SemiBold.ttf",
     "lazy" : true
   },
   {
     "lazy" : true,
-    "url" : "fonts\/Poppins-SemiBoldItalic.ttf",
     "families" : [
       "Poppins SemiBold"
-    ]
+    ],
+    "url" : "fonts\/Poppins-SemiBoldItalic.ttf"
   },
   {
     "families" : [
@@ -385,11 +385,11 @@
     "lazy" : true
   },
   {
+    "url" : "fonts\/SelawikDoc-Light.ttf",
     "families" : [
       "Selawik Doc Light"
     ],
-    "lazy" : true,
-    "url" : "fonts\/SelawikDoc-Light.ttf"
+    "lazy" : true
   },
   {
     "url" : "fonts\/SelawikDoc-Regular.ttf",
@@ -400,122 +400,122 @@
   },
   {
     "lazy" : true,
-    "url" : "fonts\/SelawikDoc-Semibold.ttf",
     "families" : [
       "Selawik Doc Semibold"
-    ]
+    ],
+    "url" : "fonts\/SelawikDoc-Semibold.ttf"
   },
   {
     "lazy" : true,
-    "url" : "fonts\/SelawikDoc-Semilight.ttf",
     "families" : [
       "Selawik Doc Semilight"
-    ]
+    ],
+    "url" : "fonts\/SelawikDoc-Semilight.ttf"
   },
   {
-    "families" : [
-      "Work Sans"
-    ],
     "url" : "fonts\/WorkSans-Bold.ttf",
-    "lazy" : true
-  },
-  {
-    "url" : "fonts\/WorkSans-BoldItalic.ttf",
     "lazy" : true,
     "families" : [
       "Work Sans"
     ]
   },
   {
+    "lazy" : true,
+    "url" : "fonts\/WorkSans-BoldItalic.ttf",
+    "families" : [
+      "Work Sans"
+    ]
+  },
+  {
+    "url" : "fonts\/WorkSans-Italic.ttf",
     "families" : [
       "Work Sans"
     ],
-    "lazy" : true,
-    "url" : "fonts\/WorkSans-Italic.ttf"
-  },
-  {
-    "lazy" : true,
-    "families" : [
-      "Work Sans Light"
-    ],
-    "url" : "fonts\/WorkSans-Light.ttf"
-  },
-  {
-    "families" : [
-      "Work Sans Light"
-    ],
-    "url" : "fonts\/WorkSans-LightItalic.ttf",
     "lazy" : true
   },
   {
     "lazy" : true,
+    "url" : "fonts\/WorkSans-Light.ttf",
+    "families" : [
+      "Work Sans Light"
+    ]
+  },
+  {
+    "families" : [
+      "Work Sans Light"
+    ],
+    "lazy" : true,
+    "url" : "fonts\/WorkSans-LightItalic.ttf"
+  },
+  {
     "url" : "fonts\/WorkSans-Medium.ttf",
     "families" : [
       "Work Sans Medium"
+    ],
+    "lazy" : true
+  },
+  {
+    "lazy" : true,
+    "url" : "fonts\/WorkSans-MediumItalic.ttf",
+    "families" : [
+      "Work Sans Medium"
     ]
   },
   {
-    "families" : [
-      "Work Sans Medium"
-    ],
     "lazy" : true,
-    "url" : "fonts\/WorkSans-MediumItalic.ttf"
-  },
-  {
     "families" : [
       "Work Sans"
     ],
-    "url" : "fonts\/WorkSans-Regular.ttf",
-    "lazy" : true
+    "url" : "fonts\/WorkSans-Regular.ttf"
   },
   {
-    "url" : "fonts\/TeXGyreAdventor-Bold.otf",
     "families" : [
       "TeX Gyre Adventor"
     ],
-    "lazy" : true
+    "lazy" : true,
+    "url" : "fonts\/TeXGyreAdventor-Bold.otf"
   },
   {
-    "url" : "fonts\/TeXGyreAdventor-BoldItalic.otf",
+    "lazy" : true,
     "families" : [
       "TeX Gyre Adventor"
     ],
-    "lazy" : true
+    "url" : "fonts\/TeXGyreAdventor-BoldItalic.otf"
   },
   {
     "url" : "fonts\/TeXGyreAdventor-Italic.otf",
-    "families" : [
-      "TeX Gyre Adventor"
-    ],
-    "lazy" : true
-  },
-  {
-    "families" : [
-      "TeX Gyre Adventor"
-    ],
     "lazy" : true,
-    "url" : "fonts\/TeXGyreAdventor-Regular.otf"
+    "families" : [
+      "TeX Gyre Adventor"
+    ]
   },
   {
+    "lazy" : true,
+    "url" : "fonts\/TeXGyreAdventor-Regular.otf",
     "families" : [
-      "TeX Gyre Cursor"
-    ],
+      "TeX Gyre Adventor"
+    ]
+  },
+  {
+    "lazy" : true,
     "url" : "fonts\/TeXGyreCursor-Bold.otf",
+    "families" : [
+      "TeX Gyre Cursor"
+    ]
+  },
+  {
+    "families" : [
+      "TeX Gyre Cursor"
+    ],
+    "url" : "fonts\/TeXGyreCursor-BoldItalic.otf",
     "lazy" : true
   },
   {
     "lazy" : true,
-    "url" : "fonts\/TeXGyreCursor-BoldItalic.otf",
     "families" : [
       "TeX Gyre Cursor"
-    ]
-  },
-  {
-    "lazy" : true,
-    "url" : "fonts\/TeXGyreCursor-Italic.otf",
-    "families" : [
-      "TeX Gyre Cursor"
-    ]
+    ],
+    "url" : "fonts\/TeXGyreCursor-Italic.otf"
   },
   {
     "lazy" : true,
@@ -525,31 +525,31 @@
     ]
   },
   {
+    "url" : "fonts\/TeXGyrePagella-Bold.otf",
     "families" : [
       "TeX Gyre Pagella"
     ],
-    "lazy" : true,
-    "url" : "fonts\/TeXGyrePagella-Bold.otf"
+    "lazy" : true
   },
   {
     "families" : [
       "TeX Gyre Pagella"
     ],
-    "lazy" : true,
-    "url" : "fonts\/TeXGyrePagella-BoldItalic.otf"
+    "url" : "fonts\/TeXGyrePagella-BoldItalic.otf",
+    "lazy" : true
   },
   {
     "url" : "fonts\/TeXGyrePagella-Italic.otf",
-    "lazy" : true,
     "families" : [
       "TeX Gyre Pagella"
-    ]
+    ],
+    "lazy" : true
   },
   {
     "url" : "fonts\/TeXGyrePagella-Regular.otf",
-    "lazy" : true,
     "families" : [
       "TeX Gyre Pagella"
-    ]
+    ],
+    "lazy" : true
   }
 ]
