@@ -170,170 +170,219 @@
 </ul></nav>
 <article id="starling-article" aria-label="Starling Desktop manual">
 <p class="starling-downloads"><a href="/site-demo/starling-desktop-manual/starling-desktop-manual.pdf">Download as PDF</a> · <a href="/site-demo/starling-desktop-manual/starling-desktop-manual.docx">Download as Word</a> · <a href="https://github.com/starling-build/site-demo/commits/main/pages/starling-desktop-manual.json">History</a></p>
-<h1 id="p=1118673630">Starling Desktop</h1>
-<p id="p=1674984558">User manual</p>
-<p id="p=1003908315">Starling, 2026</p>
-<h1 id="p=1610317096">About this guide</h1>
-<p id="p=1417909548">A tour of the desktop: what you see at first login, how to move around, the keyboard shortcuts, the apps, and how to install more. If Starling is not yet installed, start with the Installation Guide.</p>
-<p id="p=924550241">Starling's interaction model is close to macOS — if you have used a Mac, most of this will feel familiar.</p>
-<h1 id="p=1609493514">Choosing Starling at login</h1>
-<p id="p=1055827521">Installing Starling doesn't replace your current desktop — it adds a session you pick at the login screen. To start it:</p>
-<p id="p=1749244916">Click your name at the login screen.</p>
-<p id="p=1684490481">Open the session menu — usually a gear, or a small icon in a lower corner of the password box.</p>
-<p id="p=1165897405">Choose Starling from the list, then enter your password and sign in.</p>
-<p id="p=802476377">Starling stays selected for next time. The session menu only appears with a Wayland-capable login manager (GDM has one); it looks a little different on LightDM or SDDM, but the step is the same — find the session picker and choose Starling. (See the Installation Guide if you don't see a session menu at all.)</p>
-<h1 id="p=94228822">First login</h1>
-<p id="p=896575873">Once you sign in, you land on the desktop:</p>
-<p id="p=1460407904">a wallpaper filling the screen,</p>
-<p id="p=350339331">a thin menu bar across the top, with the clock and status indicators,</p>
-<p id="p=1279344581">a dock floating at the bottom, holding your apps.</p>
-<p id="p=1941785481">That is the whole desktop. Everything else is reached from the dock, the Launchpad, or a right-click on the wallpaper.</p>
-<h1 id="p=375892687">The dock</h1>
-<p id="p=580587709">The dock sits at the bottom of the screen. Out of the box it holds the first-party apps, in order: Launchpad, Settings, Files, Terminal, Text Editor, Calculator, App Store, Video Player.</p>
-<p id="p=1465314731">Click an icon to launch or focus that app.</p>
-<p id="p=547326179">A running app shows an indicator under its icon.</p>
-<p id="p=1267981661">Drag an icon to reorder the dock.</p>
-<p id="p=2087968114">Right-click an icon for its menu, including Remove from Dock.</p>
-<p id="p=1619475079">Installed apps that aren't pinned appear in the dock while they run, and drop off when they close.</p>
-<h1 id="p=2091244743">The Launchpad</h1>
-<p id="p=447620611">The first dock icon opens the Launchpad — a full-screen grid of every app Starling knows about, over a blurred background.</p>
-<p id="p=1389991516">Click any app to launch it.</p>
-<p id="p=1546056000">Type to filter the grid by name — start typing and only matching apps remain.</p>
-<p id="p=653212671">Click empty space or press Esc to dismiss it.</p>
-<h1 id="p=131080232">The menu bar</h1>
-<p id="p=2128097623">The bar along the top carries the clock and date on the left, and on the right the Wi-Fi and battery indicators, a bell, and the control centre.</p>
-<p id="p=1897060866">Click the control-centre icon for a panel of quick toggles:</p>
-<p id="p=89662385">Wi-Fi — join a network without opening Settings.</p>
-<p id="p=1687211901">Dark Mode — switches the whole desktop and every first-party app.</p>
-<p id="p=896049435">Tiling — retiles the current space; toggle it off to restore floating windows.</p>
-<p id="p=1772251459">Muted — mute or unmute output, with volume and brightness sliders below the tiles.</p>
-<p id="p=81010054">Record and Record App — see Recording the screen.</p>
-<p id="p=551209212">The bell collects notifications instead of interrupting you with banners: nothing steals focus, and you read what happened when you choose to. Click it for the list, Esc to dismiss.</p>
-<h1 id="p=835061442">Recording the screen</h1>
-<p id="p=1398876096">Starling records itself, with no extra software.</p>
-<p id="p=1757763515">Record (control centre, or Ctrl + Shift + R) captures the whole screen.</p>
-<p id="p=1150436783">Record App opens Mission Control and asks which window you want. It captures that window's own content, not the region of screen it sits in, so windows stacked on top never appear and moving or resizing the window mid-recording doesn't spoil the take. The pointer is drawn in and follows the window.</p>
-<p id="p=1279525282">While a recording runs, a red dot and a running clock sit in the menu bar, so a recording can never be going unnoticed. Stop it the same way you started it.</p>
-<p id="p=1330783079">Recordings land in ~/Videos as MP4, and the Video Player opens them. Where the machine has a hardware H.264 encoder, the frame the compositor already drew goes straight to it as a dma-buf and the CPU never touches a pixel — on a modern laptop that costs about 0.05 of a core. Machines without one fall back to a software encoder, which works but costs more.</p>
-<h1 id="p=1661368236">The screensaver</h1>
-<p id="p=100952789">Leave the desk for ten minutes and the desktop dissolves into a screensaver: your own screen, blurred and drifting behind a slow liquid warp, with the time and date floating over it. Any key, click, or mouse movement brings it straight back — nothing is asked for, so it is decoration, not a lock. Ctrl + Shift + S shows it immediately.</p>
-<p id="p=1789938279">Change the idle time (or turn it off) in Settings → Appearance → Screensaver. Video playback holds it off: an app that tells the desktop it is playing something — Chrome, Firefox, a video player — keeps the screensaver away for as long as it says so, so a film watched without touching the mouse is never interrupted.</p>
-<p id="p=338097557">For aerial footage in place of the warp, drop a video file in ~/.local/share/starling/aerials/; the screensaver dissolves into it and loops it. Starling ships none of its own — the warp needs no assets, and the clips worth watching are large. Any shape works: letterbox bars are cropped away and the picture fills the screen.</p>
-<h1 id="p=384100300">Windows</h1>
-<p id="p=1794158644">Windows have a title bar with three macOS-style colored circle buttons on the left — close, minimize, maximize.</p>
-<p id="p=1979807824">Drag the title bar to move a window.</p>
-<p id="p=637455730">Drag an edge or corner to resize it.</p>
-<p id="p=1795554237">Double-click the title bar to toggle maximized.</p>
-<p id="p=1382831010">The maximize button does the same.</p>
-<p id="p=755360774">By default windows float — you place them freely. You can switch the whole desktop to tiling (a dwm-style master-and-stack layout, where windows share the screen automatically) with the Tiling tile in the control centre, or the Tiling Windows switch in Settings. Toggling it back restores your floating layout.</p>
-<h1 id="p=1559857697">Spaces and Mission Control</h1>
-<p id="p=191999478">Starling has spaces (virtual desktops) and a Mission Control overview, driven from the keyboard the way macOS does it.</p>
-<p id="p=783960738">Do this</p>
-<p id="p=896263493">To</p>
-<p id="p=153541096">Ctrl + → / Ctrl + ←</p>
-<p id="p=99755436">Slide to the next / previous space</p>
-<p id="p=1792169697">Ctrl + Shift + → / ←</p>
-<p id="p=600686650">Carry the focused window to the next / previous space</p>
-<p id="p=455745434">Ctrl + Tab</p>
-<p id="p=686559977">Cycle through your spaces</p>
-<p id="p=809174031">Ctrl + ↑</p>
-<p id="p=1538049123">Open Mission Control (all spaces and windows at once)</p>
-<p id="p=580317945">Ctrl + ↓</p>
-<p id="p=1685270550">Open your workspace (see below)</p>
-<p id="p=2050230050">Esc</p>
-<p id="p=1185885027">Close Mission Control</p>
-<p id="p=220151991">In Mission Control, Ctrl + ← / → retargets the active space instantly. To add a space, right-click the wallpaper and choose New Desktop.</p>
-<p id="p=1667151857">Ctrl + arrows belong to the system — apps never see them — so they work no matter which window is focused.</p>
-<h1 id="p=439806501">Right-click the desktop</h1>
-<p id="p=1139102649">Right-click anywhere on the wallpaper for the desktop menu:</p>
-<p id="p=1852754562">Change Wallpaper</p>
-<p id="p=368179498">Mission Control</p>
-<p id="p=871258407">New Desktop — add a space</p>
-<p id="p=1781451677">Workspace</p>
-<p id="p=136623868">switch appearance (light / dark)</p>
-<p id="p=1812738571">Remove This Desktop — when you have more than one</p>
-<h1 id="p=262946142">Keyboard shortcuts</h1>
-<p id="p=1242687539">Shortcut</p>
-<p id="p=1885629200">Action</p>
-<p id="p=450599905">Ctrl + → / ←</p>
-<p id="p=2067684642">Adjacent space</p>
-<p id="p=1390485684">Ctrl + Shift + → / ←</p>
-<p id="p=1755411601">Move focused window to adjacent space</p>
-<p id="p=1719718831">Ctrl + Tab</p>
-<p id="p=1033945676">Cycle spaces</p>
-<p id="p=1074127857">Ctrl + ↑</p>
-<p id="p=485357980">Mission Control</p>
-<p id="p=1501072424">Ctrl + ↓</p>
-<p id="p=1304609593">Workspace mode</p>
-<p id="p=1791064265">Ctrl + Shift + R</p>
-<p id="p=788005104">Start / stop screen recording</p>
-<p id="p=422794524">Ctrl + Shift + S</p>
-<p id="p=1907652086">Show the screensaver now</p>
-<p id="p=360022705">Ctrl + Space</p>
-<p id="p=1476059642">Toggle the input method (fcitx5, for CJK and other IME input)</p>
-<p id="p=1693723410">Esc</p>
-<p id="p=932095939">Close Mission Control; release a taken-over agent window</p>
-<p id="p=353203778">Double-click title bar</p>
-<p id="p=755693252">Maximize / restore a window</p>
-<h1 id="p=1862862873">The apps</h1>
-<p id="p=155736283">Nine first-party apps ship with Starling, all written against its Swift framework:</p>
-<p id="p=63998008">Settings — appearance, displays, network, sound, and system information. See below.</p>
-<p id="p=1232896515">Files — browse your home directory and the filesystem.</p>
-<p id="p=161885118">Terminal — a real terminal with a PTY; runs your login shell ($SHELL, falling back to bash). TUI programs like vim and htop work.</p>
-<p id="p=1179194365">Text Editor — a plain-text editor.</p>
-<p id="p=984552975">Calculator — a basic calculator.</p>
-<p id="p=1596465329">App Store — install more applications. See below.</p>
-<p id="p=1032164140">Task Manager — CPU, memory, disk and network with live sparklines, a sortable process table, and End Process.</p>
-<p id="p=968024298">Video Player — plays your recordings and other video. For Starling's own recordings it decodes on the GPU and never copies a frame through the CPU.</p>
-<p id="p=1912119847">Image Viewer — opens images from Files.</p>
-<h1 id="p=1146849695">Settings</h1>
-<p id="p=320396304">The Settings app has nine sections in its sidebar:</p>
-<p id="p=191240369">General — System Information: the Starling version, your Ubuntu release, kernel, and Mesa version.</p>
-<p id="p=425203402">Network — see and join Wi-Fi networks.</p>
-<p id="p=1605363299">Displays — display information. Note: scaling is pinned to 2.0 in this release, and there is no display-mode selection yet.</p>
-<p id="p=958858904">Sound — output device and output volume, and a switch to silence it.</p>
-<p id="p=1972676339">Date &amp; Time — the current time, and the system timezone.</p>
-<p id="p=794533130">Default Apps — which application handles what, the browser included.</p>
-<p id="p=855120554">Appearance — the Dark Mode switch (the same light/dark choice as the desktop right-click menu), Tiling Windows to switch between floating and tiling window management, the wallpaper picker, the Screensaver idle time, and a Notifications toggle — events collect behind the bell in the menu bar.</p>
-<p id="p=107175615">Power — power options.</p>
-<p id="p=1337551334">About — about the desktop.</p>
-<h1 id="p=1751803816">Installing more apps</h1>
-<p id="p=297460796">Starling launches applications that are installed on your machine — it does not bundle them. Two ways to add them:</p>
-<h3 id="p=1239445941">Through the App Store</h3>
-<p id="p=458141409">Open the App Store from the dock. It lists a curated set of applications — Chrome, VS Code, Slack, Discord, Teams, Telegram, IntelliJ IDEA, GIMP, Blender, Spotify, Zoom, and more. Click Install on one and Starling installs it using your system's own apt (you may be asked to authenticate — this is polkit authorising the install). When it finishes, the app appears in the Launchpad and can be pinned to the dock.</p>
-<p id="p=1038561799">A few things to know about the store in this release:</p>
-<p id="p=66567442">The catalog is small and curated — every entry installs and launches, but it is not your whole software library.</p>
-<p id="p=572779636">Tiles use generic category glyphs, not vendor logos, on purpose — those logos are trademarks and Starling ships none of them. Chrome and VS Code show their real icons in the Launchpad and dock (read from your system at runtime); the rest use a neutral glyph.</p>
-<h3 id="p=1364791630">With your distribution's packaging</h3>
-<p id="p=2091213088">Anything you install the normal way — sudo apt install &lt;package&gt;, a .deb, a Snap or Flatpak — is a native Linux app, and Starling will run it as a Wayland client (or through the in-tree X server for X11 apps). The major toolkits composite today: Chromium/Electron, Qt6, GTK3 and GTK4.</p>
-<h1 id="p=1697004567">Workspaces — a desktop for your agent</h1>
-<p id="p=1704757355">Ctrl + ↓ opens workspace mode — a room where one app drives and everything it opens stays beside it. The workspace list is on the left, the driver runs down the middle, and every window the driver opens lands as a tab on the right — never on your desktop. Ctrl + ↓ again (or Workspace in the desktop menu) steps back out to the desktop you came from; the workspace and its apps keep running, and the same key leads back in.</p>
-<p id="p=1367481480">It is built for handing work to an AI agent — coding is the demo, not the boundary: start a terminal as the driver, run an agent in it, and whatever the agent opens to do its job — browsers, editors, documents — stacks up as tabs in its room while your own windows never move. You can watch, and you can step in — click into any pane and use it like any other window. There is a three-minute recording of a coding agent doing exactly this on <a href="https://starling.build/#agents">starling.build</a>.</p>
-<p id="p=1790044465">Working the room:</p>
-<p id="p=145266121">+ New (top of the list) creates a workspace and opens its name for editing in place — type and press Enter (Esc keeps the old name). Rename later from the pencil on the row you are pointing at, or right-click the row.</p>
-<p id="p=455045837">An empty workspace shows Choose an app to work in — pick the driver.</p>
-<p id="p=1910650155">Drag the divider between the driver and the tabs to change the split.</p>
-<p id="p=1752792802">Right-click a tab to Move to Desktop (the window leaves the room) or Close it.</p>
-<p id="p=1101711046">The trash on a hovered row opens the same menu as a right-click, which holds the two ways out: Remove moves the workspace's windows to your desktop and drops the row; Delete stops every app in it. Both sit behind the menu on purpose — a stray click on a hover button must not be able to stop your agent's apps.</p>
-<p id="p=1250703884">Each monitor has its own workspace mode: Ctrl + ↓ acts on the monitor the pointer is on and leaves the others alone.</p>
-<h1 id="p=885903061">Things to know in this release</h1>
-<p id="p=257328710">Starling is an early preview (v0.4.0). A few limits you will notice:</p>
-<p id="p=1204853100">No screen lock. There is a screensaver (below), but it is decoration: any key or mouse movement dismisses it, with nothing asked. Do not rely on it to secure an unattended machine.</p>
-<p id="p=618792471">Every display scales the same. The session picks one scale for the whole desktop, from the primary panel's pixel density, and Settings → Displays moves it in 0.25 steps (fractional scales included — 1.25 and 1.5 render as crisply as 2.0). A second monitor of a different density therefore shares the first one's scale; per-display scale is not implemented yet.</p>
-<p id="p=1196638932">Changing the scale does not rescale apps already open. The desktop and Starling's own apps follow immediately; a third-party Wayland app keeps the size it started at until you restart it.</p>
-<p id="p=1395066937">No display-mode picker. The session uses the connector's preferred mode.</p>
-<p id="p=1314878991">Zoom runs without audio. It starts and reports no pactl and pacmd found. That message is expected: pactl is deliberately left off the system because Zoom crashes at startup when it is present. Do not install pulseaudio-utils to fix it — that trades a silent Zoom for one that will not start. Sound in other apps (Chrome, Slack, Teams) is unaffected.</p>
-<p id="p=1698958393">Verified on AMD and virtio-gpu graphics, and on NVIDIA as the second GPU of a hybrid laptop (per-app render offload). Intel, and NVIDIA driving the desktop itself, are not yet tested.</p>
-<p id="p=1379183965">If something misbehaves, the session log is at /tmp/starling-session-&lt;your-uid&gt;.log, and issues go to &lt;https://github.com/starling-build/starling/issues&gt;.</p>
-<h1 id="p=1120510490">When the terminal draws the wrong thing</h1>
-<p id="p=788180957">Press ⌘⇧R (Ctrl+Shift+R) while the wrong thing is on screen. Two files land at the top of your home folder:</p>
-<p id="p=1202565851">starling-terminal-report-20260819-103759.txt</p>
-<p id="p=1433351820">starling-terminal-report-20260819-103759.png</p>
-<p id="p=1135870661">Attach both to the issue. The .txt says what the terminal believed was on screen, along with the fonts it loaded, the size of its cells and which glyph path drew them; the .png is that same frame as it was painted, recorded inside the terminal rather than captured from the display.</p>
-<p id="p=349201807">The pair is what makes a rendering bug fixable, because between them they say which half is wrong — text right and picture wrong is a drawing bug, text already wrong is not. A photograph of the screen cannot distinguish those, and almost every such report arrives as a photograph.</p>
-<p id="p=1862901469">The .txt includes the text that was on your screen when you pressed the chord (scrollback is not included). Read it before you attach it.</p>
-<p id="p=304284474">One thing worth trying first, and worth saying in the issue either way: start the terminal with STARLINGTERMATLAS=0. That swaps the whole glyph-drawing path for an older one kept for exactly this comparison. If it fixes what you are seeing, that halves the search.</p>
-<p id="p=77178580">See also: the Installation Guide, and the project README for the technical picture and what does and doesn't work yet.</p>
+<h1 id="p=1089217257">Starling Desktop</h1>
+<p id="p=1219411925">User manual</p>
+<p id="p=35353229">Starling, 2026</p>
+<h1 id="p=1353069131">About this guide</h1>
+<p id="p=740077947">A tour of the desktop: what you see at first login, how to move around, the keyboard shortcuts, the apps, and how to install more. If Starling is not yet installed, start with the Installation Guide.</p>
+<p id="p=236406947">Starling's interaction model is close to macOS — if you have used a Mac, most of this will feel familiar.</p>
+<h2 id="p=1840578382">How this guide is organised</h2>
+<p id="p=1479870545">Getting in — <a href="/site-demo/starling-desktop-manual/#p=1258993240">Choosing Starling at login</a> and <a href="/site-demo/starling-desktop-manual/#p=681475611">First login</a>.</p>
+<p id="p=1100374831">The desktop — <a href="/site-demo/starling-desktop-manual/#p=2046896751">The dock</a>, <a href="/site-demo/starling-desktop-manual/#p=1525522196">The Launchpad</a>, <a href="/site-demo/starling-desktop-manual/#p=1961426466">The menu bar</a>, <a href="/site-demo/starling-desktop-manual/#p=1054704893">Windows</a>, <a href="/site-demo/starling-desktop-manual/#p=909138253">Spaces and Mission Control</a> and <a href="/site-demo/starling-desktop-manual/#p=2043857885">Right-click the desktop</a>.</p>
+<p id="p=308388976">Features — <a href="/site-demo/starling-desktop-manual/#p=793118132">Recording the screen</a>, <a href="/site-demo/starling-desktop-manual/#p=944652187">The screensaver</a> and <a href="/site-demo/starling-desktop-manual/#p=1847839483">Workspaces</a>.</p>
+<p id="p=1584749419">Reference — <a href="/site-demo/starling-desktop-manual/#p=1039349461">Keyboard shortcuts</a>, <a href="/site-demo/starling-desktop-manual/#p=1040959809">The apps</a>, <a href="/site-demo/starling-desktop-manual/#p=1293155664">Settings</a> and <a href="/site-demo/starling-desktop-manual/#p=1042802075">Installing more apps</a>.</p>
+<p id="p=684827743">When something is off — <a href="/site-demo/starling-desktop-manual/#p=871680410">Things to know in this release</a> and <a href="/site-demo/starling-desktop-manual/#p=1704669857">When the terminal draws the wrong thing</a>.</p>
+<p id="p=1071020520">Every section name in this guide is a link: tap it to jump there, and use Contents to come back.</p>
+<h2 id="p=1609596095">Conventions</h2>
+<p id="p=2139704703">You see</p>
+<p id="p=553008590">It means</p>
+<p id="p=2095804417">Ctrl + ↑</p>
+<p id="p=1669681862">Hold the first key and press the second</p>
+<p id="p=2328228">Settings → Appearance</p>
+<p id="p=963690626">Open Settings, then its Appearance section</p>
+<p id="p=1599347620">~/Videos</p>
+<p id="p=1040276901">A path, command or file name, exactly as typed</p>
+<p id="p=486734287">A quoted note like the one below</p>
+<p id="p=341079956">Something worth knowing before you go on</p>
+<p id="p=2021528579">Note. Starling is an early preview. The limits that will matter most are listed in <a href="/site-demo/starling-desktop-manual/#p=871680410">Things to know in this release</a>; read that section first if you plan to rely on the desktop every day.</p>
+<h1 id="p=1258993240">Choosing Starling at login</h1>
+<p id="p=1225223206">Installing Starling doesn't replace your current desktop — it adds a session you pick at the login screen. To start it:</p>
+<p id="p=1931172821">Click your name at the login screen.</p>
+<p id="p=1427242868">Open the session menu — usually a gear, or a small icon in a lower corner of the password box.</p>
+<p id="p=799820347">Choose Starling from the list, then enter your password and sign in.</p>
+<p id="p=693680390">Starling stays selected for next time. The session menu only appears with a Wayland-capable login manager (GDM has one); it looks a little different on LightDM or SDDM, but the step is the same — find the session picker and choose Starling. (See the Installation Guide if you don't see a session menu at all.)</p>
+<h1 id="p=681475611">First login</h1>
+<p id="p=668880219">Once you sign in, you land on the desktop:</p>
+<p id="p=2032201912">a wallpaper filling the screen,</p>
+<p id="p=1243267328">a thin <a href="/site-demo/starling-desktop-manual/#p=1961426466">**menu bar**</a> across the top, with the clock and status indicators,</p>
+<p id="p=80218428">a <a href="/site-demo/starling-desktop-manual/#p=2046896751">**dock**</a> floating at the bottom, holding your apps.</p>
+<p id="p=2027533173">That is the whole desktop. Everything else is reached from the dock, the <a href="/site-demo/starling-desktop-manual/#p=1525522196">Launchpad</a>, or a <a href="/site-demo/starling-desktop-manual/#p=2043857885">right-click on the wallpaper</a>.</p>
+<p id="p=2023360816">Tip. The keyboard reaches most of it too. The whole list is in <a href="/site-demo/starling-desktop-manual/#p=1039349461">Keyboard shortcuts</a>; the four to learn first are Ctrl + ↑ for Mission Control, Ctrl + ← / → to move between spaces, Ctrl + ↓ for your workspace and Esc to back out of any of them.</p>
+<h1 id="p=2046896751">The dock</h1>
+<p id="p=139542200">The dock sits at the bottom of the screen. Out of the box it holds the first-party apps, in order: Launchpad, Settings, Files, Terminal, Text Editor, Calculator, App Store, Video Player.</p>
+<p id="p=203892673">Click an icon to launch or focus that app.</p>
+<p id="p=1368007438">A running app shows an indicator under its icon.</p>
+<p id="p=189551600">Drag an icon to reorder the dock.</p>
+<p id="p=515405758">Right-click an icon for its menu, including Remove from Dock.</p>
+<p id="p=1851797863">Installed apps that aren't pinned appear in the dock while they run, and drop off when they close.</p>
+<p id="p=225178147">Tip. Apps you add later — from the App Store or with your distribution's packaging — show up in the Launchpad first; see <a href="/site-demo/starling-desktop-manual/#p=1042802075">Installing more apps</a>.</p>
+<h1 id="p=1525522196">The Launchpad</h1>
+<p id="p=223031759">The first dock icon opens the Launchpad — a full-screen grid of every app Starling knows about, over a blurred background.</p>
+<p id="p=704279227">Click any app to launch it.</p>
+<p id="p=1570567446">Type to filter the grid by name — start typing and only matching apps remain.</p>
+<p id="p=817385102">Click empty space or press Esc to dismiss it.</p>
+<h1 id="p=1961426466">The menu bar</h1>
+<p id="p=1220992574">The bar along the top carries the clock and date on the left, and on the right the Wi-Fi and battery indicators, a bell, and the control centre.</p>
+<p id="p=63609031">Click the control-centre icon for a panel of quick toggles:</p>
+<p id="p=590140600">Wi-Fi — join a network without opening Settings.</p>
+<p id="p=1863242206">Dark Mode — switches the whole desktop and every first-party app.</p>
+<p id="p=1223010853">Tiling — retiles the current space; toggle it off to restore floating windows.</p>
+<p id="p=305259561">Muted — mute or unmute output, with volume and brightness sliders below the tiles.</p>
+<p id="p=1493322896">Record and Record App — see <a href="/site-demo/starling-desktop-manual/#p=793118132">Recording the screen</a>.</p>
+<p id="p=1487129532">The bell collects notifications instead of interrupting you with banners: nothing steals focus, and you read what happened when you choose to. Click it for the list, Esc to dismiss.</p>
+<h1 id="p=793118132">Recording the screen</h1>
+<p id="p=1518932808">Starling records itself, with no extra software.</p>
+<p id="p=1641383841">Record (control centre, or Ctrl + Shift + R) captures the whole screen.</p>
+<p id="p=529873922">Record App opens Mission Control and asks which window you want. It captures that window's own content, not the region of screen it sits in, so windows stacked on top never appear and moving or resizing the window mid-recording doesn't spoil the take. The pointer is drawn in and follows the window.</p>
+<p id="p=1691975306">While a recording runs, a red dot and a running clock sit in the menu bar, so a recording can never be going unnoticed. Stop it the same way you started it.</p>
+<p id="p=677456830">Recordings land in ~/Videos as MP4, and the <a href="/site-demo/starling-desktop-manual/#p=1040959809">Video Player</a> opens them; so does anything else that plays MP4. Where the machine has a hardware H.264 encoder, the frame the compositor already drew goes straight to it as a dma-buf and the CPU never touches a pixel — on a modern laptop that costs about 0.05 of a core. Machines without one fall back to a software encoder, which works but costs more.</p>
+<h1 id="p=944652187">The screensaver</h1>
+<p id="p=1192331488">Leave the desk for ten minutes and the desktop dissolves into a screensaver: your own screen, blurred and drifting behind a slow liquid warp, with the time and date floating over it. Any key, click, or mouse movement brings it straight back — nothing is asked for, so it is decoration, not a lock. Ctrl + Shift + S shows it immediately.</p>
+<p id="p=813354042">Change the idle time (or turn it off) in Settings → Appearance → Screensaver (see <a href="/site-demo/starling-desktop-manual/#p=1293155664">Settings</a>). Video playback holds it off: an app that tells the desktop it is playing something — Chrome, Firefox, a video player — keeps the screensaver away for as long as it says so, so a film watched without touching the mouse is never interrupted.</p>
+<p id="p=1725541765">For aerial footage in place of the warp, drop a video file in ~/.local/share/starling/aerials/:</p>
+<p id="p=1162796124">mkdir -p ~/.local/share/starling/aerials</p>
+<p id="p=95066483">cp ~/Downloads/coastline.mp4 ~/.local/share/starling/aerials/</p>
+<p id="p=60109479">The screensaver dissolves into it and loops it. Starling ships none of its own — the warp needs no assets, and the clips worth watching are large. Any shape works: letterbox bars are cropped away and the picture fills the screen.</p>
+<p id="p=321831197">Note. The screensaver is not a lock: nothing is asked when it clears. See <a href="/site-demo/starling-desktop-manual/#p=871680410">Things to know in this release</a>.</p>
+<h1 id="p=1054704893">Windows</h1>
+<p id="p=1080202074">Windows have a title bar with three macOS-style colored circle buttons on the left — close, minimize, maximize.</p>
+<p id="p=1058362548">Drag the title bar to move a window.</p>
+<p id="p=1007074747">Drag an edge or corner to resize it.</p>
+<p id="p=997527346">Double-click the title bar to toggle maximized.</p>
+<p id="p=608851890">The maximize button does the same.</p>
+<p id="p=1094476303">By default windows float — you place them freely. You can switch the whole desktop to tiling (a dwm-style master-and-stack layout, where windows share the screen automatically) with the Tiling tile in the <a href="/site-demo/starling-desktop-manual/#p=1961426466">control centre</a>, or the Tiling Windows switch in <a href="/site-demo/starling-desktop-manual/#p=1293155664">Settings</a>. Toggling it back restores your floating layout.</p>
+<h1 id="p=909138253">Spaces and Mission Control</h1>
+<p id="p=1173891973">Starling has spaces (virtual desktops) and a Mission Control overview, driven from the keyboard the way macOS does it.</p>
+<p id="p=1709316419">Do this</p>
+<p id="p=1870513000">To</p>
+<p id="p=1423765540">Ctrl + → / Ctrl + ←</p>
+<p id="p=1676479599">Slide to the next / previous space</p>
+<p id="p=544506773">Ctrl + Shift + → / ←</p>
+<p id="p=1862968944">Carry the focused window to the next / previous space</p>
+<p id="p=152350947">Ctrl + Tab</p>
+<p id="p=190462071">Cycle through your spaces</p>
+<p id="p=507556757">Ctrl + ↑</p>
+<p id="p=695408806">Open Mission Control (all spaces and windows at once)</p>
+<p id="p=134751547">Ctrl + ↓</p>
+<p id="p=1521565735">Open your workspace (see <a href="/site-demo/starling-desktop-manual/#p=1847839483">Workspaces</a>)</p>
+<p id="p=265500832">Esc</p>
+<p id="p=1757178447">Close Mission Control</p>
+<p id="p=153704311">In Mission Control, Ctrl + ← / → retargets the active space instantly. To add a space, right-click the wallpaper and choose New Desktop.</p>
+<p id="p=1438632979">Ctrl + arrows belong to the system — apps never see them — so they work no matter which window is focused.</p>
+<h1 id="p=2043857885">Right-click the desktop</h1>
+<p id="p=1869789188">Right-click anywhere on the wallpaper for the desktop menu:</p>
+<p id="p=1388189325">Change Wallpaper</p>
+<p id="p=234332505">Mission Control</p>
+<p id="p=151689739">New Desktop — add a space</p>
+<p id="p=1558383720">Workspace</p>
+<p id="p=270344694">switch appearance (light / dark)</p>
+<p id="p=29484929">Remove This Desktop — when you have more than one</p>
+<h1 id="p=1039349461">Keyboard shortcuts</h1>
+<p id="p=1060602597">Shortcut</p>
+<p id="p=535153828">Action</p>
+<p id="p=1438631586">Ctrl + → / ←</p>
+<p id="p=773770636">Adjacent <a href="/site-demo/starling-desktop-manual/#p=909138253">space</a></p>
+<p id="p=1252314799">Ctrl + Shift + → / ←</p>
+<p id="p=169787683">Move focused window to adjacent space</p>
+<p id="p=808355669">Ctrl + Tab</p>
+<p id="p=475129172">Cycle spaces</p>
+<p id="p=782115761">Ctrl + ↑</p>
+<p id="p=1446332792"><a href="/site-demo/starling-desktop-manual/#p=909138253">Mission Control</a></p>
+<p id="p=48716620">Ctrl + ↓</p>
+<p id="p=570241504"><a href="/site-demo/starling-desktop-manual/#p=1847839483">Workspace mode</a></p>
+<p id="p=304761672">Ctrl + Shift + R</p>
+<p id="p=21966463">Start / stop <a href="/site-demo/starling-desktop-manual/#p=793118132">screen recording</a></p>
+<p id="p=423489795">Ctrl + Shift + S</p>
+<p id="p=623262057">Show the <a href="/site-demo/starling-desktop-manual/#p=944652187">screensaver</a> now</p>
+<p id="p=1678826716">Ctrl + Space</p>
+<p id="p=1151036718">Toggle the input method (fcitx5, for CJK and other IME input)</p>
+<p id="p=516334919">Esc</p>
+<p id="p=168239493">Close Mission Control; release a taken-over <a href="/site-demo/starling-desktop-manual/#p=1847839483">agent window</a></p>
+<p id="p=2006428088">Double-click title bar</p>
+<p id="p=1655243366">Maximize / restore a <a href="/site-demo/starling-desktop-manual/#p=1054704893">window</a></p>
+<p id="p=1365833736">Ctrl + arrows belong to the system — apps never see them — so they work no matter which window is focused.</p>
+<h1 id="p=1040959809">The apps</h1>
+<p id="p=749463356">Nine first-party apps ship with Starling, all written against its Swift framework:</p>
+<p id="p=673982094">Settings — appearance, displays, network, sound, and system information. See <a href="/site-demo/starling-desktop-manual/#p=1293155664">Settings</a>.</p>
+<p id="p=1781796608">Files — browse your home directory and the filesystem.</p>
+<p id="p=1420912995">Terminal — a real terminal with a PTY; runs your login shell ($SHELL, falling back to bash). TUI programs like vim and htop work. If it ever draws the wrong thing, see <a href="/site-demo/starling-desktop-manual/#p=1704669857">When the terminal draws the wrong thing</a>.</p>
+<p id="p=449850661">Text Editor — a plain-text editor.</p>
+<p id="p=1938934470">Calculator — a basic calculator.</p>
+<p id="p=1018879741">App Store — install more applications. See <a href="/site-demo/starling-desktop-manual/#p=1042802075">Installing more apps</a>.</p>
+<p id="p=2114426408">Task Manager — CPU, memory, disk and network with live sparklines, a sortable process table, and End Process.</p>
+<p id="p=1129815079">Video Player — plays your recordings and other video. For Starling's own recordings it decodes on the GPU and never copies a frame through the CPU.</p>
+<p id="p=433135419">Image Viewer — opens images from Files.</p>
+<h1 id="p=1293155664">Settings</h1>
+<p id="p=136595271">The Settings app has nine sections in its sidebar:</p>
+<p id="p=1479361044">General — System Information: the Starling version, your Ubuntu release, kernel, and Mesa version.</p>
+<p id="p=843453961">Network — see and join Wi-Fi networks.</p>
+<p id="p=1323938036">Displays — display information. Note: scaling is pinned to 2.0 in this release, and there is no display-mode selection yet (see <a href="/site-demo/starling-desktop-manual/#p=871680410">Things to know in this release</a>).</p>
+<p id="p=1627824051">Sound — output device and output volume, and a switch to silence it.</p>
+<p id="p=469310472">Date &amp; Time — the current time, and the system timezone.</p>
+<p id="p=1395585457">Default Apps — which application handles what, the browser included.</p>
+<p id="p=253027471">Appearance — the Dark Mode switch (the same light/dark choice as the desktop right-click menu), Tiling Windows to switch between floating and tiling window management (see <a href="/site-demo/starling-desktop-manual/#p=1054704893">Windows</a>), the wallpaper picker, the <a href="/site-demo/starling-desktop-manual/#p=944652187">**Screensaver**</a> idle time, and a Notifications toggle — events collect behind the bell in the menu bar.</p>
+<p id="p=1867055212">Power — power options.</p>
+<p id="p=230595409">About — about the desktop.</p>
+<h1 id="p=1042802075">Installing more apps</h1>
+<p id="p=213094513">Starling launches applications that are installed on your machine — it does not bundle them. Three ways to add them:</p>
+<h3 id="p=1895935145">Through the App Store</h3>
+<p id="p=1114598108">Open the App Store from the dock. It lists a curated set of applications — Chrome, VS Code, Slack, Discord, Teams, Telegram, IntelliJ IDEA, GIMP, Blender, Spotify, Zoom, and more. Click Install on one and Starling installs it using your system's own apt (you may be asked to authenticate — this is polkit authorising the install). When it finishes, the app appears in the Launchpad and can be pinned to the dock.</p>
+<p id="p=1620189157">A few things to know about the store in this release:</p>
+<p id="p=1051894370">The catalog is small and curated — every entry installs and launches, but it is not your whole software library.</p>
+<p id="p=1537591797">Tiles use generic category glyphs, not vendor logos, on purpose — those logos are trademarks and Starling ships none of them. Chrome and VS Code show their real icons in the Launchpad and dock (read from your system at runtime); the rest use a neutral glyph.</p>
+<h3 id="p=258217808">From the command line</h3>
+<p id="p=1821804712">Every App Store entry can also be installed from a terminal, which is handy on a machine you reach over SSH or set up from a script. The command takes the app's id — the same names the store uses:</p>
+<p id="p=895213104">app-install chrome</p>
+<p id="p=710202806">app-install vscode</p>
+<p id="p=515428781">It installs the same way the store does, writes the app's record so the Launchpad and <a href="/site-demo/starling-desktop-manual/#p=2046896751">dock</a> pick it up at once, and prints what it did. No relogin is needed.</p>
+<h3 id="p=326755610">With your distribution's packaging</h3>
+<p id="p=1423470684">Anything you install the normal way — sudo apt install &lt;package&gt;, a .deb, a Snap or Flatpak — is a native Linux app, and Starling will run it as a Wayland client (or through the in-tree X server for X11 apps):</p>
+<p id="p=1717261104">sudo apt install gimp</p>
+<p id="p=804184171">The major toolkits composite today: Chromium/Electron, Qt6, GTK3 and GTK4.</p>
+<p id="p=103915606">Note. Whichever way an app arrives, it appears in the <a href="/site-demo/starling-desktop-manual/#p=1525522196">Launchpad</a> under the name in its .desktop entry, and keeps its own icon where it ships one.</p>
+<h1 id="p=1847839483">Workspaces — a desktop for your agent</h1>
+<p id="p=1585969381">Ctrl + ↓ opens workspace mode — a room where one app drives and everything it opens stays beside it. The workspace list is on the left, the driver runs down the middle, and every window the driver opens lands as a tab on the right — never on your desktop. Ctrl + ↓ again (or Workspace in the desktop menu) steps back out to the desktop you came from; the workspace and its apps keep running, and the same key leads back in.</p>
+<p id="p=1677422433">It is built for handing work to an AI agent — coding is the demo, not the boundary: start a terminal as the driver, run an agent in it, and whatever the agent opens to do its job — browsers, editors, documents — stacks up as tabs in its room while your own windows never move. You can watch, and you can step in — click into any pane and use it like any other window. There is a three-minute recording of a coding agent doing exactly this on <a href="https://starling.build/#agents">starling.build</a>.</p>
+<h3 id="p=1534534842">Handing a task to an agent</h3>
+<p id="p=409198128">Press Ctrl + ↓. The room opens on the monitor the pointer is on.</p>
+<p id="p=85490669">Click + New at the top of the list, type a name for the workspace and press Enter.</p>
+<p id="p=588278064">The empty room asks Choose an app to work in — pick Terminal. It becomes the driver, running down the middle.</p>
+<p id="p=383458494">In that terminal, go to the project and start the agent.</p>
+<p id="p=1874397292">Hand it the task. Each window the agent opens — a browser to read docs, an editor, a document — lands as a tab on the right, never on your desktop.</p>
+<p id="p=541267366">Press Ctrl + ↓ again to step back out and carry on with your own work; the agent keeps running. The same key leads back in.</p>
+<p id="p=1543272533">Step 4, for a coding agent that runs in the terminal, is two lines:</p>
+<p id="p=2107628416">cd ~/projects/my-app</p>
+<p id="p=1162339824">claude</p>
+<p id="p=1436615582">Tip. If the agent takes over a window you need, press Esc to release it — see <a href="/site-demo/starling-desktop-manual/#p=1039349461">Keyboard shortcuts</a>.</p>
+<h3 id="p=542635242">Working the room</h3>
+<p id="p=440042461">+ New (top of the list) creates a workspace and opens its name for editing in place — type and press Enter (Esc keeps the old name). Rename later from the pencil on the row you are pointing at, or right-click the row.</p>
+<p id="p=659715798">An empty workspace shows Choose an app to work in — pick the driver.</p>
+<p id="p=1361735140">Drag the divider between the driver and the tabs to change the split.</p>
+<p id="p=1955995564">Right-click a tab to Move to Desktop (the window leaves the room) or Close it.</p>
+<p id="p=434123153">The trash on a hovered row opens the same menu as a right-click, which holds the two ways out: Remove moves the workspace's windows to your desktop and drops the row; Delete stops every app in it. Both sit behind the menu on purpose — a stray click on a hover button must not be able to stop your agent's apps.</p>
+<p id="p=154645223">Each monitor has its own workspace mode: Ctrl + ↓ acts on the monitor the pointer is on and leaves the others alone.</p>
+<h1 id="p=871680410">Things to know in this release</h1>
+<p id="p=141841698">Starling is an early preview (v0.4.0). A few limits you will notice:</p>
+<p id="p=38994903">No screen lock. There is a <a href="/site-demo/starling-desktop-manual/#p=944652187">screensaver</a>, but it is decoration: any key or mouse movement dismisses it, with nothing asked. Do not rely on it to secure an unattended machine.</p>
+<p id="p=611798389">Every display scales the same. The session picks one scale for the whole desktop, from the primary panel's pixel density, and Settings → Displays moves it in 0.25 steps (fractional scales included — 1.25 and 1.5 render as crisply as 2.0). A second monitor of a different density therefore shares the first one's scale; per-display scale is not implemented yet.</p>
+<p id="p=719565276">Changing the scale does not rescale apps already open. The desktop and Starling's own apps follow immediately; a third-party Wayland app keeps the size it started at until you restart it.</p>
+<p id="p=274138369">No display-mode picker. The session uses the connector's preferred mode.</p>
+<p id="p=1788469195">Zoom runs without audio. It starts and reports no pactl and pacmd found. That message is expected: pactl is deliberately left off the system because Zoom crashes at startup when it is present. Do not install pulseaudio-utils to fix it — that trades a silent Zoom for one that will not start. Sound in other apps (Chrome, Slack, Teams) is unaffected.</p>
+<p id="p=228536159">Verified on AMD and virtio-gpu graphics, and on NVIDIA as the second GPU of a hybrid laptop (per-app render offload). Intel, and NVIDIA driving the desktop itself, are not yet tested.</p>
+<p id="p=843316327">If something misbehaves, the session log is at /tmp/starling-session-&lt;your-uid&gt;.log. The last fifty lines are usually the ones that matter:</p>
+<p id="p=797161133">tail -n 50 /tmp/starling-session-$(id -u).log</p>
+<p id="p=386433901">Issues go to &lt;https://github.com/starling-build/starling/issues&gt;; attach that log, and for a terminal rendering problem the report described in <a href="/site-demo/starling-desktop-manual/#p=1704669857">When the terminal draws the wrong thing</a>.</p>
+<h1 id="p=1704669857">When the terminal draws the wrong thing</h1>
+<p id="p=1818615242">Press ⌘⇧R (Ctrl+Shift+R) while the wrong thing is on screen. Two files land at the top of your home folder:</p>
+<p id="p=496278992">starling-terminal-report-20260819-103759.txt</p>
+<p id="p=1429954571">starling-terminal-report-20260819-103759.png</p>
+<p id="p=1688890317">Attach both to the issue. The .txt says what the terminal believed was on screen, along with the fonts it loaded, the size of its cells and which glyph path drew them; the .png is that same frame as it was painted, recorded inside the terminal rather than captured from the display.</p>
+<p id="p=2079268985">The pair is what makes a rendering bug fixable, because between them they say which half is wrong — text right and picture wrong is a drawing bug, text already wrong is not. A photograph of the screen cannot distinguish those, and almost every such report arrives as a photograph.</p>
+<p id="p=872494205">The .txt includes the text that was on your screen when you pressed the chord (scrollback is not included). Read it before you attach it.</p>
+<p id="p=382602399">One thing worth trying first, and worth saying in the issue either way: start the terminal with the atlas painter off:</p>
+<p id="p=512646693">STARLING_TERM_ATLAS=0</p>
+<p id="p=1431025288">That swaps the whole glyph-drawing path for an older one kept for exactly this comparison. If it fixes what you are seeing, that halves the search.</p>
+<p id="p=1818607598">See also: <a href="/site-demo/starling-desktop-manual/#p=871680410">Things to know in this release</a>, and the project <a href="https://github.com/starling-build/starling">README</a> for the technical picture and what does and doesn't work yet.</p>
 </article>
 </main>
 <canvas id="starling"></canvas>
