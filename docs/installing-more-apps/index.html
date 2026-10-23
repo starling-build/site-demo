@@ -185,15 +185,15 @@
 </ul></nav>
 <article id="starling-article" aria-label="Installing more apps">
 <p class="starling-downloads"><a href="/site-demo/installing-more-apps/installing-more-apps.pdf">Download as PDF</a> · <a href="/site-demo/installing-more-apps/installing-more-apps.docx">Download as Word</a> · <a href="https://github.com/starling-build/site-demo/commits/main/pages/installing-more-apps.json">History</a></p>
-<h1 id="p=1232877467">Installing more apps</h1>
-<p id="p=1010594398">Starling launches applications that are installed on your machine — it does not bundle them. Two ways to add them:</p>
-<h3 id="p=1103115689">Through the App Store</h3>
-<p id="p=1292192996">Open the App Store from the dock. It lists a curated set of applications — Chrome, VS Code, Slack, Discord, Teams, Telegram, IntelliJ IDEA, GIMP, Blender, Spotify, Zoom, and more. Click Install on one and Starling installs it using your system's own apt (you may be asked to authenticate — this is polkit authorising the install). When it finishes, the app appears in the Launchpad and can be pinned to the dock.</p>
-<p id="p=1579368096">A few things to know about the store in this release:</p>
-<p id="p=559870030">The catalog is small and curated — every entry installs and launches, but it is not your whole software library.</p>
-<p id="p=905236942">Tiles use generic category glyphs, not vendor logos, on purpose — those logos are trademarks and Starling ships none of them. Chrome and VS Code show their real icons in the Launchpad and dock (read from your system at runtime); the rest use a neutral glyph.</p>
-<h3 id="p=1007356072">With your distribution's packaging</h3>
-<p id="p=778303715">Anything you install the normal way — sudo apt install &lt;package&gt;, a .deb, a Snap or Flatpak — is a native Linux app, and Starling will run it as a Wayland client (or through the in-tree X server for X11 apps). The major toolkits composite today: Chromium/Electron, Qt6, GTK3 and GTK4.</p>
+<h1 id="p=1564419560">Installing more apps</h1>
+<p id="p=1864671435">Starling launches applications that are installed on your machine — it does not bundle them. Two ways to add them:</p>
+<h3 id="p=1145376815">Through the App Store</h3>
+<p id="p=169812688">Open the App Store from the dock. It lists a curated set of applications — Chrome, VS Code, Slack, Discord, Teams, Telegram, IntelliJ IDEA, GIMP, Blender, Spotify, Zoom, and more. Click Install on one and Starling installs it using your system's own apt (you may be asked to authenticate — this is polkit authorising the install). When it finishes, the app appears in the Launchpad and can be pinned to the dock.</p>
+<p id="p=1777680988">A few things to know about the store in this release:</p>
+<p id="p=1222838866">The catalog is small and curated — every entry installs and launches, but it is not your whole software library.</p>
+<p id="p=1043951795">Tiles use generic category glyphs, not vendor logos, on purpose — those logos are trademarks and Starling ships none of them. Chrome and VS Code show their real icons in the Launchpad and dock (read from your system at runtime); the rest use a neutral glyph.</p>
+<h3 id="p=260900277">With your distribution's packaging</h3>
+<p id="p=930624841">Anything you install the normal way — sudo apt install &lt;package&gt;, a .deb, a Snap or Flatpak — is a native Linux app, and Starling will run it as a Wayland client (or through the in-tree X server for X11 apps). The major toolkits composite today: Chromium/Electron, Qt6, GTK3 and GTK4.</p>
 </article>
 </main>
 <canvas id="starling"></canvas>
